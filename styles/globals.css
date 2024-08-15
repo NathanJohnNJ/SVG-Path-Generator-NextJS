@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'Geologica';
+    font-style: normal;
+    font-display: swap;
+    src: url(../public/fonts/Geologica-Sharp-VariableFont_wght.woff2) format('woff2');
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

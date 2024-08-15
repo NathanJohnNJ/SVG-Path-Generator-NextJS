@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { geologicaSharp } from '@/styles/fonts';
+import { geologicaSharp, poppins } from '@/styles/fonts';
 
  const rainbowAnimation = keyframes`
   to { --bg-angle: 360deg; }
@@ -15,7 +15,7 @@ export const Rainbow = styled.div`
 }
   border-radius: 18px;
   animation: ${rainbowAnimation} 6s infinite linear running;
-  margin: 5px;
+  margin: 2px;
   background:
     padding-box,
     conic-gradient(
@@ -31,21 +31,28 @@ export const Rainbow = styled.div`
 
 export const Article = styled.div`
   color: #0010a0;
-  font-size: 3vw;
+  font-size: 12;
   font-weight: 575;
   text-align:left;
   padding-left: 2vw;
+  padding-right: 5px;
   border-radius: 18px;
   background-color: #898989;
 `
-
-
-export const RainbowPanel = ({children}) => {
+export const Heading = styled.h2`
+  color: #0010a0;
+  font-weight: 650;
+  text-align: center;
+`
+export const RainbowPanel = ({children}, props) => {
   return(
-      <Rainbow>
-          <Article className={geologicaSharp.className}>
-            {children}
-          </Article>
-      </Rainbow>
+    <Rainbow>
+      <Article>
+        <Heading className={geologicaSharp.className}>{props.heading}</Heading>
+        <div className={poppins.className}>
+          {children}
+        </div>
+      </Article>
+    </Rainbow>
   )
 }
