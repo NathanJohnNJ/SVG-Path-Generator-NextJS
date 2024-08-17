@@ -13,7 +13,19 @@
     "type": "git",
     "url": "https://github.com/NathanJohnNJ/testing.git"
   },
-  "author": "Nathan John (NJTD)",
+  {
+    "name": "njtd-next-expo-mongo",
+    "version": "0.1.0",
+    "private": true,
+    "description": "NJTD Next.js + Expo + MongoDB Starter",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Nathan John (NJTD)",
+    "license": "ISC",
+    "dependencies": {
   "license": "ISC",
   "dependencies": {
     "@expo/next-adapter": "^6.0.0",
