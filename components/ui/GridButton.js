@@ -12,7 +12,7 @@ const GridButton = (props) => {
     const i = document.getElementById(id);
     i.style.stroke = props.stroke[0].highlight;
     i.style.strokeWidth = props.stroke[0].width*2;
-    i.style.fill = props.fill[highlight];
+    i.style.fill = props.fill.highlight;
   }
   function resetHover(id){
     const i = document.getElementById(id);
