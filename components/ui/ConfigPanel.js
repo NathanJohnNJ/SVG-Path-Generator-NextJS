@@ -56,29 +56,11 @@ export const ConfigPanel = (props) => {
   const [showControl, setShowControl] = useState(false);
   const [showEndPoints, setShowEndPoints] = useState(false);
 
-    function openEndPoints(){
-        setShowStroke(false);
-        setShowFill(false);
-        setShowControl(false);
-        setShowEndPoints(true);
-    }
-    function openControl(){
-        setShowStroke(false);
-        setShowFill(false);
-        setShowControl(true);
-        setShowEndPoints(false);
-    }
-    function openFill(){
-        setShowStroke(false);
-        setShowFill(true);
-        setShowControl(false);
-        setShowEndPoints(false);
-    }
-    function openStroke(){
-        setShowStroke(true);
-        setShowFill(false);
-        setShowControl(false);
-        setShowEndPoints(false);
+    function openSection(sectionName) {
+      setShowStroke(sectionName === 'stroke');
+      setShowFill(sectionName === 'fill');
+      setShowControl(sectionName === 'control');
+      setShowEndPoints(sectionName === 'endPoints');
     }
     function hoverFunc(i){
         const newHover = { ...hover, [i]: true}
