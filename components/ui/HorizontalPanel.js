@@ -27,7 +27,7 @@ const Article = styled.div`
   font-size: 3vw;
   font-weight: 575;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: #eee;
@@ -40,7 +40,7 @@ const Heading = styled.h2`
   text-align: center;
 `
 
-export const Panel = ({children}, props) => {
+export const HorizontalPanel = ({children}, props) => {
 
   return(
     <StyledDiv style={styles(props).panel} colour={props.colour}>

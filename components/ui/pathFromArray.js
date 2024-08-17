@@ -18,8 +18,8 @@ const PathFromArray = (props) => {
     }
 
     function pressFunc(path){
-        // props.setInfo(path)
-        // props.setShowBtn(true)
+        props.setSelected(path)
+        props.setShowTable(true)
         if(path.type==="q" || path.type==="s"){
             props.setFirstCtrl({x: path.controlPoints[0].value, y: path.controlPoints[1].value})
             props.setEndPoint({x: path.endPoint.x, y: path.endPoint.y})

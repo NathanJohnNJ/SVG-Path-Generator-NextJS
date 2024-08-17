@@ -16,7 +16,11 @@
   "author": "Nathan John (NJTD)",
   "license": "ISC",
   "dependencies": {
+    "@expo/next-adapter": "^6.0.0",
+    "@heroicons/react": "^2.1.4",
+    "@njtd/react-native-fieldset-web": "file:../../gitRepos/react-native-fieldset-web",
     "autoprefixer": "^10.4.19",
+    "clsx": "^2.1.1",
     "expo": "~51.0.17",
     "expo-font": "~12.0.7",
     "mongodb": "^6.8.0",
@@ -24,21 +28,22 @@
     "nativewind": "^2.0.11",
     "next": "^14.2.4",
     "next-fonts": "^1.5.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  },
-  "devDependencies": {
-    "@expo/next-adapter": "^6.0.0",
-    "@heroicons/react": "^2.1.4",
-    "@types/react": "18.3.3",
-    "@vercel/postgres": "^0.9.0",
-    "clsx": "^2.1.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
     "postcss": "^8.4.39",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-native-svg-web": "^1.0.9",
     "react-native-web": "^0.19.12",
     "styled-components": "^6.1.11",
     "tailwindcss": "^3.4.4"
-  }
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

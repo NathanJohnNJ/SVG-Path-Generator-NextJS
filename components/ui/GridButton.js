@@ -7,28 +7,24 @@ import { addToPath, deletePath } from "@/lib/mongodb/path/mongodb";
 
 
 const GridButton = (props) => {
-  const stroke = props.config.stroke[0].parameters;
-  const fill = props.config.fill[0].parameters;
-  const control = props.config.control[0].parameters;
-  const end = props.config.end[0].parameters;
   
   function hoverFunc(id){
-    const i = document.getElementById(id)
-    i.style.stroke = stroke.highlight
-    i.style.strokeWidth = stroke.width*2
-    i.style.fill = fill.highlight
+    const i = document.getElementById(id);
+    i.style.stroke = props.stroke[0].highlight;
+    i.style.strokeWidth = props.stroke[0].width*2;
+    i.style.fill = props.fill[highlight];
   }
   function resetHover(id){
-    const i = document.getElementById(id)
-    i.style.stroke = stroke.colour
-    i.style.strokeWidth = stroke.width
-    i.style.fill = fill.colour
+    const i = document.getElementById(id);
+    i.style.stroke = props.stroke[0].colour;
+    i.style.strokeWidth = props.stroke[0].width;
+    i.style.fill = props.fill[colour];
   }
   function add(command){
-    console.log('starting add function')
-    deletePath()
-    addToPath(command)
-    console.log(`${command.type} command added to database sucessfully.`)
+    console.log('starting add function');
+    deletePath();
+    addToPath(command);
+    console.log(`${command.type} command added to database sucessfully.`);
   }
 
   return(
@@ -42,7 +38,7 @@ const GridButton = (props) => {
       </View>
       <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl">
         <Grid size="150" mainWidth="180" id="miniGrid" >
-          <Path id={props.id} d={props.d} fill={fill.colour} fillOpacity={fill.opacity} stroke={stroke.colour} strokeWidth={stroke.width}/>
+          <Path id={props.id} d={props.d} fill="none" stroke={props.stroke[0].colour} strokeWidth={props.stroke[0].width}/>
         </Grid>
       </Link>
     </View>

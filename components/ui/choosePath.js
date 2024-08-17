@@ -139,7 +139,7 @@ const lines = [hPath, lPath, vPath];
             return(
               <Link
               href="/viewPath">
-                <GridButton command={command} id={gridID} d={d} key={i} config={props.config}/>
+                <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />
               </Link>
             )
           })}
@@ -158,7 +158,7 @@ const lines = [hPath, lPath, vPath];
             return(
               <Link
               href="/viewPath">
-                <GridButton command={command} id={gridID} d={d} key={i} config={props.config}/>
+                <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end}/>
               </Link>
             )
           })
