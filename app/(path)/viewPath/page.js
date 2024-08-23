@@ -1,55 +1,24 @@
+import { fullPath, absolutePath } from "@/lib/utils";
 import { getPath } from "@/lib/mongodb/path/mongodb";
-import PathFromArray from "@/components/ui/pathFromArray";
-import Grid from '@/components/ui/Grid';
-import Title from "@/components/layouts/title";
-import { getAllConfig } from "@/lib/mongodb/config/mongodb";
+import { getConfig } from "@/lib/mongodb/config/mongodb";
+import MainPanel from "@/components/ui/panels/MainPanel";
+import Container from "@/components/layouts/Container";
 
 const ViewPath = async () => {
   const path = await getPath();
-  const config = await getAllConfig();
-  const stroke = config.stroke[0].parameters;
-  const fill = config.fill[0].parameters;
-  const control = config.control[0].parameters;
-  const end = config.end[0].parameters;
+  const stroke = await getConfig('stroke');
+  const fill = await getConfig('fill');
+  const control = await getConfig('control');
+  const end = await getConfig('end');
 
-  const fullPath = path.map((command) => {
-        if (command.type==='c'){
-          return(
-            `${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`
-          )
-        } else if (command.type==='q'){
-          return(
-            `${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`
-          )
-        } else if (command.type==='s'){
-          return(
-            `${command.type}${command.controlPoints[0].d2.x},${command.controlPoints[0].d2.y} ${command.endPoint.x},${command.endPoint.y}`
-          )
-        } else if (command.type==='h'){
-          return(
-            `${command.type}${command.endPoint.x}`
-          )
-        } else if (command.type==='v'){
-          return(
-            `${command.type}${command.endPoint.y}`
-          )
-        }else{
-          return(
-            `${command.type}${command.endPoint.x},${command.endPoint.y}`
-          )
-        }
-      });
-      const finalPath = `M50,50${fullPath}`
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Title title="Path" />
-      <h2>Full Path: {finalPath}</h2>
-      <Grid id="mainGrid" size={400} mainWidth={450}>
-        <PathFromArray path={path} fill={fill} stroke={stroke} size={400} />
-      </Grid>
-    </div>
+    <Container className="flex flex-row justify-center items-center">
+      <MainPanel path={path} fill={fill} stroke={stroke} control={control} end={end} fullPath={fullPath}>
+      <h2 className="text-[9.5px] hover:text-sm text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1">Full Relative Path: {fullPath}</h2>
+      <h2 className="text-[9.5px] hover:text-sm  text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1">Full Absolute Path: {absolutePath}</h2>
+      </MainPanel>
+    </Container>
   );
 };
-
 
 export default ViewPath;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import NavLinks from './nav-links';
 import Image from 'next/image';
 
-export default function SideNav() {
+export default function SideNav(props) {
   return (
     <div className="flex h-full flex-col px-3 py-1 mt-20 md:px-2">
       <Link
@@ -20,7 +20,7 @@ export default function SideNav() {
         </div>
       </Link>
       <div className="flex grow flex-row justify-start gap-1 space-x-2 md:flex-col md:space-x-0 md:space-y-1">
-        <NavLinks />
+        <NavLinks path={props.path} />
       </div>
     </div>
   );
