@@ -1,6 +1,6 @@
 'use client';
-import { View, StyleSheet, Text, Pressable } from "react-native";
-import { Path } from "react-native-svg";
+import { View, StyleSheet, Text, Pressable } from "react-native-web";
+import { Path } from "react-native-svg-web";
 import Grid from "../Grid";
 
 const Presets = (props) => {

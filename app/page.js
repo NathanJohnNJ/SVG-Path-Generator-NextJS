@@ -2,23 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { RainbowPanel } from '@/components/ui/panels/RainbowPanel';
 import '@/styles/globals.css';
-import { deletePath } from "@/lib/mongodb/path/mongodb";
 
 
 
 export default async function Home() {
-  await deletePath();
   return (
-    <main className="flex w-full flex-col items-center justify-between h-full">
+    <main className="flex w-full flex-col items-center justify-start h-screen">
+      
       <div className="z-10 w-full flex">
-
-        <div className="w-full h-40 justify-center rounded-2xl bg-gradient-to-b from-zinc-800/30 via-zinc-500/50 backdrop-blur-2xl md:h-20 lg:h-40 sm:h-20">
-          <div className="mt-2 h-8 md:mt-6 lg:mt-2 sm:mt-6" >
+        <div className="w-full h-20 justify-center rounded-2xl bg-gradient-to-b from-zinc-800/30 via-zinc-500/50 backdrop-blur-2xl md:h-20 lg:h-40 sm:h-20">
+          <div className="mt-6 h-8 md:mt-6 lg:mt-2 sm:mt-6" >
             <code className="font-mono font-bold text-2xl text-center">
               SVG Path Generator
             </code>
           </div>
-          <div id="logo" className="flex h-20 justify-center sm:invisible md:invisible lg:visible">
+          <div className=" invisible flex h-20 justify-center sm:invisible md:invisible lg:visible">
             <Link
               className="items-center"
               href="https://www.njtd.xyz"
@@ -40,7 +38,6 @@ export default async function Home() {
           </div>
         </div>
 
-
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:hidden">
           <Link
             className="pointer-events-none flex place-items-center gap-2 p-8"
@@ -60,7 +57,7 @@ export default async function Home() {
         </div>
       </div>
       
-      <div className="flex w-full mt-5 h-full items-center">
+      <div id="main" className="flex w-full h-fit mt-16 items-center">
         <div className="flex mr-4 w-fit h-fit min-w-40">
           <RainbowPanel>
             <Link
