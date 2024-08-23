@@ -43,7 +43,6 @@ const Heading = styled.h2`
 export const HorizontalPanel = ({children}, props) => {
 
   return(
-    <StyledDiv style={styles(props).panel} colour={props.colour}>
       <Article className={poppins.className}>
         <Heading className="font-sans" style={styles(props).heading}>
           {props.heading}

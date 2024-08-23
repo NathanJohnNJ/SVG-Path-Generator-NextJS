@@ -12,9 +12,10 @@ const Container = ({children}, props) => {
 
 export default Container;
 
-const styles = StyleSheet({
+const styles = StyleSheet.create({
   container: {
     width: '90%',
     height: '90%'
   }
+})
 })
