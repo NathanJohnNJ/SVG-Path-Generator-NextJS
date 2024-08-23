@@ -1,8 +1,8 @@
 'use client';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { poppins } from '@/styles/fonts';
 import { StyleSheet } from 'react-native-web';
-import Title from "@/components/layouts/title";
 
  const borderAnimation = keyframes`
   to { --bg-angle: 360deg; }
@@ -27,36 +27,45 @@ const Article = styled.div`
   font-size: 3vw;
   font-weight: 575;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #ddd;
+  background-color: #eee;
   border-radius: 18px;
   padding: 10px;
-  height: 100%;
-  width: 100%;
+`
+const Heading = styled.h2`
+  color: #0010a0;
+  font-weight: 650;
+  text-align: center;
 `
 
 export const HorizontalPanel = ({children}, props) => {
 
   return(
-    <StyledDiv style={styles.panel}>
+    <StyledDiv style={styles(props).panel} colour={props.colour}>
       <Article className={poppins.className}>
-      <Title title="Path" />
-        <div className="flex flex-row w-full">
+        <Heading className="font-sans" style={styles(props).heading}>
+          {props.heading}
+        </Heading>
         {children}
-        </div>
       </Article>
-      </StyledDiv>
+    </StyledDiv>
   )
 };
-const styles = StyleSheet.create({
+const styles = (props) => StyleSheet.create({
   panel:{
       padding: 4,
       borderRadius: 18,
       boxShadow: '-2px 2px 8px #9c9c9c',
       margin: 10,
-      height: '85vh',
-      width:'70vw'
+      height: props.height,
+      width: props.width,
+  },
+  heading: {
+      fontSize: 17.5,
+      marginTop: -5,
+      marginBottom: 5,
+      textAlign: 'center'
   }
 });

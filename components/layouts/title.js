@@ -2,10 +2,9 @@
 import { View, StyleSheet } from 'react-native-web';
 
 const Title = (props) => {
-
   return(
     <View style={styles.container}>
-      <h1 style={styles.title} className="text-sky-600 font-sans underline decoration-wavy decoration-4 underline-offset-4">
+      <h1 style={styles.title} className="font-sans underline decoration-wavy decoration-4 underline-offset-4">
         {props.title}
       </h1>
     </View>
@@ -24,6 +23,8 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 35,
-    fontWeight: 600
+    fontWeight: 600,
+    color: 'rgb(251 146 60)',
+    opacity: '0.7'
   }
 })

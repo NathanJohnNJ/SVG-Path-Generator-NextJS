@@ -29,7 +29,7 @@ const MainPanel = (props) => {
   const [end, setEnd] = useState(props.end);
 
   return(
-    <HorizontalPanel style={styles.panel}>
+    <HorizontalPanel style={styles.panel} heading="Path">
       <ConfigPanel heading="Config" stroke={stroke} setStroke={setStroke} fill={fill} setFill={setFill} control={control} setControl={setControl} end={end} setEnd={setEnd} fullPath={props.fullPath} strokeColor={strokeColor} setStrokeColor={setStrokeColor} strokeWidth={strokeWidth} setStrokeWidth={setStrokeWidth} strokeHighlight={strokeHighlight} setStrokeHighlight={setStrokeHighlight} strokeOpacity={strokeOpacity} setStrokeOpacity={setStrokeOpacity} setFillColor={setFillColor} fillColor={fillColor} fillOpacity={fillOpacity} setFillOpacity={setFillOpacity} fillHighlight={fillHighlight} setFillHighlight={setFillHighlight} controlColor={controlColor} setControlColor={setControlColor} controlSize={controlSize} setControlSize={setControlSize} endColor={endColor} setEndColor={setEndColor} endSize={endSize} setEndSize={setEndSize} endOpacity={endOpacity} setEndOpacity={setEndOpacity} controlOpacity={controlOpacity} setControlOpacity={setControlOpacity} />
       <View id="gridView">
         <Grid id="mainGrid" size={400} mainWidth={450}>
