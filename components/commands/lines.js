@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import GridWithDrag from '../gridWithDrag';
 import { Text, View, Modal } from 'react-native-web';
