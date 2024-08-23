@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
   initial-value: 0deg;
   syntax: "<angle>";
 }
-  border-radius: 18px;
+  border-radius: 2px;
   animation: ${borderAnimation} 40s infinite linear running;
   background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #fdb, grey, dimgrey, #cfc4ba, grey, lightgrey, white); 
   &:hover {

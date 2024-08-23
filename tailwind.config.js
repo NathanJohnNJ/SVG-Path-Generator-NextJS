@@ -13,10 +13,13 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          '"Geologica", sans-serif',
+          'Geologica',
           {
             fontVariationSettings: '"CRSV" 1, "slnt" 0, "SHRP" 100'
           }
+        ],
+        serif: [
+          'Anton'
         ]
       }
     }

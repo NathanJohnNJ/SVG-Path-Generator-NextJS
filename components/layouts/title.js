@@ -1,6 +1,5 @@
 'use client';
-import { geologicaSharp } from '@/styles/fonts';
-import { View, Text, StyleSheet } from 'react-native-web';
+import { View, StyleSheet } from 'react-native-web';
 
 const Title = (props) => {
 

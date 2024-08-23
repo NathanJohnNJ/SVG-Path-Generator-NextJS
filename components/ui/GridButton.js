@@ -10,14 +10,14 @@ const GridButton = (props) => {
   
   function hoverFunc(id){
     const i = document.getElementById(id);
-    i.style.stroke = props.stroke[0].highlight;
-    i.style.strokeWidth = props.stroke[0].width*2;
+    i.style.stroke = props.stroke.highlight;
+    i.style.strokeWidth = props.stroke.width*2;
     i.style.fill = props.fill[highlight];
   }
   function resetHover(id){
     const i = document.getElementById(id);
-    i.style.stroke = props.stroke[0].colour;
-    i.style.strokeWidth = props.stroke[0].width;
+    i.style.stroke = props.stroke.colour;
+    i.style.strokeWidth = props.stroke.width;
     i.style.fill = props.fill[colour];
   }
   function add(command){
@@ -38,7 +38,7 @@ const GridButton = (props) => {
       </View>
       <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl">
         <Grid size="150" mainWidth="180" id="miniGrid" >
-          <Path id={props.id} d={props.d} fill="none" stroke={props.stroke[0].colour} strokeWidth={props.stroke[0].width}/>
+          <Path id={props.id} d={props.d} fill="none" stroke={props.stroke.colour} strokeWidth={props.stroke.width}/>
         </Grid>
       </Link>
     </View>

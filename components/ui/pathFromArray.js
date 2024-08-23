@@ -2,19 +2,19 @@
 import { Path, G, Defs, ClipPath, Rect, Svg } from "react-native-svg-web";
 
 const PathFromArray = (props) => {
-    const hoverWidth = props.stroke.width*2;
+    const hoverWidth = props.strokeWidth*2;
 
     function hoverFunc(id){
         const i = document.getElementById(id)
         i.setAttributeNS(null, 'stroke-width', hoverWidth)
-        i.setAttributeNS(null, 'stroke', props.stroke.highlight)
-        i.setAttributeNS(null, 'fill', props.fill.highlight)
+        i.setAttributeNS(null, 'stroke', props.strokeHighlight)
+        i.setAttributeNS(null, 'fill', props.fillHighlight)
     }
     function resetHover(id){
         const i = document.getElementById(id)
-        i.setAttributeNS(null, 'stroke-width', props.stroke.width)
-        i.setAttributeNS(null, 'stroke', props.stroke.colour)
-        i.setAttributeNS(null, 'fill', props.fill.colour)
+        i.setAttributeNS(null, 'stroke-width', props.strokeWidth)
+        i.setAttributeNS(null, 'stroke', props.strokeColor)
+        i.setAttributeNS(null, 'fill', props.fillColor)
     }
 
     function pressFunc(path){
@@ -40,27 +40,27 @@ const PathFromArray = (props) => {
                 if(command.type==="c"){
                     d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`;
                     return(
-                      <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
+                      <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
                     )
                   } else if(command.type==="q" || command.type==="s"){
                     d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`;
                     return(
-                      <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
+                      <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
                     )
                   } else if(command.type==="l"){
                     d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.endPoint.x},${command.endPoint.y}`;
                     return(
-                      <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
+                      <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
                     )
                   } else if(command.type==="v"){
                     d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.endPoint.y}`;
                     return(
-                      <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
+                      <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
                     )
                   } else if(command.type==="h"){
                     d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.endPoint.x}`;
                     return(
-                      <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
+                      <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
                     )
                   } 
                   else if(command.type==="t"){
@@ -74,7 +74,7 @@ const PathFromArray = (props) => {
                           </ClipPath>
                         </Defs>
                         <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >
-                          <Path d={d} id={command.commandId} key={i} fill={props.fill.colour} fillOpacity={props.fill.opacity} stroke={props.stroke.colour} strokeWidth={props.stroke.width} strokeOpacity={props.stroke.opacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} clipPath="url(#clip)" />
+                          <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} clipPath="url(#clip)" />
                         </G>
                         </Svg>
                     )

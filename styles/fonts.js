@@ -11,3 +11,7 @@ export const poppins = Poppins({
 export const geologicaSharp = localFont({
     src:'../public/fonts/Geologica-Sharp-VariableFont_wght.woff2',
 });
+
+export const anton = localFont({
+  src:'../public/fonts/Anton-Regular.ttf'
+})

@@ -4,7 +4,7 @@ import { Path } from 'react-native-svg-web';
 const FullPath = (props) => {
 
   return(
-      <Path d={props.fullPath} id="mainPath" stroke="red" fill="none" strokeWidth={5} />
+      <Path d={props.fullPath} id="mainPath" stroke={props.stroke} fill={props.fill} fillOpacity={props.fillOpacity} strokeWidth={props.strokeWidth} />
   )
 };
 

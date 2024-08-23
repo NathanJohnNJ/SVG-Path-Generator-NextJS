@@ -9,6 +9,12 @@
     font-display: swap;
     src: url(../public/fonts/Geologica-Sharp-VariableFont_wght.woff2) format('woff2');
   }
+  @font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-display: swap;
+    src: url(../public/fonts/Anton-Regular.ttf)
+  }
 }
 
 :root {
@@ -30,17 +36,20 @@
     scale: 0.4
   }
 }
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1000px){
   #gridView, #configPanel, #commandPanel{
     scale: 0.6
   }
 }
-@media screen and (max-width: 1024px)  {
+@media screen and (max-width: 1200px)  {
   #gridView, #configPanel, #commandPanel{
     scale: 0.8
   }
+  #gridView {
+    margin-left: -100px
+  }
 }
-@media screen and (min-width: 1024px)  {
+@media screen and (min-width: 1200px)  {
   #gridView, #configPanel, #commandPanel{
     scale: 1
   }
