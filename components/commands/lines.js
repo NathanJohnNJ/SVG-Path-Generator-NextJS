@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import GridWithDrag from '../gridWithDrag';
+import GridWithDrag from '../ui/gridWithDrag';
 import { Text, View, Modal } from 'react-native-web';
 import { styles } from './styles';
-import { EndTable } from '../Tables';
+import { EndTable } from '../ui/Tables';
 // import Help from '../help';
-import Presets from '../presetPaths/l';
+// import Presets from '../presetPaths/l';
 
 const [hover, setHover] = useState({sub: false, can: false, l:false, v:false, h:false, x:false, y:false});
 const startX = props.path[props.pathID].endPoint.x + props.path[props.pathID].startPoint.x;
@@ -69,7 +69,7 @@ export const L = (props) => {
       onReluestClose={closeModal}
       >
         <View style={styles(props).row}>
-          <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} />
+          {/* <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} /> */}
           <View style={styles(props).middleSection}>
             <View style={styles(props).titleContainer}>
               <Text style={styles(props).title}>

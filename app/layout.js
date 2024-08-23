@@ -11,14 +11,15 @@ const path = await getPath();
 // );
 
 export default function RootLayout({ children }) {
+  console.log(path.length)
   return (
     <html lang="en">
       <body className={`w-screen ${poppins.className}`}>
-        <div className="flex h-full w-full flex-col md:flex-row md:overflow-hidden">
+        <div className="flex h-full w-full flex-col md:flex-row">
           <div className="w-full flex-none md:w-64">
             <SideNav path={path} />
           </div>
-          <div className="w-full p-6 md:overflow-y-auto md:p-12">
+          <div className="w-full p-6 md:p-12">
             <div>{children}</div>
           </div>
         </div>

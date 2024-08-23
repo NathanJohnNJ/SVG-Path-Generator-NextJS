@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import GridWithDrag from '../gridWithDrag';
+import GridWithDrag from '../ui/gridWithDrag';
 import { Text, View, Modal } from 'react-native-web';
-import { EndTable, ControlTables } from '../Tables';
+import { EndTable, ControlTables } from '../ui/Tables';
 import { styles } from './styles';
 // import Help from '../help';
-import Presets from '../presetPaths/l';
+// import Presets from '../presetPaths/l';
 
 const [hover, setHover] = useState({sub: false, can: false, q:false, t:false, c:false, s:false, x:false, y:false, dx1:false, dy1: false, dx2: false, dy2: false});
 const startX = props.path[props.pathID].endPoint.x + props.path[props.pathID].startPoint.x;
@@ -79,7 +79,7 @@ export const C = (props) => {
       onRequestClose={closeModal}
       >
         <View style={styles.row}>
-          <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setSecondCtrl={props.setSecondCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} secondCtrl={props.secondCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} />
+          {/* <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setSecondCtrl={props.setSecondCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} secondCtrl={props.secondCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} /> */}
           <View style={styles.middleSection}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>
@@ -222,7 +222,7 @@ export const Q = (props) => {
       onRequestClose={closeModal}
       >
         <View style={styles.row}>
-          <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} />
+          {/* <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} /> */}
           <View style={styles.middleSection}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>
