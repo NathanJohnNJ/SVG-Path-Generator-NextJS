@@ -36,7 +36,7 @@ const GridButton = (props) => {
           {props.command.name3?props.command.name3:<></>}
         </Text>
       </View>
-      <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl">
+      <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl" aria-label="View Path">
         <div>
           <Grid size="150" mainWidth="180" id="miniGrid" >
             <Path id={props.id} d={props.d} fill="none" stroke={props.stroke.colour} strokeWidth={props.stroke.width}/>

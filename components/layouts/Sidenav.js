@@ -27,7 +27,7 @@ export default function SideNav(props) {
           />
         </div>
       </Link>
-      <button onClick={()=>setShow(!show)} className="group mb-2 flex h-fit items-center justify-center rounded-md bg-gray-400 p-4 hover:bg-gray-300 w-1/2 self-center md:w-full">
+      <button type="button" onClick={()=>setShow(!show)} className="group mb-2 flex h-fit items-center justify-center rounded-md bg-gray-400 p-4 hover:bg-gray-300 w-1/2 self-center md:w-full">
         <Bars3Icon className="group w-6 text-slate-700 hover:text-slate-300 hover:rotate-90" />
       </button>
       {show &&

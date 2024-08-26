@@ -66,7 +66,7 @@ const PathFromArray = (props) => {
                             <Rect x={props.path[command.commandId-1].startPoint.x+props.path[command.commandId-1].endPoint.x} y="0" width={width} height={props.size} />
                           </ClipPath>
                         </Defs>
-                        <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >c
+                        <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >
                           <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} clipPath="url(#clip)" />
                         </G>
                         </Svg>
