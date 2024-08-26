@@ -29,17 +29,6 @@ const Rainbow = styled.div`
     }
 `
 
-
-const Article = styled.div`
-  color: #0010a0;
-  font-size: 12;
-  font-weight: 575;
-  text-align:left;
-  padding-left: 2vw;
-  padding-right: 5px;
-  border-radius: 18px;
-  background-color: #898989;
-`
 const RainbowArticle = styled.div`
   color: #0010a0;
   font-size: 12;
@@ -51,7 +40,6 @@ const RainbowArticle = styled.div`
   min-height: 192px;
   background-color: #898989;
 `
-
 
 const Heading = styled.h2`
   color: #0010a0;
@@ -73,13 +61,15 @@ export const RainbowPanel = ({children}, props) => {
 
 const ButtonRainbow = styled.div`
 display: flex;
+width: min-content;
 @property --bg-angle {
   inherits: false;
   initial-value: 0deg;
   syntax: "<angle>";
 }
   border-radius: 18px;
-  animation: ${rainbowAnimation} 6s infinite linear running;
+  animation: ${rainbowAnimation} 4s infinite linear running;
+  animation-play-state: paused;
   margin: 2px;
   background:
     padding-box,
@@ -88,9 +78,9 @@ display: flex;
       oklch(1 0.37 0) 0 0
     )
     border-box; 
-    border: 6px solid transparent;
+    border: 3px solid transparent;
     &:hover {
-      animation-play-state: paused;
+      animation-play-state: running;
     }
 `
 const Button = styled.button`
@@ -101,12 +91,18 @@ const Button = styled.button`
   padding-right: 5px;
   border-radius: 18px;
   background-color: #ddd;
+  opacity: 0.75;
+  box-shadow: -1px 0.5px 0.5px 1px rgba(70, 70, 70, 0.85);
+  &:hover {
+    opacity: 0.95;
+    box-shadow: none;
+  };
 `
 
 export const RainbowButton = ({children}, props) => {
   return(
     <ButtonRainbow>
-      <Button className="font-serif tracking-wider uppercase">                    
+      <Button className="font-serif tracking-widest uppercase text-center ">                    
         {children}
       </Button>
     </ButtonRainbow>

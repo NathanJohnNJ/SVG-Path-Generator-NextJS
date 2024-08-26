@@ -11,7 +11,7 @@ import ColorPicker from '../colorPicker/colorPicker';
 import Title from '../../layouts/title';
 import Grid from '../Grid';
 import Path from '../Path';
-import { Article, ConfigHeading, ConfigStyledDiv } from './Panel';
+import { Article, ConfigHeading, ConfigStyledDiv } from './Panels';
 
 const ConfigPanel = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -562,7 +562,9 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
-    margin: 10
+    margin: 10,
+    marginRight: 35,
+    height: 'fit-content'
   },
   strokeSection:{
     display: 'flex',

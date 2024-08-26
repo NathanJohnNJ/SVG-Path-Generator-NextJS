@@ -3,6 +3,9 @@ import "@/styles/globals.css";
 import { poppins } from "@/styles/fonts";
 import SideNav from '@/components/layouts/Sidenav';
 import { getPath } from "@/lib/mongodb/path/mongodb";
+import Link from "next/link";
+import Image from "next/image";
+import StyledComponentsRegistry from "@/lib/registry";
 
 const path = await getPath();
 // export const metadata = Metadata(
@@ -11,16 +14,81 @@ const path = await getPath();
 // );
 
 export default function RootLayout({ children }) {
-  console.log(path.length)
   return (
     <html lang="en">
+      <head>
+        <link
+        rel="prefetch"
+        href="/fonts/Anton-Regular.ttf"
+        as="font"
+        type="font/ttf"
+        />
+        <link
+        rel="prefetch"
+        href="/fonts/Geologica-Sharp-VariableFont_wght.woff2"
+        as="font"
+        type="font/woff2"
+        />
+      </head>
       <body className={`w-screen ${poppins.className}`}>
         <div className="flex h-full w-full flex-col md:flex-row">
-          <div className="w-full flex-none md:w-64">
-            <SideNav path={path} />
-          </div>
-          <div className="w-full p-6 md:p-12">
-            <div>{children}</div>
+          
+          <div className="z-10 w-full flex flex-col">
+            <div className="w-full h-20 justify-center rounded-2xl bg-gradient-to-b from-zinc-800/30 via-zinc-500/50 backdrop-blur-2xl md:h-20 lg:h-40 sm:h-20">
+              <div className="mt-6 h-8 md:mt-6 lg:mt-2 sm:mt-6" >
+                <code className="font-mono font-bold text-2xl text-center">
+                  SVG Path Generator
+                </code>
+              </div>
+              <div className="visible flex h-20 justify-center">
+                <Link
+                className="items-center"
+                href="https://www.njtd.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                  <code className="font-mono font-bold text-xs text-center">
+                    Brought To You By{" "}
+                  </code>
+                  <Image
+                  src="/images/logoBlack.svg"
+                  width={100}
+                  height={100}
+                  className="ml-2"
+                  alt="NJTD Logo"
+                  priority
+                  />
+                </Link>
+              </div>
+            </div>
+
+          <div className="flex flex-col md:flex-row">
+            <div className="w-screen md:w-64 md:absolute h-screen md:top-0">
+              <SideNav path={path} />
+            </div>
+
+              <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:hidden">
+                <Link
+                className="pointer-events-none flex place-items-center gap-2 p-8"
+                href="https://www.njtd.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                  <Image
+                  src="/images/logoBlack.svg"
+                  width={125}
+                  height={125}
+                  className="image"
+                  alt="NJTD Logo"
+                  priority
+                  />
+                </Link>
+              </div>
+          
+              <div className="w-full p-6 md:p-12">
+                <div><StyledComponentsRegistry>{children}</StyledComponentsRegistry></div>
+              </div>
+            </div>
           </div>
         </div>
       </body>
