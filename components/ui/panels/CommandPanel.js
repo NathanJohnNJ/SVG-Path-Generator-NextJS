@@ -1,5 +1,5 @@
 'use client';
-import { CommandStyledPanel } from "./Panel";
+import { CommandStyledPanel } from "./Panels";
 import { RainbowButton } from "./RainbowPanel";
 import { StyleSheet, View, Text, Pressable } from 'react-native-web';
 import Link from "next/link";

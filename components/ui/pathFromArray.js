@@ -1,35 +1,28 @@
 'use client';
 import { Path, G, Defs, ClipPath, Rect, Svg } from "react-native-svg-web";
+import { addToTableInfo } from "@/lib/mongodb/tables/mongodb";
 
 const PathFromArray = (props) => {
     const hoverWidth = props.strokeWidth*2;
-
+    
     function hoverFunc(id){
-        const i = document.getElementById(id)
-        i.setAttributeNS(null, 'stroke-width', hoverWidth)
-        i.setAttributeNS(null, 'stroke', props.strokeHighlight)
-        i.setAttributeNS(null, 'fill', props.fillHighlight)
+      const i = document.getElementById(id)
+      i.setAttributeNS(null, 'stroke-width', hoverWidth)
+      i.setAttributeNS(null, 'stroke', props.strokeHighlight)
+      i.setAttributeNS(null, 'fill', props.fillHighlight)
     }
     function resetHover(id){
-        const i = document.getElementById(id)
-        i.setAttributeNS(null, 'stroke-width', props.strokeWidth)
-        i.setAttributeNS(null, 'stroke', props.strokeColor)
-        i.setAttributeNS(null, 'fill', props.fillColor)
+      const i = document.getElementById(id)
+      i.setAttributeNS(null, 'stroke-width', props.strokeWidth)
+      i.setAttributeNS(null, 'stroke', props.strokeColor)
+      i.setAttributeNS(null, 'fill', props.fillColor)
     }
 
     function pressFunc(path){
-        props.setSelected(path)
-        props.setShowTable(true)
-        if(path.type==="q" || path.type==="s"){
-            props.setFirstCtrl({x: path.controlPoints[0].value, y: path.controlPoints[1].value})
-            props.setEndPoint({x: path.endPoint.x, y: path.endPoint.y})
-        } else if (props.type==="c"){
-            props.setFirstCtrl({x: path.controlPoints.dx1, y: path.controlPoints.dy1})
-            props.setSecondCtrl({x: path.controlPoints.dx2, y: path.controlPoints.dy2})
-            props.setEndPoint({x: path.endPoint.x, y: path.endPoint.y})
-        } else{
-            props.setEndPoint({x: path.endPoint.x, y: path.endPoint.y})
-        }
+      props.setSelected(path)
+      console.log(props.selected)
+
+      // props.setShowTable(true)
     }
     const viewBox = `0 0 ${props.size} ${props.size}`
     return(
@@ -73,7 +66,7 @@ const PathFromArray = (props) => {
                             <Rect x={props.path[command.commandId-1].startPoint.x+props.path[command.commandId-1].endPoint.x} y="0" width={width} height={props.size} />
                           </ClipPath>
                         </Defs>
-                        <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >
+                        <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >c
                           <Path d={d} id={command.commandId} key={i} fill={props.fillColor} fillOpacity={props.fillOpacity} stroke={props.strokeColor} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} clipPath="url(#clip)" />
                         </G>
                         </Svg>

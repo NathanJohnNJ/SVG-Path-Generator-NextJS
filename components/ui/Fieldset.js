@@ -27,10 +27,10 @@ const styles = (props) => StyleSheet.create({
     borderWidth: 1.5,
     borderStyle: 'solid',
     borderColor: props.borderColor,
-    margin: 5,
-    marginTop: 10,
-    padding: 5,
-    width: 'fit-content'
+    margin: 2,
+    marginTop: 20,
+    padding: 3,
+    width: 'min-content'
   },
   labelView: {
     display: 'flex',
@@ -38,6 +38,7 @@ const styles = (props) => StyleSheet.create({
     justifyContent: 'center',
     padding: 2,
     marginBottom: 15,
+    marginTop: '-8px',
     height: 0,
     fontSize: props.fontSize,
   },

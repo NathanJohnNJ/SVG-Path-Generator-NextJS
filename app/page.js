@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { RainbowPanel } from '@/components/ui/panels/RainbowPanel';
 import '@/styles/globals.css';
@@ -9,55 +8,7 @@ export default async function Home() {
   return (
     <main className="flex w-full flex-col items-center justify-start h-screen">
       
-      <div className="z-10 w-full flex">
-        <div className="w-full h-20 justify-center rounded-2xl bg-gradient-to-b from-zinc-800/30 via-zinc-500/50 backdrop-blur-2xl md:h-20 lg:h-40 sm:h-20">
-          <div className="mt-6 h-8 md:mt-6 lg:mt-2 sm:mt-6" >
-            <code className="font-mono font-bold text-2xl text-center">
-              SVG Path Generator
-            </code>
-          </div>
-          <div className=" invisible flex h-20 justify-center sm:invisible md:invisible lg:visible">
-            <Link
-              className="items-center"
-              href="https://www.njtd.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <code className="font-mono font-bold text-xs text-center">
-                Brought To You By{" "}
-              </code>
-              <Image
-                src="/images/logoBlack.svg"
-                width={100}
-                height={100}
-                className="ml-2"
-                alt="NJTD Logo"
-                priority
-              />
-            </Link>
-          </div>
-        </div>
-
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:hidden">
-          <Link
-            className="pointer-events-none flex place-items-center gap-2 p-8"
-            href="https://www.njtd.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/logoBlack.svg"
-              width={125}
-              height={125}
-              className="image"
-              alt="NJTD Logo"
-              priority
-            />
-          </Link>
-        </div>
-      </div>
-      
-      <div id="main" className="flex w-full h-fit mt-16 items-center">
+      <div id="main" className="flex w-full h-fit mt-16 items-center ">
         <div className="flex mr-4 w-fit h-fit min-w-40">
           <RainbowPanel>
             <Link

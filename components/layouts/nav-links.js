@@ -30,6 +30,7 @@ export default function NavLinks(props) {
       key='Home'
       href='/'
       rel="noopener noreferrer"
+      onClick={props.close}
       className={clsx(
         'flex h-min grow items-center justify-center gap-2 rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
@@ -45,6 +46,7 @@ export default function NavLinks(props) {
       key='Path'
       href='/viewPath'
       rel="noopener noreferrer"
+      onClick={props.close}
       className={clsx(
         'flex h-min items-center justify-center rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
@@ -53,7 +55,7 @@ export default function NavLinks(props) {
       )}
       style={{minWidth: '130px'}}
     >
-      <PresentationChartLineIcon style={{minWidth: '50px'}} />
+      <PresentationChartLineIcon className="w-6" style={{minWidth: '50px'}} />
       View Path
     </Link>
       :<></>}
@@ -66,6 +68,7 @@ export default function NavLinks(props) {
             href={link.href}
             target={link.target?link.target:null}
             rel="noopener noreferrer"
+            onClick={props.close}
             className={clsx(
               'flex h-min grow items-center justify-center rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {

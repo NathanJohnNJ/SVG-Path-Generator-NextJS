@@ -37,9 +37,11 @@ const GridButton = (props) => {
         </Text>
       </View>
       <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl">
-        <Grid size="150" mainWidth="180" id="miniGrid" >
-          <Path id={props.id} d={props.d} fill="none" stroke={props.stroke.colour} strokeWidth={props.stroke.width}/>
-        </Grid>
+        <div>
+          <Grid size="150" mainWidth="180" id="miniGrid" >
+            <Path id={props.id} d={props.d} fill="none" stroke={props.stroke.colour} strokeWidth={props.stroke.width}/>
+          </Grid>
+        </div>
       </Link>
     </View>
   )

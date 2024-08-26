@@ -128,6 +128,7 @@ const lines = [hPath, lPath, vPath];
         {
           curves.map((command, i) => {
             const gridID = `grid${command.type}`;
+            const key = `choose${i}`
             let d;
             if(command.type==="c"){
               d = `M${startX},${startY}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`;
@@ -137,10 +138,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
             }
             return(
-              <Link
-              href="/viewPath">
                 <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />
-              </Link>
             )
           })}
           </View>
@@ -156,10 +154,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
             }
             return(
-              <Link
-              href="/viewPath">
                 <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end}/>
-              </Link>
             )
           })
         }
