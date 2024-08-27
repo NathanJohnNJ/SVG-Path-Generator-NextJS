@@ -2,7 +2,6 @@
 import {Text, View, StyleSheet, TextInput } from 'react-native-web';
 import { useState } from 'react';
 import GridButton from './GridButton';
-import Link from 'next/link';
 
 export default function ChoosePath(props) {
   const [startX, setStartX] = useState(50);

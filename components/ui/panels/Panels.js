@@ -28,8 +28,7 @@ export const Article = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #eee;
-  border-radius: 18px;
-  padding: 10px;
+  border-radius: 5%;
 `
 
 export const Heading = styled.h2`
@@ -60,12 +59,13 @@ export const CommandHeading = ({children}) => {
 }
 
 const CommandStyledDiv = styled.div`
+width: 25vw;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
 syntax: "<angle>";
 }
-border-radius: 18px;
+border-radius: 5%;
 animation: ${borderAnimation} 40s infinite linear running;
 background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, darkgrey, lightgrey, #F6E0EF, lightgrey, #FCC3D9, lightgrey, white); 
 `
@@ -94,6 +94,7 @@ export const CommandStyledPanel = ({children}, props) => {
 
 
 const InfoStyledDiv = styled.div`
+width: 25vw;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -128,7 +129,7 @@ export const ConfigHeading = ({children}) => {
 }
 
 export const ConfigStyledDiv = styled.div`
-
+width: 30vw;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -178,6 +179,26 @@ export const HorizontalPanel = ({children}, props) => {
 };
 
 
+ const Border = styled.div`
+  border-radius: 5%;
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+  animation: ${borderAnimation} 40s infinite linear running;
+  background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #3192f6, grey, dimgrey, #1206bf, grey, lightgrey, white); 
+`
+export const GridBorder =({children}, props)=> {
+  return (
+    <Border style={styles(props).gridPanel}>
+      <Article>
+        {children}
+      </Article>
+    </Border>
+  )
+}
+
 
 const styles = (props) => StyleSheet.create({
   panel:{
@@ -198,7 +219,10 @@ const styles = (props) => StyleSheet.create({
     padding: 4,
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
-    height: '85vh',
-    width:'fit-content'
+    height: 'min-content',
+    width:'95vw'
+  },
+  gridPanel: {
+    padding: 5
   }
 });

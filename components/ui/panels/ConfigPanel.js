@@ -543,11 +543,11 @@ const ConfigPanel = (props) => {
             <View style={styles.pickerView}>
               <ColorPicker color={currentColor} element={elementToChange} property={propertyToChange} onSelectColor={onSelectColor} setModalIsOpen={setModalIsOpen} />
             </View>
-            <View style={styles.gridView}>
+            {/* <View style={styles.gridView}>
               <Grid id="miniGrid" size={200} mainWidth={225}>
                 <Path path={props.fullPath} fill={props.fillColor} fillOpacity={props.fillOpacity} strokeWidth={props.strokeWidth} stroke={props.strokeColor} size={250} />
               </Grid>
-            </View>
+            </View> */}
           </View>
         </Modal>
       </Article>

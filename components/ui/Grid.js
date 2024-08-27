@@ -1,12 +1,14 @@
 'use client';
 import { StyleSheet, View } from 'react-native-web';
 import Svg, { G, Rect, Defs, Pattern, Line } from "react-native-svg-web";
+import {GridBorder} from './panels/Panels';
 
 const Grid = (props) => {
   const viewBox = `0 0 ${props.size} ${props.size}`
   
   return(
-    <View style={[styles.grid, {width: props.mainWidth}]}>
+    <GridBorder>
+    <View style={[styles.grid, {width: props.mainWidth, height: props.mainWidth}]}>
       <Svg id={props.id} width={props.size} height={props.size} viewBox={viewBox} x="0" y="0" onMouseMove={props.onMouseMove?props.onMouseMove:null} onMouseLeave={props.onMouseLeave?props.onMouseLeave:null}>
         <Defs>
           <Pattern
@@ -39,6 +41,7 @@ const Grid = (props) => {
         {props.children}
       </Svg>
     </View>
+    </GridBorder>
   )
 };
 
@@ -47,14 +50,10 @@ export default Grid;
 const styles = StyleSheet.create({
     grid:{
         backgroundColor: '#f2f2f2',
-        borderColor: '#acf',
-        borderWidth: 3,
         borderRadius: 18,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 16,
-        boxShadow: '-2px 2px 8px #9c9c9c',
         margin: 10                                      
     }
 })
