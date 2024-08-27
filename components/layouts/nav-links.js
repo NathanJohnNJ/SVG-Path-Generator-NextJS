@@ -10,7 +10,9 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import Image from 'next/image';
+// import Image from 'next/image';
+import { PathContext } from '../../app/providers';
+import { useContext } from 'react';
 
 // const NJTD = <Image src="/images/logoBlack.svg" alt="NJTD Logo" width={125} height={125} />
 
@@ -23,6 +25,7 @@ const links = [
 ];
 
 export default function NavLinks(props) {
+  // const [path, setPath] = useContext(PathContext);
   const pathname = usePathname();
   return (
     <>
@@ -41,7 +44,7 @@ export default function NavLinks(props) {
       <HomeIcon className="w-6" style={{width: '50px'}} />
       Home
     </Link>
-    {props.path.length>=1?
+    {/* {path.length>=1?
       <Link
       key='Path'
       href='/viewPath'
@@ -58,7 +61,7 @@ export default function NavLinks(props) {
       <PresentationChartLineIcon className="w-6" style={{minWidth: '50px'}} />
       View Path
     </Link>
-      :<></>}
+      :<></>} */}
       {links.map((link) => {
         const LinkIcon = link.icon;
         

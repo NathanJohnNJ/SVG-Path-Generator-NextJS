@@ -4,9 +4,11 @@ import Link from "next/link";
 import Grid from "./Grid";
 import { Path } from 'react-native-svg-web';
 import { addToPath, deletePath } from "@/lib/mongodb/path/mongodb";
-
+import { PathContext } from '@/app/(path)/layout';
+import { useContext } from 'react';
 
 const GridButton = (props) => {
+  const [path, setPath] = useContext(PathContext);
   
   function hoverFunc(id){
     const i = document.getElementById(id);
@@ -22,6 +24,8 @@ const GridButton = (props) => {
   }
   function add(command){
     console.log('starting add function');
+    const newPath = [command];
+    setPath(newPath);
     deletePath();
     addToPath(command);
     console.log(`${command.type} command added to database sucessfully.`);

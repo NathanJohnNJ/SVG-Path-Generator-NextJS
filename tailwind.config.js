@@ -20,6 +20,9 @@ module.exports = {
         ],
         serif: [
           'Anton'
+        ],
+        mono: [
+          'Rubik'
         ]
       }
     }

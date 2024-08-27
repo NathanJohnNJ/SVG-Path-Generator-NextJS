@@ -61,5 +61,8 @@ const styles = StyleSheet.create({
   column: {
     display: 'flex',
     flexDirection: 'column'
+  },
+  gridView:{
+    flex:1
   }
 })
