@@ -4,12 +4,12 @@ import Wrapper from './components/wrapper';
 // name, toUpdate, newValue
 
 const ColorPicker = (props) => {
-  const { color, onSelectColor, element, property, setModalIsOpen } = props;
+  const { color, element, setModalIsOpen } = props;
 
 
   return(
     <Container>
-      <Wrapper color={color} element={element} property={property} onSaveHandler={onSelectColor} setModalIsOpen={setModalIsOpen}/>
+      <Wrapper color={color} element={element} setModalIsOpen={setModalIsOpen}/>
     </Container>
   )
 }

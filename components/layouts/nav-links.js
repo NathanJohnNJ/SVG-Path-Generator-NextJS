@@ -10,22 +10,16 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-// import Image from 'next/image';
-import { PathContext } from '../../app/providers';
-import { useContext } from 'react';
-
-// const NJTD = <Image src="/images/logoBlack.svg" alt="NJTD Logo" width={125} height={125} />
+import { path } from '@/lib/store';
 
 const links = [
-  { name: 'Create', href: '/newPath', icon: PaintBrushIcon },
-  { name: 'Edit', href: '/editPath', icon: PencilSquareIcon },
-  { name: 'Export', href: '/exportPath', icon: ArrowUpOnSquareIcon },
-  { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon },
-  // { name: 'NJTD', href: 'https://www.njtd.xyz', icon: NJTD, target: '_blank' },
+  { name: 'Create', href: '/path/newPath', icon: PaintBrushIcon },
+  { name: 'Edit', href: '/path/editPath', icon: PencilSquareIcon },
+  { name: 'Export', href: '/path/exportPath', icon: ArrowUpOnSquareIcon },
+  { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon }
 ];
 
 export default function NavLinks(props) {
-  // const [path, setPath] = useContext(PathContext);
   const pathname = usePathname();
   return (
     <>
@@ -44,7 +38,7 @@ export default function NavLinks(props) {
       <HomeIcon className="w-6" style={{width: '50px'}} />
       Home
     </Link>
-    {/* {path.length>=1?
+    {path.length>=1?
       <Link
       key='Path'
       href='/viewPath'
@@ -61,7 +55,7 @@ export default function NavLinks(props) {
       <PresentationChartLineIcon className="w-6" style={{minWidth: '50px'}} />
       View Path
     </Link>
-      :<></>} */}
+      :<></>}
       {links.map((link) => {
         const LinkIcon = link.icon;
         

@@ -1,183 +1,153 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { poppins } from '@/styles/fonts';
-import { StyleSheet } from 'react-native-web';
-import { useState } from 'react';
-import { View, Text, Pressable, TextInput, Modal } from 'react-native-web';
+import { View, Text, Pressable, TextInput, Modal, StyleSheet } from 'react-native-web';
 import Image from 'next/image';
 import FieldSet from '../Fieldset';
-import { updateConfig } from '@/lib/mongodb/config/mongodb';
 import ColorPicker from '../colorPicker/colorPicker';
 import Title from '../../layouts/title';
-import Grid from '../Grid';
-import Path from '../Path';
 import { Article, ConfigHeading, ConfigStyledDiv } from './Panels';
+import {  stroke, strokeActions, fill, fillActions, control, controlActions, end, endActions, resetConfig } from '@/lib/store';
+import { useSnapshot } from 'valtio';
 
 const ConfigPanel = (props) => {
+  const strokeSnap = useSnapshot(stroke);
+  const fillSnap = useSnapshot(fill);
+  const controlSnap = useSnapshot(control);
+  const endSnap = useSnapshot(end);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
-  const [elementToChange, setElementToChange] = useState();
-  const [propertyToChange, setPropertyToChange] = useState();
-  const [currentColor, setCurrentColor] = useState()
-  const [hover, setHover] = useState({x: false, change: false, edit: false, can: false});
+  const [element, setElement] = useState('');
+  const [currentColor, setCurrentColor] = useState();
+  const [hover, setHover] = useState({x: false, change: false, edit: false, can: false, resetStroke: false, resetFill: false, resetControl: false, resetEnd: false});
   const [openSection, setOpenSection] = useState('');
-  // const [modalConfig, setModalConfig] = useState({
-  //   stroke: {
-  //     color: '#000',
-  //     width:5
-  //   },
-  //   fill: {
-  //     example: 'string'
-  //   }
-  // })
-
-  // const newModalConfig = { ...modalConfig, [stroke.color]: "#fff"}
 
     function hoverFunc(i){
         const newHover = { ...hover, [i]: true}
         setHover(newHover)
     }
     function resetHover(){
-        setHover({x: false, change: false, edit: false, can: false})
+        setHover({x: false, change: false, edit: false, can: false, resetStroke: false, resetFill: false, resetControl: false, resetEnd: false})
     }
-    function openModal(title, element, property, color){
+    function openModal(title, color, toUpdate){
         setModalTitle(title);
-        setElementToChange(element);
-        setPropertyToChange(property);
         setCurrentColor(color);
+        setElement(toUpdate)
         setModalIsOpen(true);
     }
 
     function closeModal(){
         setModalIsOpen(false);
-        setElementToChange(null);
-        setPropertyToChange(null);
+        setUpdateFunc(null);
         setCurrentColor();
+        setModalTitle('');
     }
-
-    const onSelectColor = (hex) => {
-      updateConfig(elementToChange, propertyToChange, hex)
-    }
-    function reset(){
-      updateConfig('stroke', 'width', 3);
-      updateConfig('stroke', 'colour', '#444');
-      updateConfig('stroke', 'opacity', '1.0');
-      updateConfig('stroke', 'highlight', '#0ef');
-      updateConfig('fill', 'colour', '#000');
-      updateConfig('fill', 'opacity', '0.0');
-      updateConfig('fill', 'highlight', '#0bd');
-      updateConfig('control', 'colour', '#00f');
-      updateConfig('control', 'opacity', '0.8');
-      updateConfig('control', 'size', 5);
-      updateConfig('end', 'colour', '#f00');
-      updateConfig('end', 'opacity', '0.8');
-      updateConfig('end', 'size', 5);
-    }
-
-    function up(){
-      if(props.strokeOpacity<1){
-        const newOpacity = props.strokeOpacity + 0.05;
-        props.setStrokeOpacity(newOpacity);    
-      } else {
-        props.setStrokeOpacity(1);  
+    
+    function opacityUp(type){
+      if (type==="stroke"){
+      if(strokeSnap.opacity<1){
+          const newOpacity = strokeSnap.opacity + 0.05;
+          strokeActions.setOpacity(newOpacity);    
+        } else {
+          strokeActions.setOpacity(1);  
+        }
+      } else if (type==="fill"){
+        if(fillSnap.opacity<1){
+          const newOpacity = fillSnap.opacity + 0.05;
+          fillActions.setOpacity(newOpacity);    
+        } else {
+          fillActions.setOpacity(1);  
+        }
+      } else if (type==="control"){
+        if(controlSnap.opacity<1){
+          const newOpacity = controlSnap.opacity + 0.05;
+          controlActions.setOpacity(newOpacity);    
+        } else {
+          controlActions.setOpacity(1);  
+        }
+      } else if (type==="end"){
+        if(endSnap.opacity<1){
+          const newOpacity = endSnap.opacity + 0.05;
+          endActions.setOpacity(newOpacity);    
+        } else {
+          endActions.setOpacity(1);  
+        }
       }
     }
-    function down(){
-      if(props.strokeOpacity>0){
-        const newOpacity = props.strokeOpacity - 0.05;
-        props.setStrokeOpacity(newOpacity);    
-      } else {
-        props.setStrokeOpacity(0);  
+    function opacityDown(type){
+      if (type==="stroke"){
+      if(strokeSnap.opacity>0){
+        const newOpacity = strokeSnap.opacity - 0.05;
+        strokeActions.setOpacity(newOpacity);    
+        } else {
+          strokeActions.setOpacity(0);  
+        }
+      } else if (type==="fill"){
+        if(fillSnap.opacity>0){
+          const newOpacity = fillSnap.opacity - 0.05;
+          fillActions.setOpacity(newOpacity);    
+        } else {
+          fillActions.setOpacity(0);  
+        }
+      } else if (type==="control"){
+        if(controlSnap.opacity>0){
+          const newOpacity = controlSnap.opacity - 0.05;
+          controlActions.setOpacity(newOpacity);    
+        } else {
+          controlActions.setOpacity(0);  
+        }
+      } else if (type==="end"){
+        if(endSnap.opacity>0){
+          const newOpacity = endSnap.opacity - 0.05;
+          endActions.setOpacity(newOpacity);    
+        } else {
+          endActions.setOpacity(0);  
+        }
       }
     }
-    function upFill(){
-      if(props.fillOpacity<1){
-        const newOpacity = Number(props.fillOpacity) + 0.05
-        props.setFillOpacity(newOpacity);    
-      } else {
-        props.setFillOpacity(1);  
+    function sizeUp(type){
+      if(type==='control'){
+        if(controlSnap.size<10){
+          const newSize = controlSnap.size + 1;
+          controlActions.setSize(newSize);     
+        } else {
+          controlActions.setSize(10);   
+        }
+      }else {
+        if(endSnap.size<10){
+          const newSize = endSnap.size + 1;
+          endActions.setSize(newSize);     
+        } else {
+          endActions.setSize(10);   
+        }
       }
-    }
-    function downFill(){
-      if(props.fillOpacity>0){
-        const newOpacity = Number(props.fillOpacity) - 0.05
-        props.setFillOpacity(newOpacity);    
-      } else {
-        props.setFillOpacity(0);  
-      }
-    }
-    function upSize(){
-      if(props.controlSize<10){
-        const newSize = props.controlSize + 1;
-        props.setContolSize(newSize);     
-      } else {
-        props.setContolSize(10);   
-      }
-    }
-    function downSize(){
-      if(props.controlSize>0){
-        const newSize = props.controlSize - 1;
-        props.setContolSize(newSize);     
-      } else {
-        props.setContolSize(0);   
-      }
-    }
-    function upControlOpacity(){
-      if(props.controlOpacity<1){
-        const newOpacity = Number(props.controlOpacity) + 0.05;
-        props.setControlOpacity(newOpacity);      
-      } else {
-        props.setControlOpacity(1);      
-      }
-    }
-    function downControlOpacity(){
-      if(props.controlOpacity>0){
-        const newOpacity = Number(props.controlOpacity) - 0.05;
-        props.setControlOpacity(newOpacity);      
-      } else {
-        props.setControlOpacity(0);      
-      }
-    }
-    function upEnd(){
-      if(props.endSize<10){
-        const newSize = props.endSize + 1;
-        props.setEndSize(newSize);      
-      } else {
-        props.setEndSize(10);  
-      }
-    }
-    function downEnd(){
-      if(props.endSize>0){
-        const newSize = props.endSize - 1;
-        props.setEndSize(newSize);      
-      } else {
-        props.setEndSize(0);  
-      }
-    }
-    function upEndOpacity(){
-      if(props.endOpacity<1){
-        const newOpacity = Number(props.endOpacity) + 0.05;
-        props.setEndOpacity(newOpacity);      
-      } else {
-        props.setEndOpacity(1.0);  
-      }
-    }
-    function downEndOpacity(){
-      if(props.endOpacity>0){
-        const newOpacity = Number(props.endOpacity) - 0.05;
-        props.setEndOpacity(newOpacity);      
-      } else {
-        props.setEndOpacity(0.0);  
+    };
+    function downSize(type){
+      if(type==='control'){
+        if(controlSnap.size>0){
+          const newSize = controlSnap.size - 1;
+          controlActions.setSize(newSize);     
+        } else {
+          controlActions.setSize(0);   
+        }
+      }else {
+        if(endSnap.size>0){
+          const newSize = endSnap.size - 1;
+          endActions.setSize(newSize);     
+        } else {
+          endActions.setSize(0);   
+        }
       }
     }
   return(
+    <>
     <ConfigStyledDiv id="configPanel" style={styles.panel} colour={props.colour}>
       <Article className={poppins.className}>
       <ConfigHeading color="red">{props.heading}</ConfigHeading>
 
         {/****** STROKE SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet label="Stroke" fontSize={15} labelColor={props.stroke.colour} labelBgColor={props.stroke.highlight} borderColor={props.stroke.highlight}>
+          <FieldSet label="Stroke" fontSize={15} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
           {
           openSection === 'stroke'
 
@@ -188,7 +158,7 @@ const ConfigPanel = (props) => {
               <p style={styles.attribute} className="text-slate-700">
                 Colour:{"  "}
               </p>
-              <Pressable style={[styles.color, {backgroundColor:props.stroke.colour}]} onPress={() => openModal('Stroke Colour', 'stroke', 'colour', props.stroke.colour)} />
+              <Pressable style={[styles.color, {backgroundColor:strokeSnap.color}]} onPress={() => openModal('Stroke Colour', strokeSnap.color, 'stroke.color')} />
             </View>
           
 
@@ -196,7 +166,7 @@ const ConfigPanel = (props) => {
               <Text style={styles.attribute}>
                 Highlight Colour:{"  "}
               </Text>
-              <Pressable style={[styles.color, {backgroundColor:props.stroke.highlight}]} onPress={() => openModal('Stroke Highlight Colour', 'stroke', 'highlight', props.stroke.highlight)} />
+              <Pressable style={[styles.color, {backgroundColor:strokeSnap.highlight}]} onPress={() => openModal('Stroke Highlight Colour', strokeSnap.highlight, 'stroke.highlight')} />
             </View>
           
 
@@ -205,8 +175,8 @@ const ConfigPanel = (props) => {
                 Width: 
               </Text>
               <TextInput
-              onChangeText={props.setStrokeWidth}
-              value={props.strokeWidth}
+              onChangeText={strokeActions.setWidth}
+              value={strokeSnap.width}
               inputMode="numeric"
               style={styles.textInput} />
             </View>
@@ -216,36 +186,46 @@ const ConfigPanel = (props) => {
               <Text style={styles.attribute}>
                 Opacity: 
               </Text>
-              <Pressable style={styles.upDown} onPress={down}>
+              <Pressable style={styles.upDown} onPress={()=>opacityDown('stroke')}>
                 <Image
                 src="/images/down.svg"
-                width={20}
-                height={20}
+                width={24}
+                height={24}
+                className="m-2"
                 alt="Down arrow"
                 />
               </Pressable>
               <Text style={styles.opacity}>
-                {Math.round( ( Number(props.strokeOpacity) + Number.EPSILON ) * 100 ) / 100}
+                {Math.round( ( strokeSnap.opacity+Number.EPSILON ) * 100 ) / 100}
               </Text>
-              <Pressable style={styles.upDown} onPress={up}>
-              <Image
-              src="/images/up.svg"
-              width={20}
-              height={20}
-              alt="Up arrow"
-              />
+              <Pressable style={styles.upDown} onPress={()=>opacityUp('stroke')}>
+                <Image
+                src="/images/up.svg"
+                width={24}
+                height={24}
+                className="m-2"
+                alt="Up arrow"
+                />
               </Pressable>
             </View>
           
           
+            <View style={styles.resetSection}>
             <Pressable style={styles.openClose} onPress={() => setOpenSection('')}>
-            <Image
-            src="/images/up.svg"
-            width={20}
-            height={20}
-            alt="Up arrow"
-            />
+              <Image
+              src="/images/up.svg"
+              width={24}
+              height={24}
+              alt="Up arrow"
+              />
             </Pressable>
+            <Pressable style={hover.resetStroke?styles.cancelHover:styles.cancel} onPress={strokeActions.reset} onMouseOver={() => hoverFunc('resetStroke')} onMouseLeave={resetHover}>
+              <h2 className="font-sans" style={hover.resetStroke?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('resetStroke')} onMouseLeave={resetHover}>
+                RESET
+              </h2>
+            </Pressable>
+          </View>
+      
           </View>
           
           :
@@ -253,11 +233,11 @@ const ConfigPanel = (props) => {
           <View>
             <Pressable style={styles.upDown} onPress={()=>setOpenSection('stroke')}>
             <Image
-            src="/images/down.svg"
-            width={20}
-            height={20}
-            alt="Down arrow"
-            />
+                src="/images/down.svg"
+                width={24}
+                height={24}
+                alt="Down arrow"
+                />
             </Pressable>
           </View>
           }
@@ -268,26 +248,23 @@ const ConfigPanel = (props) => {
         
         {/****** FILL SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet fontSize={15} label="Fill" labelColor={props.fill.colour} labelBgColor={props.fill.highlight} borderColor={props.fill.highlight} >
+          <FieldSet fontSize={15} label="Fill" labelColor={fillSnap.color} labelBgColor={fillSnap.highlight} borderColor={fillSnap.highlight} >
           {
             openSection === 'fill'
-            
             ?
-            
             <View>
             <View style={styles.attSection}>
             <Text style={styles.attribute}>
               Colour:{"  "}
             </Text>
-            <Pressable style={[styles.color, {backgroundColor:props.fill.colour}]} onPress={() => openModal('Fill Colour', 'fill', 'colour', props.fill.colour)} />
+            <Pressable style={[styles.color, {backgroundColor:fillSnap.color}]} onPress={() => openModal('Fill Colour', fillSnap.color, 'fill.color')} />
           </View>
-          
           
           <View style={styles.attSection}>
             <Text style={styles.attribute}>
               Highlight Colour:{"  "}
             </Text>
-            <Pressable style={[styles.color, {backgroundColor:props.fill.highlight}]} onPress={() => openModal('Fill Highlight Colour', 'fill', 'highlight', props.stroke.colour)} />
+            <Pressable style={[styles.color, {backgroundColor:fillSnap.highlight}]} onPress={() => openModal('Fill Highlight Colour', fillSnap.highlight, 'fill.highlight')} />
           </View>
           
           
@@ -295,34 +272,40 @@ const ConfigPanel = (props) => {
             <Text style={styles.attribute}>
               Opacity: 
             </Text>
-            <Pressable style={styles.upDown} onPress={downFill}>
+            <Pressable style={styles.upDown} onPress={() => opacityDown('fill')}>
             <Image
-            src="/images/down.svg"
-            width={20}
-            height={20}
-            alt="Down arrow"
-            />
+                src="/images/down.svg"
+                width={24}
+                height={24}
+                className="m-2"
+                alt="Down arrow"
+                />
             </Pressable>
-              <Text style={styles.opacity}>{Math.round( ( Number(props.fillOpacity) + Number.EPSILON ) * 100 ) / 100}</Text>
-              <Pressable style={styles.upDown} onPress={upFill}>
+            <Text style={styles.opacity}>{Math.round( ( fillSnap.opacity+Number.EPSILON ) * 100 ) / 100}</Text>
+            <Pressable style={styles.upDown} onPress={() => opacityUp('fill')}>
               <Image
               src="/images/up.svg"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
+              className="m-2"
               alt="Up arrow"
               />
             </Pressable>
           </View>
-          
-          
-          <View>
+
+          <View style={styles.resetSection}>
             <Pressable style={styles.openClose} onPress={() => setOpenSection('')}>
-            <Image
-            src="/images/up.svg"
-            width={20}
-            height={20}
-            alt="Up arrow"
-            />
+              <Image
+              src="/images/up.svg"
+              width={24}
+              height={24}
+              alt="Up arrow"
+              />
+            </Pressable>
+            <Pressable style={hover.resetFill?styles.cancelHover:styles.cancel} onPress={fillActions.reset} onMouseOver={() => hoverFunc('resetFill')} onMouseLeave={resetHover}>
+              <h2 className="font-sans" style={hover.resetFill?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('resetFill')} onMouseLeave={resetHover}>
+                RESET
+              </h2>
             </Pressable>
           </View>
         </View>
@@ -333,8 +316,8 @@ const ConfigPanel = (props) => {
           <Pressable style={styles.upDown} onPress={() => setOpenSection('fill')}>
           <Image
           src="/images/down.svg"
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           alt="Down arrow"
           />
           </Pressable>
@@ -347,18 +330,16 @@ const ConfigPanel = (props) => {
     
     {/****** CONTROL SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet fontSize={15} label="Control Points" labelColor="white" labelBgColor={props.control.colour} borderColor={props.control.colour}>
+      <FieldSet fontSize={15} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
       {
       openSection === 'control'
-    
       ?
-    
       <View>
         <View style={styles.attSection}>
           <Text style={styles.attribute}>
             Colour:{"  "}
           </Text>
-          <Pressable style={[styles.color, {backgroundColor:props.controlColor}]} onPress={() => openModal('Control Point Colour', 'control', 'colour', props.controlColor)} />
+          <Pressable style={[styles.color, {backgroundColor:controlSnap.color}]} onPress={() => openModal('Control Point Colour', controlSnap.color, 'control.color')} />
         </View>
         
         
@@ -366,22 +347,24 @@ const ConfigPanel = (props) => {
           <Text style={styles.attribute}>
             Opacity: 
           </Text>
-          <Pressable style={styles.upDown} onPress={downControlOpacity}>
+          <Pressable style={styles.upDown} onPress={()=>opacityDown('control')}>
             <Image
               src="/images/down.svg"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
+              className="m-2"
               alt="Down arrow"
               />
           </Pressable>
-          <Text style={styles.opacity}>{Math.round( ( Number(props.controlOpacity) + Number.EPSILON ) * 100 ) / 100}</Text>
-          <Pressable style={styles.upDown} onPress={upControlOpacity}>
+          <Text style={styles.opacity}>{Math.round( (controlSnap.opacity+Number.EPSILON ) * 100 ) / 100}</Text>
+          <Pressable style={styles.upDown} onPress={()=>opacityUp('control')}>
             <Image
-            src="/images/up.svg"
-            width={20}
-            height={20}
-            alt="Up arrow"
-            />
+                src="/images/up.svg"
+                width={24}
+                height={24}
+                className="m-2"
+                alt="Up arrow"
+                />
           </Pressable>
         </View>
         
@@ -390,33 +373,42 @@ const ConfigPanel = (props) => {
           <Text style={styles.attribute}>
             Size: 
           </Text>
-          <Pressable style={styles.upDown} onPress={downSize}>
+          <Pressable style={styles.upDown} onPress={()=>downSize('control')}>
             <Image
-            src="/images/down.svg"
-            width={20}
-            height={20}
-            alt="Down arrow"
-            />
+                src="/images/down.svg"
+                width={24}
+                height={24}
+                className="m-2"
+                alt="Down arrow"
+                />
           </Pressable>  
-          <Text style={styles.opacity}>{Math.round( ( props.controlSize + Number.EPSILON ) * 100 ) / 100}</Text>
-          <Pressable style={styles.upDown} onPress={upSize}>
+          <Text style={styles.opacity}>{Math.round( ( controlSnap.size + Number.EPSILON ) * 100 ) / 100}</Text>
+          <Pressable style={styles.upDown} onPress={()=>sizeUp('control')}>
             <Image
             src="/images/up.svg"
-            width={20}
-            height={20}
+            width={24}
+            height={24}
+            className="m-2"
             alt="Up arrow"
             />
           </Pressable>
         </View>
         
-        <Pressable style={styles.openClose} onPress={() =>  setOpenSection('')}>
-          <Image
-          src="/images/up.svg"
-          width={20}
-          height={20}
-          alt="Up arrow"
-          />
-        </Pressable>
+        <View style={styles.resetSection}>
+            <Pressable style={styles.openClose} onPress={() => setOpenSection('')}>
+              <Image
+              src="/images/up.svg"
+              width={24}
+              height={24}
+              alt="Up arrow"
+              />
+            </Pressable>
+            <Pressable style={hover.resetControl?styles.cancelHover:styles.cancel} onPress={controlActions.reset} onMouseOver={() => hoverFunc('resetControl')} onMouseLeave={resetHover}>
+              <h2 className="font-sans" style={hover.resetControl?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('resetControl')} onMouseLeave={resetHover}>
+                RESET
+              </h2>
+            </Pressable>
+          </View>
       </View>
     
       :
@@ -425,8 +417,8 @@ const ConfigPanel = (props) => {
         <Pressable style={styles.upDown} onPress={() => setOpenSection('control')}>
           <Image
           src="/images/down.svg"
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           alt="Down arrow"
           />
         </Pressable>
@@ -438,75 +430,80 @@ const ConfigPanel = (props) => {
     
     {/****** END POINT SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet fontSize={15} label="End Points" labelColor="white" labelBgColor={props.end.colour} borderColor={props.end.colour}>
+      <FieldSet fontSize={15} label="End Points" labelColor="white" labelBgColor={endSnap.color} borderColor={endSnap.color}>
       {
       openSection === 'end'
-
       ?
-
       <View>
         <View style={styles.attSection}>
           <Text style={styles.attribute}>
             Colour:{"  "}
           </Text>
-          <Pressable style={[styles.color, {backgroundColor:props.end.colour}]} onPress={() => openModal('End Point Colour', 'end', 'colour', props.end.colour)} />
+          <Pressable style={[styles.color, {backgroundColor:endSnap.color}]} onPress={() => openModal('End Point Colour', endSnap.color, 'end.color')} />
         </View>
-      
       
         <View style={styles.attSection}>
           <Text style={styles.attribute}>
             Opacity: 
           </Text>
-          <Pressable style={styles.upDown} onPress={downEndOpacity}>
+          <Pressable style={styles.upDown} onPress={()=>opacityDown('end')}>
             <Image
             src="/images/down.svg"
-            width={20}
-            height={20}
+            width={24}
+            height={24}
+            className="m-2"
             alt="Down arrow"
             />
           </Pressable>
-          <Text style={styles.opacity}>{Math.round( ( Number(props.endOpacity) + Number.EPSILON ) * 100 ) / 100}</Text>
-          <Pressable style={styles.upDown} onPress={upEndOpacity}>
+          <Text style={styles.opacity}>{Math.round( ( endSnap.opacity+Number.EPSILON ) * 100 ) / 100}</Text>
+          <Pressable style={styles.upDown} onPress={()=>opacityUp('end')}>
             <Image
             src="/images/up.svg"
-            width={20}
-            height={20}
+            width={24}
+            height={24}
+            className="m-2"
             alt="Up arrow"
             />
           </Pressable>
         </View>
-      
-      
         <View style={styles.attSection}>
           <Text style={styles.attribute}>
             Size: 
           </Text>
-          <Pressable style={styles.upDown} onPress={downEnd}>
+          <Pressable style={styles.upDown} onPress={()=>downSize('end')}>
             <Image
             src="/images/down.svg"
-            width={20}
-            height={20}
+            width={24}
+            height={24}
+            className="m-2"
             alt="Down arrow"
             />
           </Pressable>
-            <Text style={styles.opacity}>{Math.round( ( props.endSize + Number.EPSILON ) * 100 ) / 100}</Text>
-            <Pressable style={styles.upDown} onPress={upEnd}>
+            <Text style={styles.opacity}>{Math.round( ( endSnap.size + Number.EPSILON ) * 100 ) / 100}</Text>
+            <Pressable style={styles.upDown} onPress={()=>sizeUp('end')}>
               <Image
               src="/images/up.svg"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
+              className="m-2"
               alt="Up arrow"
               />
             </Pressable>
           </View>
-          <View>
+          
+          <View style={styles.resetSection}>
             <Pressable style={styles.openClose} onPress={() => setOpenSection('')}>
               <Image
               src="/images/up.svg"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
               alt="Up arrow"
               />
+            </Pressable>
+            <Pressable style={hover.resetEnd?styles.cancelHover:styles.cancel} onPress={endActions.reset} onMouseOver={() => hoverFunc('resetEnd')} onMouseLeave={resetHover}>
+              <h2 className="font-sans" style={hover.resetEnd?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('resetEnd')} onMouseLeave={resetHover}>
+                RESET
+              </h2>
             </Pressable>
           </View>
         </View>
@@ -517,8 +514,8 @@ const ConfigPanel = (props) => {
         <Pressable style={styles.upDown} onPress={()=> setOpenSection('end')}>
           <Image
           src="/images/down.svg"
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           alt="Down arrow"
           />
         </Pressable>
@@ -527,31 +524,28 @@ const ConfigPanel = (props) => {
     </FieldSet>
   </View>
   {/****** END OF END POINT SECTION ******/}
-        <Pressable style={hover.can?styles.cancelHover:styles.cancel} onPress={reset} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
+        <Pressable style={hover.can?styles.cancelHover:styles.cancel} onPress={resetConfig} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
           <h2 className="font-sans" style={hover.can?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
-            RESET
+            RESET ALL
           </h2>
         </Pressable>
-        <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalIsOpen}
-        onRequestClose={closeModal}
-        >
-          <Title title={`Colour Picker - ${modalTitle}`} />
-          <View style={styles.colorModal}>
-            <View style={styles.pickerView}>
-              <ColorPicker color={currentColor} element={elementToChange} property={propertyToChange} onSelectColor={onSelectColor} setModalIsOpen={setModalIsOpen} />
-            </View>
-            {/* <View style={styles.gridView}>
-              <Grid id="miniGrid" size={200} mainWidth={225}>
-                <Path path={props.fullPath} fill={props.fillColor} fillOpacity={props.fillOpacity} strokeWidth={props.strokeWidth} stroke={props.strokeColor} size={250} />
-              </Grid>
-            </View> */}
-          </View>
-        </Modal>
+        
       </Article>
     </ConfigStyledDiv>
+    <Modal
+    animationType="slide"
+    transparent={false}
+    visible={modalIsOpen}
+    onRequestClose={closeModal}
+    >
+      <Title title={`Colour Picker - ${modalTitle}`} />
+      <View style={styles.colorModal}>
+        <View style={styles.pickerView}>
+          <ColorPicker color={currentColor} element={element} setModalIsOpen={setModalIsOpen} />
+        </View>
+      </View>
+    </Modal>
+    </>
   )
 };
 
@@ -564,7 +558,8 @@ const styles = StyleSheet.create({
     boxShadow: '-2px 2px 8px #9c9c9c',
     margin: 10,
     marginRight: 35,
-    height: 'fit-content'
+    height: 'fit-content',
+    maxWidth: '250px'
   },
   strokeSection:{
     display: 'flex',
@@ -592,6 +587,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  resetSection:{
+    display: 'flex',
+    flexDirection: 'row',
+    // alignItems: 'center',
+    justifyContent: 'space-between'
   },
   attribute: {
     fontSize: 16,
@@ -668,6 +669,7 @@ const styles = StyleSheet.create({
     justifySelf:'center'
   },
   openClose: {
-    marginTop: 25
+    marginTop: 8,
+    marginLeft: 8
   }
 })

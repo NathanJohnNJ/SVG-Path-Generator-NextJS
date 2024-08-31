@@ -5,7 +5,7 @@ import CancelButton from '../buttons/cancelButton';
 import { useState } from 'react';
 
 const CustomView = (props) => {
-  const { setModalIsOpen, selectedColor, setSelectedColor, colors, onSaveHandler, element, property, currentColor } = props;
+  const { setModalIsOpen, selectedColor, setSelectedColor, colors, element, currentColor } = props;
   const [fullHex, setFullHex] = useState('#');
   const [showColor, setShowColor] = useState(false);
 
@@ -64,7 +64,6 @@ const CustomView = (props) => {
     colors.map((color) => {
       if (color.hex === fullHex){
         setSelectedColor(color);
-        onSaveHandler()
       }
     })
   }
@@ -85,7 +84,7 @@ const CustomView = (props) => {
       </div>
       <div className="absolute -bottom-4 right-0 flex gap-2">
         <CancelButton setModalIsOpen={setModalIsOpen} color={selectedColor} />
-        <SaveButton setModalIsOpen={setModalIsOpen} color={selectedColor} onClickHandler={saveHandler}/>
+        <SaveButton setModalIsOpen={setModalIsOpen} color={selectedColor} element={element}/>
       </div>
     </div>
   )

@@ -1,10 +1,11 @@
 'use client';
 import { StyleSheet, View } from 'react-native-web';
 import Svg, { G, Rect, Defs, Pattern, Line } from "react-native-svg-web";
-import {GridBorder} from './panels/Panels';
+import { GridBorder } from './panels/Panels';
 
 const Grid = (props) => {
-  const viewBox = `0 0 ${props.size} ${props.size}`
+  const viewBox = `0 0 ${props.size} ${props.size}`;
+  
   
   return(
     <GridBorder>
@@ -54,6 +55,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 10                                      
+        margin: 5                                   
     }
 })

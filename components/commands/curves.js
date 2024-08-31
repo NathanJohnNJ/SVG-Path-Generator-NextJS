@@ -1,15 +1,20 @@
 'use client';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PathContext } from '@/app/path/layout';
 import GridWithDrag from '../ui/gridWithDrag';
 import { Text, View, Modal } from 'react-native-web';
-import { EndTable, ControlTables } from '../ui/Tables';
+import InfoPanel from '../ui/panels/InfoPanel';
 import { styles } from './styles';
 // import Help from '../help';
 // import Presets from '../presetPaths/l';
 
-const [hover, setHover] = useState({sub: false, can: false, q:false, t:false, c:false, s:false, x:false, y:false, dx1:false, dy1: false, dx2: false, dy2: false});
-const startX = props.path[props.pathID].endPoint.x + props.path[props.pathID].startPoint.x;
-const startY = props.path[props.pathID].endPoint.y + props.path[props.pathID].startPoint.y;
+
+const startX = (props) => {
+  return(
+    props.path[props.pathID-1].endPoint.x + props.path[props.pathID-1].startPoint.x
+  )
+};
+const startY = (props) => {return(props.path[props.pathID].endPoint.y + props.path[props.pathID].startPoint.y)};
 
 function hoverFunc(i){
   if (i==='dx1'||i==='dy1'){
@@ -31,8 +36,9 @@ function resetHover(){
 }
 
 export const C = (props) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
- 
+  const [hover, setHover] = useState({sub: false, can: false, q:false, t:false, c:false, s:false, x:false, y:false, dx1:false, dy1: false, dx2: false, dy2: false});
+  const [modalIsOpen, setModalIsOpen] = useState(false);  
+
   function openModal(){
     props.setFirstCtrl({x:25, y:50})
     props.setSecondCtrl({x:75, y:50})
@@ -58,9 +64,10 @@ export const C = (props) => {
     type: 'c',
     id: props.pathID+1,
     startPoint: {x: startX, y: startY},
-    controlPoints: [{key: 'dx1', value:props.firstCtrl.x}, {key: 'dy1', value:props.firstCtrl.y}, {key: 'dx2', value:props.secondCtrl.x}, {key: 'dy2', value:props.secondCtrl.y}],
-    endPoint: {x: props.endPoint.x,y: props.endPoint.y}
+    controlPoints: [{key: 'dx1', value:props.firstCtrl.x}, {key: 'dy1', value:props.firstCtrl.y}, {key: 'dx2', value:secondCtrl.x}, {key: 'dy2', value:secondCtrl.y}],
+    endPoint: {x: endPoint.x, y: endPoint.y}
     };
+    
     const newPath = [...props.path, cPath];
     props.setPath(newPath);
     props.setPathID(props.pathID+1);
@@ -78,27 +85,28 @@ export const C = (props) => {
       visible={modalIsOpen}
       onRequestClose={closeModal}
       >
-        <View style={styles.row}>
-          {/* <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setSecondCtrl={props.setSecondCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} secondCtrl={props.secondCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} /> */}
-          <View style={styles.middleSection}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>
-                New C Command
-              </Text>
+        <View style={styles.column}>
+          <View style={styles.row}>
+            {/* <Presets pathID={props.pathID} defaultPath={defaultPath} setDefaultPath={setDefaultPath} stroke={props.stroke} strokeWidth={props.strokeWidth} setFirstCtrl={props.setFirstCtrl} setSecondCtrl={props.setSecondCtrl} setEndPoint={props.setEndPoint} firstCtrl={props.firstCtrl} secondCtrl={props.secondCtrl} endPoint={props.endPoint} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} /> */}
+            <View style={styles.middleSection}>
+              <View style={styles.titleContainer}>
+                <Text style={styles.title}>
+                  New C Command
+                </Text>
+              </View>
+              <View style={styles.container}>
+                <GridWithDrag size="250" path={defaultPath} firstCtrl={props.firstCtrl} startPoint={props.startPoint} setStartPoint={props.setStartPoint} setFirstCtrl={props.setFirstCtrl} secondCtrl={props.secondCtrl} setSecondCtrl={props.setSecondCtrl} endPoint={props.endPoint} setEndPoint={props.setEndPoint} strokeWidth={props.strokeWidth} stroke={props.stroke} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} controlCol={props.controlCol} ctrlOpacity={props.ctrlOpacity} controlSize={props.controlSize} endCol={props.endCol} endOpacity={props.endOpacity} endSize={props.endSize} highlight={props.highlight} startX={startX} startY={startY} resetHover={resetHover} hoverFunc={hoverFunc}/>
+              </View>
             </View>
             <View style={styles.container}>
-              <GridWithDrag size="250" path={defaultPath} firstCtrl={props.firstCtrl} startPoint={props.startPoint} setStartPoint={props.setStartPoint} setFirstCtrl={props.setFirstCtrl} secondCtrl={props.secondCtrl} setSecondCtrl={props.setSecondCtrl} endPoint={props.endPoint} setEndPoint={props.setEndPoint} strokeWidth={props.strokeWidth} stroke={props.stroke} fill={props.fill} fillOpacity={props.fillOpacity} strokeOpacity={props.strokeOpacity} controlCol={props.controlCol} ctrlOpacity={props.ctrlOpacity} controlSize={props.controlSize} endCol={props.endCol} endOpacity={props.endOpacity} endSize={props.endSize} highlight={props.highlight} startX={startX} startY={startY} resetHover={resetHover} hoverFunc={hoverFunc}/>
+              {/* <Help url="https://svgwg.org/svg2-draft/paths.html#PathDataCubicBezierCommands" /> */}
+              <InfoPanel selected={selected} control={control} end={end} />
             </View>
           </View>
-          <View style={styles.container}>
-            {/* <Help url="https://svgwg.org/svg2-draft/paths.html#PathDataCubicBezierCommands" /> */}
-            <ControlTables type="c" labelBgColor="#fff" fontSize={15} labelColor={props.control.colour} borderColor={props.control.colour} firstCtrl={props.firstCtrl} secondCtrl={props.secondCtrl} startX={startX} startY={startY} resetHover={resetHover} hoverFunc={hoverFunc} hover={hover}/>
-            <EndTable label="End Point" labelBgColor="#fff" fontSize={15} labelColor={props.end.colour} borderColor={props.end.colour} endPoint={props.endPoint} startX={startX} startY={startY} resetHover={resetHover} hoverFunc={hoverFunc} hover={hover}/>
+          <View style={styles.subCan}>
+            <Text onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Add to path!</Text>
+            <Text onClick={closeModal} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover} style={hover.can?styles.cancelHover:styles.cancelButton}>Cancel</Text>
           </View>
-        </View>
-        <View style={styles.subCan}>
-          <Text onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Add to path!</Text>
-          <Text onClick={closeModal} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover} style={hover.can?styles.cancelHover:styles.cancelButton}>Cancel</Text>
         </View>
       </Modal>
     </View>

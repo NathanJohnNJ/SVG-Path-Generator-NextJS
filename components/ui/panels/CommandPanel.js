@@ -2,6 +2,7 @@
 import { CommandStyledPanel } from "./Panels";
 import { RainbowButton } from "./RainbowPanel";
 import { StyleSheet, View, Text, Pressable } from 'react-native-web';
+import { selectedActions } from "@/lib/store";
 import Link from "next/link";
 
 const CommandPanel = (props) => {
@@ -9,7 +10,7 @@ const CommandPanel = (props) => {
     <CommandStyledPanel>
       <RainbowButton>
         <Link
-        href='addCommand'
+        href='/path/addCommand'
         className="rounded-lg border border-transparent transition-colors text-center text-base"
         >
           Add
@@ -17,7 +18,7 @@ const CommandPanel = (props) => {
       </RainbowButton>
       <RainbowButton>
         <Link
-        href='changeCommand'
+        href='/path/changeCommand'
         className="rounded-lg border border-transparent transition-colors text-center text-base"
         >
           Change
@@ -25,7 +26,7 @@ const CommandPanel = (props) => {
       </RainbowButton>
       <RainbowButton>
         <Link
-        href='editCommand'
+        href='/path/editCommand'
         className="rounded-lg border border-transparent transition-colors text-center text-base"
         >
           Edit

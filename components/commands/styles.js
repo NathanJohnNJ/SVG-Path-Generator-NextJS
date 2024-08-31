@@ -14,6 +14,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
+  column: {
+    display:'flex',
+    flexDirection: "column",
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
   row: {
     display:'flex',
     flexDirection: "row",

@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { poppins } from '@/styles/fonts';
 import { StyleSheet } from 'react-native-web';
+import Title from '@/components/layouts/title';
 
  const borderAnimation = keyframes`
   to { --bg-angle: 360deg; }
@@ -37,28 +38,28 @@ font-size: 35px;
   text-align: center;
 `
 
-export const Panel = ({children}, props) => {
-  return(
-    <StyledDiv style={styles(props).panel}>
-      <Article className={poppins.className}>
-        <Heading className="font-sans" style={styles(props).heading}>
-          {props.heading}
-        </Heading>
-        {children}
-      </Article>
-    </StyledDiv>
-  )
-};
+// export const Panel = ({children}, props) => {
+//   return(
+//     <StyledDiv style={styles(props).panel}>
+//       <Article className={poppins.className}>
+//         <Heading className="font-sans" style={styles(props).heading}>
+//           {props.heading}
+//         </Heading>
+//         {children}
+//       </Article>
+//     </StyledDiv>
+//   )
+// };
 
 export const CommandHeading = ({children}) => {
   return(
-  <Heading className="font-sans" style={{color: 'rgb(249 168 212)'}}>
+  <Heading className="font-sans" style={{color: 'rgb(249 168 212)', fontSize: '25px'}}>
     {children}
   </Heading>
   )
 }
 
-const CommandStyledDiv = styled.div`
+export const CommandStyledDiv = styled.div`
 width: 25vw;
 @property --bg-angle {
 inherits: false;
@@ -109,7 +110,7 @@ export const InfoStyledPanel = ({children}, props) => {
   return(
     <InfoStyledDiv style={styles(props).panel}>
       <CommandArticle>
-        <Heading className="font-sans" style={{color: 'rgb(209 90 220)'}}>
+        <Heading className="font-sans" style={{color: 'rgb(209 90 220)', fontSize: '25px'}}>
           Info
         </Heading>
         <div style={{display: 'flex'}}>
@@ -163,13 +164,14 @@ const HorizontalArticle = styled.div`
   border-radius: 18px;
   padding: 10px;
   height: 100%;
-  width: 100%;
+  width: 90vw
 `
 
 export const HorizontalPanel = ({children}, props) => {
   return(
     <HorizontalStyledDiv style={styles(props).horizontalPanel}>
       <HorizontalArticle className={poppins.className}>
+      <Title title="Path" />
         <div className="flex flex-row w-full">
         {children}
         </div>
@@ -188,6 +190,7 @@ export const HorizontalPanel = ({children}, props) => {
 }
   animation: ${borderAnimation} 40s infinite linear running;
   background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #3192f6, grey, dimgrey, #1206bf, grey, lightgrey, white); 
+  box-shadow: -2px 2px 4px 1px rgba(0,0,0,0.4)
 `
 export const GridBorder =({children}, props)=> {
   return (
@@ -199,30 +202,24 @@ export const GridBorder =({children}, props)=> {
   )
 }
 
-
 const styles = (props) => StyleSheet.create({
   panel:{
     padding: 4,
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
-    margin: 10,
+    margin: 5,
     height: props.height,
     width: props.width,
-  },
-  heading: {
-    fontSize: 17.5,
-    marginTop: -5,
-    marginBottom: 5,
-    textAlign: 'center'
   },
   horizontalPanel:{
     padding: 4,
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
     height: 'min-content',
-    width:'95vw'
+    width:'min-content'
   },
   gridPanel: {
-    padding: 5
+    padding: 4,
+    width: 'fit-content'
   }
 });

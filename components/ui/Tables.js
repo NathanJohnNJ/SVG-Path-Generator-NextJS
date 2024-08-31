@@ -9,7 +9,7 @@ const Table = (props) => {
       <View style={styles.inside}>
     {props.array.map((table, i) => {
       return(
-        <table style={styles(props).table}>
+        <table key={i} style={styles(props).table}>
           <tbody style={styles(props).tbody}>
             {table.title!=null&&
             <tr style={styles(props).tr}> 
@@ -25,7 +25,7 @@ const Table = (props) => {
               ({table.points.x},{table.points.y})
               </td>
               <td style={props.hover.end?styles(props).hoverTd:styles(props).td} >
-               ({table.points.x+props.startX},{table.points.y+props.startY})
+               ({Number(table.points.x)+Number(props.startX)},{Number(table.points.y)+Number(props.startY)})
               </td>
             </tr>
           </tbody>
