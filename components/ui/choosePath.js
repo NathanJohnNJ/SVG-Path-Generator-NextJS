@@ -1,15 +1,16 @@
 'use client';
 import {Text, View, StyleSheet, TextInput } from 'react-native-web';
-import { useState } from 'react';
 import GridButton from './GridButton';
+import { path, setStartX, setStartY } from "@/lib/store";
+import { useSnapshot } from 'valtio';
 
 export default function ChoosePath(props) {
-  const [startX, setStartX] = useState(50);
-  const [startY, setStartY] = useState(50);
+  const startX = useSnapshot(path).startPoint.x;
+  const startY = useSnapshot(path).startPoint.y;
 
   const cPath = {
     type:'c',
-    name: 'Curve',                                                      
+    name: 'Curve',
     commandId: 0,
     startPoint: { 
       x: startX,
@@ -113,9 +114,9 @@ const lines = [hPath, lPath, vPath];
       </Text>
       <View style={styles.row}>
         <Text style={{marginRight: '5px', color: 'white'}}>x:</Text>
-        <TextInput onChangeText={setStartX} value={startX} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'#000', marginRight: '5px', color: 'white'}} />
+        <TextInput onChangeText={(e)=>setStartX(e)} value={path.startPoint.x} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'#000', marginRight: '5px', color: 'white'}} />
         <Text style={{marginRight: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>y:</Text>
-        <TextInput onChangeText={setStartY} value={startY} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'white'}}  />
+        <TextInput onChangeText={setStartY} value={path.startPoint.y} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'white'}}  />
       </View>
       <Text style={styles.heading}>
         Choose your starting path...
@@ -137,7 +138,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
             }
             return(
-                <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />
+              <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />
             )
           })}
           </View>
@@ -153,7 +154,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
             }
             return(
-                <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end}/>
+              <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end}/>
             )
           })
         }

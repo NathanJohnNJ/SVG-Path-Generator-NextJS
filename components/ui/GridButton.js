@@ -3,13 +3,9 @@ import { View, Text, StyleSheet } from "react-native-web";
 import Link from "next/link";
 import Grid from "./Grid";
 import { Path } from 'react-native-svg-web';
-import { addToPath, deletePath } from "@/lib/mongodb/path/mongodb";
-import { PathContext } from '@/app/(path)/layout';
-import { useContext } from 'react';
+import { addToPath, resetPath, stroke, fill } from "@/lib/store";
 
 const GridButton = (props) => {
-  const [path, setPath] = useContext(PathContext);
-  
   function hoverFunc(id){
     const i = document.getElementById(id);
     i.style.stroke = props.stroke.highlight;
@@ -24,15 +20,12 @@ const GridButton = (props) => {
   }
   function add(command){
     console.log('starting add function');
-    const newPath = [command];
-    setPath(newPath);
-    deletePath();
+    resetPath();
     addToPath(command);
-    console.log(`${command.type} command added to database sucessfully.`);
   }
 
   return(
-    <View style={styles.gridButton} onHoverIn={() => hoverFunc(props.id)} onHoverOut={() => resetHover(props.id)} onClick={()=>add(props.command)}>
+    <View style={styles.gridButton} className="group" onHoverIn={() => hoverFunc(props.id)} onHoverOut={() => resetHover(props.id)} onClick={()=>add(props.command)}>
       <View style={styles.titleSection}>
         <Text style={styles.gridTitle} className="text-sky-900">
           {props.command.name}{"\n"}
@@ -40,10 +33,10 @@ const GridButton = (props) => {
           {props.command.name3?props.command.name3:<></>}
         </Text>
       </View>
-      <Link href="/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl" aria-label="View Path">
+      <Link href="/path/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl" aria-label="View Path">
         <div>
-          <Grid size="150" mainWidth="180" id="miniGrid" >
-            <Path id={props.id} d={props.d} fill="none" stroke={props.stroke.colour} strokeWidth={props.stroke.width}/>
+          <Grid size="150" mainWidth="180" id="miniGrid" className="group-hover:scale-110" >
+            <Path id={props.id} d={props.d} className="group-hover:scale-110" fill="none" stroke={stroke.color} strokeWidth={stroke.width}/>
           </Grid>
         </div>
       </Link>

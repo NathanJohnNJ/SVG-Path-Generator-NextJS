@@ -1,11 +1,24 @@
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { fillActions, strokeActions, controlActions, endActions } from "@/lib/store";
 
 const SaveButton = (props) => { 
-  const { color, setModalIsOpen, onClickHandler } = props;
+  const { color, setModalIsOpen, element } = props;
 
   function saveColor(color){
-    console.log(color);
+    if(element==='stroke.color'){
+      strokeActions.setColor(color);
+    } else if(element==='stroke.highlight'){
+      strokeActions.setHighlight(color);
+    } else if (element==='fill.color'){
+      fillActions.setColor(color);
+    } else if(element==='fill.highlight'){
+      fillActions.setHighlight(color);
+    } else if (element==='control.color'){
+      controlActions.setColor(color);
+    } else if (element==='end.color'){
+      endActions.setColor(color);
+    }
     setModalIsOpen(false);
   }
   return ( 
@@ -18,7 +31,7 @@ const SaveButton = (props) => {
       backgroundColor: color === '' ? '#1e293b' : '#4dea25',
       color: color === '' ? '#64748b' : 'white',
       }}
-      onClick={onClickHandler ? onClickHandler : () => saveColor(color)}>
+      onClick={()=>saveColor(color)}>
         <Check className="w-4 h-4 " />
       </motion.button>
     </div>

@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { geologicaSharp, poppins, gothic } from '@/styles/fonts';
 
  const rainbowAnimation = keyframes`
   to { --bg-angle: 360deg; }
@@ -39,21 +38,14 @@ const RainbowArticle = styled.div`
   border-radius: 18px;
   min-height: 192px;
   background-color: #898989;
+  padding-bottom: 10px;
 `
 
-const Heading = styled.h2`
-  color: #0010a0;
-  font-weight: 650;
-  text-align: center;
-`
-export const RainbowPanel = ({children}, props) => {
+export const RainbowPanel = ({children}) => {
   return(
     <Rainbow>
       <RainbowArticle>
-        <Heading className={geologicaSharp.className}>{props.heading}</Heading>
-        <div className={poppins.className}>
           {children}
-        </div>
       </RainbowArticle>
     </Rainbow>
   )
@@ -99,7 +91,7 @@ const Button = styled.button`
   };
 `
 
-export const RainbowButton = ({children}, props) => {
+export const RainbowButton = ({children}) => {
   return(
     <ButtonRainbow>
       <Button className="font-serif tracking-widest uppercase text-center ">                    

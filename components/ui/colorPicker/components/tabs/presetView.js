@@ -7,7 +7,7 @@ import CancelButton from '../buttons/cancelButton';
 import { StyleSheet } from 'react-native-web';
 
 const PresetView = (props) => {
-  const { setModalIsOpen, colors, selectedColor, setSelectedColor, onSaveHandler, element, property, currentColor } = props;
+  const { setModalIsOpen, colors, selectedColor, setSelectedColor, element, currentColor } = props;
 
   return(
     <>
@@ -38,7 +38,7 @@ const PresetView = (props) => {
         </div>
         <div className="mt-7 absolute flex right-0 gap-2">
         <CancelButton color={selectedColor} setModalIsOpen={setModalIsOpen} />
-        <SaveButton color={selectedColor} setModalIsOpen={setModalIsOpen} onClickHandle={onSaveHandler} element={element} property={property}/>
+        <SaveButton color={selectedColor} setModalIsOpen={setModalIsOpen} element={element}/>
         </div> 
       </div>
     </>

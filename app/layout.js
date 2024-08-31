@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
             {/* header, footer, sidebar */}
             <Header />
            
-              <div className="w-screen md:w-64 md:fixed md:-top-10">
+              <div className="w-screen md:w-64 md:fixed md:-top-10" >
                 <SideBar path={Path} />
               </div>
               {/* <Footer /> */}
