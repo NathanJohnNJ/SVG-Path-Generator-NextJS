@@ -112,16 +112,16 @@ const lines = [hPath, lPath, vPath];
       <Text style={styles.heading} >
         Choose your starting point...
       </Text>
-      <View style={styles.row}>
-        <Text style={{marginRight: '5px', color: 'white'}}>x:</Text>
-        <TextInput onChangeText={(e)=>setStartX(e)} value={path.startPoint.x} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'#000', marginRight: '5px', color: 'white'}} />
-        <Text style={{marginRight: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>y:</Text>
-        <TextInput onChangeText={setStartY} value={path.startPoint.y} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'white'}}  />
+      <View style={styles.row} >
+        <Text style={{marginRight: '5px', color: 'grey'}}>x:</Text>
+        <TextInput onChangeText={(e)=>setStartX(e)} value={path.startPoint.x} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'#000', marginRight: '5px', color: 'grey'}} className="text-grey"/>
+        <Text style={{marginRight: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'grey'}}>y:</Text>
+        <TextInput onChangeText={setStartY} value={path.startPoint.y} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'grey'}}  />
       </View>
-      <Text style={styles.heading}>
+      <Text style={styles.heading} >
         Choose your starting path...
       </Text>
-      <Text style={styles.subHeading}>
+      <Text style={styles.heading} >
         (This is just to get you started and can be edited later)
       </Text>
       <View style={styles.row}>
@@ -165,7 +165,6 @@ const lines = [hPath, lPath, vPath];
 
 const styles = StyleSheet.create({
   title: {
-    color: 'white',
     fontSize: 40,
     textAlign: 'center',
     textDecorationLine: 'underline'
@@ -184,7 +183,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center', 
     justifySelf: 'center',
     marginBottom: 5,
-    color: 'white'
+    color: 'dimgrey'
   },
   row: {
     display: 'flex',

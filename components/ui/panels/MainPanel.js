@@ -34,10 +34,6 @@ const MainPanel = (props) => {
 export default MainPanel;
 
 const styles = StyleSheet.create({
-  panel: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
   column: {
     display: 'flex',
     flexDirection: 'column'
@@ -49,6 +45,7 @@ const styles = StyleSheet.create({
   },
   main: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 })

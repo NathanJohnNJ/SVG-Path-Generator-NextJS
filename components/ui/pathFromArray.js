@@ -25,6 +25,8 @@ const PathFromArray = (props) => {
   function pressFunc(command){
     props.setSelected(command)
     selectedActions.setType(command.type)
+    selectedActions.setId(command.commandId)
+    selectedActions.setStartPoint(command.startPoint.x, command.startPoint.y);
     selectedActions.setStartPoint(command.startPoint.x, command.startPoint.y);
     selectedActions.setEndPoint(command.endPoint.x, command.endPoint.y);
     if(command.type==='c'){

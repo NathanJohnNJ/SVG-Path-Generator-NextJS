@@ -2,7 +2,6 @@
 import ChoosePath from "@/components/ui/choosePath";
 import Title from "@/components/layouts/title";
 import { fill, stroke, control, end } from '@/lib/store'
-import EnterPath from '@/components/ui/enterPath';
 
 
 export default async function NewPath() {
@@ -11,7 +10,6 @@ export default async function NewPath() {
   <div>
     <Title title="New Path"/>
     <ChoosePath stroke={stroke} fill={fill} control={control} end={end}/>
-    <EnterPath />
   </div>
   );
 }

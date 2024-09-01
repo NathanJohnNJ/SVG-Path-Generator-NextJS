@@ -3,23 +3,20 @@ import { View, Text, StyleSheet } from "react-native-web";
 import Link from "next/link";
 import Grid from "./Grid";
 import { Path } from 'react-native-svg-web';
-import { addToPath, resetPath, stroke, fill } from "@/lib/store";
+import { addToPath, resetPath, stroke } from "@/lib/store";
 
 const GridButton = (props) => {
   function hoverFunc(id){
     const i = document.getElementById(id);
-    i.style.stroke = props.stroke.highlight;
-    i.style.strokeWidth = props.stroke.width*2;
-    i.style.fill = props.fill[highlight];
+    i.style.stroke = stroke.highlight;
+    i.style.strokeWidth = stroke.width*2;
   }
   function resetHover(id){
     const i = document.getElementById(id);
-    i.style.stroke = props.stroke.colour;
-    i.style.strokeWidth = props.stroke.width;
-    i.style.fill = props.fill[colour];
+    i.style.stroke = stroke.color;
+    i.style.strokeWidth = stroke.width;
   }
   function add(command){
-    console.log('starting add function');
     resetPath();
     addToPath(command);
   }
@@ -33,8 +30,8 @@ const GridButton = (props) => {
           {props.command.name3?props.command.name3:<></>}
         </Text>
       </View>
-      <Link href="/path/viewPath" style={styles.grid} className="hover:bg-sky-200 rounded-xl" aria-label="View Path">
-        <div>
+      <Link href="/path/viewPath" style={styles.grid} className="group-hover:bg-sky-200 rounded-xl" aria-label="View Path">
+        <div className="group-hover:scale-110">
           <Grid size="150" mainWidth="180" id="miniGrid" className="group-hover:scale-110" >
             <Path id={props.id} d={props.d} className="group-hover:scale-110" fill="none" stroke={stroke.color} strokeWidth={stroke.width}/>
           </Grid>
@@ -59,7 +56,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 0
+    paddingBottom: 15
   },
   titleSection: {
     display: 'flex',
@@ -72,6 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 450,
     textAlign: 'center',
     color: '#00006a',
+    marginBottom: 5
   },
   grid:{
     scale: 0.5,
