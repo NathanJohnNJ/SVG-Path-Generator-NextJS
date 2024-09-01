@@ -1,22 +1,12 @@
-// import { View, Text, Image, Pressable, StyleSheet } from 'react-native-web';
+// 'use client';
+// import { View, Text, StyleSheet } from 'react-native-web';
 // import { Svg, Path, ForeignObject, G, Defs, LinearGradient, Stop } from 'react-native-svg-web';
 // import { useState, useLayoutEffect } from 'react';
-
+// import Link from 'next/link';
+// import Image from 'next/image';
 
 // const Footer = ( props ) => {
-//     const [hover, setHover] = useState({git: false, nj: false})
-
-//     function hoverFunc(i){
-//         const newHover = { ...hover, [i]: true}
-//         setHover(newHover)
-//     }
-//     function resetHover(){
-//         setHover({git: false, nj: false})
-//     }
-
-//     function njtd(){
-//         window.open('https://www.njtd.xyz');
-//     }
+    
 //     function useWindowSize() {
 //         const [size, setSize] = useState([0, 0]);
 //         useLayoutEffect(() => {
@@ -31,137 +21,159 @@
 //       }
 
 //     const [width, height] = useWindowSize();
-//     const viewbox = `0 ${height-120} ${width} ${height}`;
-   
-//     const myPath = `M0,0 c${width/12},-20 ${width/6},20 ${width/3},0 s${width/6},20 ${width/3},0s${width/6},-20 ${width/3},0l0,120 l-${width},0 z`;
-//     return(
-//         <Svg style={styles.footer}>
-//             <Defs>
-//                 <LinearGradient id="grad" x1="0%" x2="100%" y1="0%" y2="0%">
-//                     <Stop offset="0%" stopColor="#eee"  />
-//                     <Stop offset="50%" stopColor="#aaa" />
-//                     <Stop offset="100%" stopColor="#444" />
-//                 </LinearGradient>
-//             </Defs>
+//     const viewbox = `0 0 ${width} ${height}`;
+//     const myPath = `M${width},${height}h-${width}v-150 c${width/12},-20 ${width/6},20 ${width/3},0 s${width/6},20 ${width/3},0s${width/6},-20 ${width/3}z`;
 
-//             <G x="0" y="40" viewBox={viewbox}>
-//                 <Path d={myPath} x="0" y="0" viewBox={viewbox} fill="url(#grad)" stroke="none" preserveAspectRatio="minXminY meet"/>
-//                 <ForeignObject x={width/3} y={80} width={width/2} height={120} >
-//                     <View style={styles.footerMain}>
-//                         <Pressable onPress={njtd}>    
-//                             <Image style={styles.logo} source={require('../assets/logo.svg')}  alt="Logo" />
-//                         </Pressable>
-//                         <View style={styles.footerText}>
-//                             <View style={styles.textLine}>
-//                                 <Text style={styles.footerText}>
-//                                     If you like what you see, check out the rest of my portfolio at 
-//                                 </Text>
-//                                 <Text onMouseOver={()=>hoverFunc('nj')} onMouseLeave={resetHover}>
-//                                     <a href="https://www.njtd.xyz/portfolio/developer" target="_blank" rel="noreferrer" style={hover.nj?styles.gitHover:styles.github} >
-//                                          www.njtd.xyz
-//                                     </a>
-//                                 </Text>
-//                             </View>
-//                             <View style={styles.textLine}>
-//                                 <Text style={styles.footerText}>
-//                                     You can also see what I'm currently up to on 
-//                                 </Text>
-//                                 <Text onMouseOver={()=>hoverFunc('git')} onMouseLeave={resetHover} >
-//                                     <a href="https://github.com/NathanJohnNJ" target="_blank" rel="noreferrer" style={hover.git?styles.gitHover:styles.github}>
-//                                          GitHub
-//                                     </a>
-//                                 </Text>
-//                             </View>
-//                             <View style={styles.textLine}>
-//                                 <Text style={styles.footerText}>
-//                                     Thanks for checking out my SVG Path Generator! I hope you've enjoyed using it!
-//                                 </Text>
-//                             </View>
-//                             <View style={styles.textLine}>
-//                                 <Text style={styles.footerText}>
-//                                     See you again soon!
-//                                 </Text>
-//                             </View>
-//                         </View>
-//                         <Pressable onPress={njtd}>
-//                             <Image style={styles.logo2} source={require('../assets/grey.png')} />
-//                         </Pressable>
-//                     </View>
-//                 </ForeignObject>
-//             </G>
+//     return(
+//       <div className="fixed bottom-0 left-0 flex w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black">
+//         <Svg style={styles.footer} className="w-full" x="0" y={height-150} viewbox={viewbox}>
+//           <Defs>
+//             <LinearGradient id="grad" x1="0%" x2="100%" y1="0%" y2="0%">
+//               <Stop offset="0%" stopColor="#eee"  />
+//               <Stop offset="50%" stopColor="#aaa" />
+//               <Stop offset="100%" stopColor="#444" />
+//             </LinearGradient>
+//           </Defs>
+//           <G>
+//             <Path d={myPath} x={width} y={height} fill="url(#grad)" stroke="none" preserveAspectRatio="minXminY meet" width="100%">
+//             <ForeignObject x={width/3} y={80} width={width/2} height={120} >
+//               <View style={styles.footerMain}>
+//               <Link
+//                 className="pointer-events-none flex place-items-center gap-2 p-8"
+//                 href="https://www.njtd.xyz"
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 >
+//                   <Image
+//                   src="/images/logoBlack.svg"
+//                   width={125}
+//                   height={125}
+//                   className="image"
+//                   alt="NJTD Logo"
+//                   priority
+//                   />
+//                 </Link>
+//                 <View style={styles.footerText}>
+//                   <View style={styles.textLine}>
+                    
+//                   </View>
+//                   <View style={styles.textLine}>
+                    
+//                   </View>
+//                   <View style={styles.textLine}>
+//                     
+//                   </View>
+//                 </View>
+                
+//               </View>
+//             </ForeignObject>
+//             </Path>
+//           </G>
 //         </Svg>
+//       </div>
 //     )
 // };
 
 // export default Footer;
 
-// const styles = StyleSheet.create({
-//     footer: {
-//         height: 160,
-//         display: 'flex',
-//         flexDirection: 'column',
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     },
-//     logo: {
-//         marginLeft: 75,
-//         marginRight: 50,
-//         width: 100,
-//         height: 100
-//     },
-//     logo2: {
-//         marginLeft: 50,
-//         width: 100,
-//         height: 100,
-//         marginTop: -15
-//     },
-//     footerMain: {
-//         display: 'flex',
-//         flexDirection: 'row',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         marginTop: 5
-//     },
-//     footerText: {
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         whiteSpace: 'nowrap',
-//         color: "#494949",
-//         fontFamily: 'Quicksand-Regular',
-//     },
-//     github: {
-//         color: "#1166d9",
-//         fontFamily: 'Quicksand-Medium',
-//         textDecorationLine: 'none',
-//         marginLeft:3
-//     },
-//     gitHover: {
-//         color: "#fff",
-//         fontFamily: 'Quicksand-Medium',
-//         textDecorationLine: 'none',
-//         marginLeft:3
-//     },
-//     textLine: {
-//         display: 'flex',
-//         flexDirection: 'row'
-//     }
-// })
 
+'use client';
+import { useState, useLayoutEffect } from "react";
+import { Svg, LinearGradient, Path, Text, Defs, Stop, G, ForeignObject } from 'react-native-svg-web';
+import Link from "next/link";
+import { StyleSheet } from "react-native-web";
+import Image from "next/image";
 
-<div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:hidden">
-                <Link
-                className="pointer-events-none flex place-items-center gap-2 p-8"
-                href="https://www.njtd.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
-                >
-                  <Image
-                  src="/images/logoBlack.svg"
-                  width={125}
-                  height={125}
-                  className="image"
-                  alt="NJTD Logo"
-                  priority
-                  />
-                </Link>
-              </div>
+const Footer = () => {
+  function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return size;
+  }
+  const [width, height] = useWindowSize();
+  const viewbox = `0 0 ${width} ${height}`;
+  const myPath = `M0,20 c${width/16},60 ${width/8},-40 ${width/4},0 s${width/8},-30 ${width/4},5s${width/8},-40 ${width/4},0s${width/8},-60 ${width/4},10 l0,120 l-${width},0z`;
+
+  return (
+    <Svg className="w-full h-fit backdrop-blur-2xl relative">
+      <Defs>
+        <LinearGradient id="grad" x1="0%" x2="100%" y1="0%" y2="100%">
+          <Stop offset="0%" stopColor="#444"  />
+          <Stop offset="50%" stopColor="#aaa" />
+          <Stop offset="100%" stopColor="#eee" />
+        </LinearGradient>
+        <LinearGradient id="grad2" x1="0%" x2="100%" y1="0%" y2="100%">
+          <Stop offset="0%" stopColor="#fff" />
+          <Stop offset="50%" stopColor="#222" />
+          <Stop offset="100%" stopColor="#000" />
+        </LinearGradient>
+      </Defs>
+      <G x="0" y="0" viewBox={viewbox} className="relative">
+        <Path x="0" y="0" viewBox={viewbox} fill="url(#grad)" d={myPath} stroke="none" preserveAspectRatio="minXminY meet" width="100%" height={200}/>
+        
+        <Text x={(width-100)/2} y={60} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth="0.5" fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]" >
+            Thanks for checking out my SVG Path Generator!
+            </Text>
+        <Text x={(width-100)/2} y={80} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className=" font-extrabold text-[16px]" >
+          View the rest of my portfolio at {"  "}
+          <Link href="https://www.njtd.xyz/portfolio/developer" target="_blank" rel="noreferrer" className="hover:text-xl text-zinc-600 hover:text-zinc-400" >
+            www.njtd.xyz
+          </Link>
+        </Text>
+        <Text x={(width-100)/2} y={100} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]" >
+          Or see what I'm currently working on on{" "}
+          <Link href="https://github.com/NathanJohnNJ" target="_blank" rel="noreferrer" className="hover:text-xl text-zinc-600 hover:text-zinc-400">
+            GitHub
+        </Link>
+        </Text>
+        
+        {/* <Link
+        className="pointer-events-none absolute right"
+        href="https://www.njtd.xyz"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
+          <Image
+          href="/images/logoBlack.svg"
+          width={125}
+          height={125}
+            alt="NJTD Logo"
+            className=""
+            />
+        </Link> */}
+      </G>
+      <ForeignObject style={styles.object} x={0} y={0} width="100%" height="100%" viewBox={viewbox}>
+        <Image src="/images/greyLogo.png" alt="Logo" height={100} width={100} style={styles.grey}/>
+        <Image src="/images/logoBlack.svg" alt="Logo" height={100} width={100} style={styles.image}/>
+        </ForeignObject>
+    </Svg>
+  )
+};
+
+export default Footer;
+
+const styles = StyleSheet.create({
+  object:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginLeft: '50vw'
+  },
+  grey: {
+    display: 'flex',
+    marginLeft: '10vw',
+    marginTop: '10'
+  },
+  image: {
+    display: 'flex',
+    marginLeft: '60vw'
+  }
+})

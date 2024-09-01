@@ -5,36 +5,35 @@ import { StyleSheet, View } from "react-native-web";
 const Table = (props) => {
 // Takes array of [{title: '', points: {x: '', y:''}}]
   return(
-    <FieldSet label={props.label} labelBgColor={props.colour} fontSize={15} labelColor="white" borderColor={props.colour}>
+    <FieldSet label={props.label} labelBgColor={props.colour} fontSize={15} labelColor="white" borderColor={props.colour} width="min-content" height={props.height}>
       <View style={styles.inside}>
-    {props.array.map((table, i) => {
-      return(
-        <table key={i} style={styles(props).table}>
-          <tbody style={styles(props).tbody}>
-            {table.title!=null&&
-            <tr style={styles(props).tr}> 
-              <th style={styles(props).titleTh}>{table.title}</th>
-            </tr>
-            } 
-            <tr style={styles(props).tr}> 
-              <th style={styles(props).th}>Relative</th>
-              <th style={styles(props).th}>Absolute</th>
-            </tr>
-            <tr style={styles(props).tr}>
-              <td style={props.hover.end?styles(props).hoverTd:styles(props).td} >
-              ({table.points.x},{table.points.y})
-              </td>
-              <td style={props.hover.end?styles(props).hoverTd:styles(props).td} >
-               ({Number(table.points.x)+Number(props.startX)},{Number(table.points.y)+Number(props.startY)})
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      )
-    })}
-    </View>
+      {props.array.map((table, i) => {
+        return(
+          <table key={i} style={styles(props).table}>
+            <tbody>
+              {table.title!=null&&
+              <tr style={styles(props).tr}> 
+                <th style={styles(props).titleTh}>{table.title}</th>
+              </tr>
+              } 
+              <tr style={styles(props).tr}> 
+                <th style={styles(props).th}>Relative</th>
+                <th style={styles(props).th}>Absolute</th>
+              </tr>
+              <tr style={styles(props).tr}>
+                <td style={styles(props).td} >
+                ({table.points.x},{table.points.y})
+                </td>
+                <td style={styles(props).td} >
+                ({Number(table.points.x)+Number(props.startX)},{Number(table.points.y)+Number(props.startY)})
+                </td>
+              </tr>
+             </tbody>
+            </table>
+          )
+        })}
+      </View>
     </FieldSet>
-    
   )
 };
 
@@ -78,7 +77,7 @@ const styles = (props) => StyleSheet.create({
     fontSize: 11,
     width: 60,
     height: 25,
-    backgroundColor: props.colour,
+    backgroundColor: props.colour
   },
   td: {
     display: 'flex',
@@ -92,17 +91,5 @@ const styles = (props) => StyleSheet.create({
     color: props.colour,
     width: 57,
     height: 25
-},
-  hoverTd: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    border: `0.5px dashed ${props.colour}`,
-    borderRadius: 6,
-    fontSize: 12.5,
-    color: props.colour,
-    width: 57,
-    height: 25,
   }
 })

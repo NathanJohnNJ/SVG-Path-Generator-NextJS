@@ -1,8 +1,6 @@
-import { useContext, useEffect } from "react";
 import { path } from "@/lib/store";
 
 const PathText = () => {
-  console.log(path.commands);
   const pathFromMap = path.commands.map((command) => {
     if (command.type==='c'){
       return(
@@ -64,8 +62,8 @@ const PathText = () => {
 
   return (
     <div className="self-center p-2">
-      <h2 id="topText" className="group flex text-[9.5px] py-1.5 px-1 hover:text-sm text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Relative Path: </span>{fullPath}</span></h2>
-      <h2 id="bottomText" className="group flex text-[9.5px] py-1.5 px-1 hover:text-sm  text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Absolute Path: </span>{absolutePath}</span></h2>
+      <h2 id="topText" className="group font-semibold flex text-[9.5px] py-1.5 px-1 hover:text-sm text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Relative Path: </span>{fullPath}</span></h2>
+      <h2 id="bottomText" className="group font-semibold flex text-[9.5px] py-1.5 px-1 hover:text-sm  text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Absolute Path: </span>{absolutePath}</span></h2>
     </div>
   )
 }

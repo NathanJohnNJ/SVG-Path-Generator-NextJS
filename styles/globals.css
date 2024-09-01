@@ -30,7 +30,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-svg text{
+#svgText{
   font-size: 2.5vw;
 	-webkit-animation: stroke 15s 1 linear;
 	-moz-animation: stroke 15s 1 linear;

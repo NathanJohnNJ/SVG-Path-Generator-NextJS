@@ -8,7 +8,7 @@ const FieldSet = (props) => {
       <View style={styles(props).labelView}>
         <p style={styles(props).label} className="font-sans">{props.label}</p>
       </View>
-      <View style={{ flex: 1, justifyContent: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', width: 'fit-content' }}>
         <View style={styles(props).mainTextView}>
           <Text style={styles(props).mainText}>
             {props.children}
@@ -30,7 +30,8 @@ const styles = (props) => StyleSheet.create({
     margin: 2,
     marginTop: 20,
     padding: 3,
-    width: 'min-content'
+    width: props.width,
+    height: props.height
   },
   labelView: {
     display: 'flex',
@@ -48,14 +49,14 @@ const styles = (props) => StyleSheet.create({
     backgroundColor: props.labelBgColor,
     color: props.labelColor,
     fontSize: props.fontSize,
-    padding: 5
+    padding: 5,
+    fontWeight: 'bold'
   },
   mainTextView: {
     zIndex: 1,
-    padding: 4,
-    width: 160,
+    padding: 4
   },
   mainText: {
-    fontSize: 11
+    fontSize: 11,
   }
 });

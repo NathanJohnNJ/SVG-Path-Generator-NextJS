@@ -29,7 +29,7 @@ export const Article = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #eee;
-  border-radius: 5%;
+  border-radius: 18px;
 `
 
 export const Heading = styled.h2`
@@ -136,7 +136,6 @@ inherits: false;
 initial-value: 0deg;
 syntax: "<angle>";
 }
-border-radius: 18px;
 animation: ${borderAnimation} 40s infinite linear running;
 background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #bfd, darkgrey, #bacfc4, lightgrey, white);
 `
@@ -153,13 +152,9 @@ const HorizontalStyledDiv = styled.div`
 `
 
 const HorizontalArticle = styled.div`
-  color: #0010a0;
-  font-size: 3vw;
-  font-weight: 575;
+  /* font-weight: 575; */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   background-color: #ddd;
   border-radius: 18px;
   padding: 10px;

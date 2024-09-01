@@ -3,9 +3,7 @@ import "@/styles/globals.css";
 import { poppins } from "@/styles/fonts";
 import SideBar from '@/components/layouts/Sidenav';
 import Header from "@/components/layouts/Header";
-import { Path } from "@/lib/mongodb/path/mongoOutputs";
-import Link from "next/link";
-import Image from "next/image";
+import Footer from "@/components/layouts/Footer";
 import StyledComponentsRegistry from "@/lib/registry";
 
 // export const metadata = Metadata(
@@ -30,23 +28,27 @@ export default function RootLayout({ children }) {
         type="font/woff2"
         />
       </head>
-      <body className={`w-screen ${poppins.className}`}>
-        <div className="flex h-full w-full flex-col md:flex-row">
+      <body className={`w-screen h-fit ${poppins.className}`}>
+        <div className="h-fit">
+        <div className="flex h-min w-full flex-col md:flex-row">
           <div className="z-10 w-full flex flex-col">
             
             {/* header, footer, sidebar */}
             <Header />
-           
-              <div className="w-screen md:w-64 md:fixed md:-top-10" >
-                <SideBar path={Path} />
-              </div>
-              {/* <Footer /> */}
+            <div className="w-screen md:w-64 md:fixed md:-top-10" >
+              <SideBar />
+            </div>
+            
           </div>
         </div>
-        <div className="pt-10 pl-2">
+        <div className="pl-2">
           <StyledComponentsRegistry>
             {children}
           </StyledComponentsRegistry>
+        </div>
+        <div className="relative bottom-0">
+          <Footer />
+        </div>
         </div>
       </body>
     </html>

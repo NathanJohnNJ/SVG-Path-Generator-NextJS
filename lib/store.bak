@@ -154,21 +154,28 @@ export const selectedActions = {
   setId: (id) => {
     selected.commandId = id;
   },
-  setStartPoint: (x, y) => {
-    selected.startPoint.x = x,
+  setStartPointX: (x) => {
+    selected.startPoint.x = x
+  },
+  setStartPointY: (y) => {
     selected.startPoint.y = y
   },
-  setFirstControl: (x, y) => {
-    selected.firstControl.x = x,
+  setFirstControlX: (x) => {
+    selected.firstControl.x = x
+  },
+  setFirstControlY: (y) => {
     selected.firstControl.y = y
   },
-  
-  setSecondControl: (x, y) => {
-    selected.secondControl.x = x,
+  setSecondControlX: (x) => {
+    selected.secondControl.x = x
+  },
+  setSecondControlY: (y) => {
     selected.secondControl.y = y
   },
-  setEndPoint: (x, y) =>{
-    selected.endPoint.x = x,
+  setEndPointX: (x) =>{
+    selected.endPoint.x = x
+  },
+  setEndPointY: (y) =>{
     selected.endPoint.y = y
   }
 };

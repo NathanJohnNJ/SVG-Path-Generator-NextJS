@@ -147,7 +147,7 @@ const ConfigPanel = (props) => {
 
         {/****** STROKE SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet label="Stroke" fontSize={15} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
+          <FieldSet width={160} label="Stroke" fontSize={15} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
           {
           openSection === 'stroke'
 
@@ -248,7 +248,7 @@ const ConfigPanel = (props) => {
         
         {/****** FILL SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet fontSize={15} label="Fill" labelColor={fillSnap.color} labelBgColor={fillSnap.highlight} borderColor={fillSnap.highlight} >
+          <FieldSet width={160} fontSize={15} label="Fill" labelColor={fillSnap.color} labelBgColor={fillSnap.highlight} borderColor={fillSnap.highlight} >
           {
             openSection === 'fill'
             ?
@@ -330,7 +330,7 @@ const ConfigPanel = (props) => {
     
     {/****** CONTROL SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet fontSize={15} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
+      <FieldSet width={160} fontSize={15} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
       {
       openSection === 'control'
       ?
@@ -430,7 +430,7 @@ const ConfigPanel = (props) => {
     
     {/****** END POINT SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet fontSize={15} label="End Points" labelColor="white" labelBgColor={endSnap.color} borderColor={endSnap.color}>
+      <FieldSet width={160} fontSize={15} label="End Points" labelColor="white" labelBgColor={endSnap.color} borderColor={endSnap.color}>
       {
       openSection === 'end'
       ?
@@ -559,7 +559,9 @@ const styles = StyleSheet.create({
     margin: 10,
     marginRight: 35,
     height: 'fit-content',
-    maxWidth: '250px'
+    maxWidth: '250px',
+    width: 'max-content',
+    display: 'flex'
   },
   strokeSection:{
     display: 'flex',
@@ -575,14 +577,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 10
   },
-  fieldSet:{
-    backgroundColor: '#a2a2a2',
-    width: 'fit-content',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
   attSection:{
     display: 'flex',
     flexDirection: 'row',
@@ -591,7 +585,6 @@ const styles = StyleSheet.create({
   resetSection:{
     display: 'flex',
     flexDirection: 'row',
-    // alignItems: 'center',
     justifyContent: 'space-between'
   },
   attribute: {
