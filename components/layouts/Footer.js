@@ -82,6 +82,7 @@ import { useState, useLayoutEffect } from "react";
 import { Svg, LinearGradient, Path, Text, Defs, Stop, G, ForeignObject } from 'react-native-svg-web';
 import Link from "next/link";
 import { StyleSheet } from "react-native-web";
+import Logo from '@/public/images/logoBlack.svg';
 import Image from "next/image";
 
 const Footer = () => {
@@ -118,16 +119,16 @@ const Footer = () => {
       <G x="0" y="0" viewBox={viewbox} className="relative">
         <Path x="0" y="0" viewBox={viewbox} fill="url(#grad)" d={myPath} stroke="none" preserveAspectRatio="minXminY meet" width="100%" height={200}/>
         
-        <Text x={(width-100)/2} y={60} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth="0.5" fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]" >
+        <Text x={(width-100)/2} y={60} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth="0.5" fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]  translate-y-4" >
             Thanks for checking out my SVG Path Generator!
             </Text>
-        <Text x={(width-100)/2} y={80} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className=" font-extrabold text-[16px]" >
+        <Text x={(width-100)/2} y={80} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className=" font-extrabold text-[16px]  translate-y-4" >
           View the rest of my portfolio at {"  "}
-          <Link href="https://www.njtd.xyz/portfolio/developer" target="_blank" rel="noreferrer" className="hover:text-xl text-zinc-600 hover:text-zinc-400" >
+          <Link href="https://www.njtd.xyz/portfolio/developer" target="_blank" rel="noreferrer" className="hover:text-xl text-zinc-600 hover:text-zinc-400 translate-y-4" >
             www.njtd.xyz
           </Link>
         </Text>
-        <Text x={(width-100)/2} y={100} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]" >
+        <Text x={(width-100)/2} y={100} width="100%" height="100%" dy="10" dx="35" stroke="url(#grad2)" strokeWidth={0.5} fill="url(#grad)" textAnchor="middle" className="font-extrabold text-[16px]  translate-y-4" >
           Or see what I'm currently working on on{" "}
           <Link href="https://github.com/NathanJohnNJ" target="_blank" rel="noreferrer" className="hover:text-xl text-zinc-600 hover:text-zinc-400">
             GitHub
@@ -150,8 +151,8 @@ const Footer = () => {
         </Link> */}
       </G>
       <ForeignObject style={styles.object} x={0} y={0} width="100%" height="100%" viewBox={viewbox}>
-        <Image src="/images/greyLogo.png" alt="Logo" height={100} width={100} style={styles.grey}/>
-        <Image src="/images/logoBlack.svg" alt="Logo" height={100} width={100} style={styles.image}/>
+        <Image src="/images/greyLogo.png" alt="Logo" height={125} width={125} style={styles.grey} className="translate-y-12"/>
+        <Image src="/images/logoBlack.svg" alt="Logo" height={90} width={90} style={styles.image}/>
         </ForeignObject>
     </Svg>
   )
@@ -165,15 +166,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    marginLeft: '50vw'
+    marginLeft: '50vw',
+    marginTop: '3vh'
   },
   grey: {
     display: 'flex',
-    marginLeft: '10vw',
-    marginTop: '10'
+    marginLeft: '7vw',
   },
   image: {
     display: 'flex',
-    marginLeft: '60vw'
+    marginLeft: '61vw',
+    marginTop: '-8vh'
   }
 })

@@ -16,7 +16,7 @@ const MainPanel = (props) => {
   return(
     <View style={styles.main}>
       <HorizontalPanel heading="Path">
-        <ConfigPanel heading="Config" fullPath={props.fullPath} />
+        <ConfigPanel heading="Config" className="flex flex-row" />
         <View style={styles.gridView}>
           <Grid id="mainGrid" size={400} mainWidth={450}>
             <PathFromArray path={path} setSelected={setSelected} size={400} />
@@ -24,7 +24,7 @@ const MainPanel = (props) => {
           <PathText />
         </View>
         <View style={styles.column}>
-          <CommandPanel heading="Commands" />
+          <CommandPanel heading="Commands" selected={selected} />
           <InfoPanel selected={selected} />
         </View>
       </HorizontalPanel>

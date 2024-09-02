@@ -1,17 +1,30 @@
 // CANNOT IMPORT THINGS FROM REACT OR NATIVE SO BUILD COMPONENTS TO IMPORT
-
+'use client';
+import { View, StyleSheet, Text } from "react-native-web";
 import Title from "@/components/layouts/title";
-import { CommandStyledDiv } from "@/components/ui/panels/Panels";
-import { Q, C, S, T } from '@/components/commands/curves';
-import { L, V, H } from '@/components/commands/lines';
-import { path, addToPath, fill, stroke, control, end } from '@/lib/store'; 
+import NewGridWithDrag from "@/components/ui/newGridWithDrag";
+import Table from "@/components/ui/Tables";
+import Link from "next/link";
+import { C } from '@/components/commands/curves';
+import { CPresets } from '@/components/ui/presetPaths/c';
+// import { L, V, H } from '@/components/commands/lines';
+import { path, addToPath, fill, stroke, control, end, newCommand, newActions } from '@/lib/store';
+import { useSnapshot, subscribe, snapshot } from 'valtio';
+import Heading from "@/components/layouts/heading";
+import { useState } from "react";
+import localforage from "localforage";
 
-const AddCommand =  async () => {
-
+const AddCommand = () => {
+  subscribe(newCommand, () => {
+    localforage.setItem("newCommand", snapshot(newCommand).command);
+    console.log(localforage.getItem("newCommand"))
+  })
+  const newSnap = useSnapshot(newCommand);
+  const [showPresets, setShowPresets] = useState({c:false, l:false, q:false})
   // function displayExtras(){
   //   if ( path[path.length-1].type==="q" || path[path.length-1].type==="t"){
   //     return(
-  //       <T path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} />
+        // <T path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} />
   //     )
   //   } else if(path[path.length-1].type==="c"){
   //     return(
@@ -19,24 +32,76 @@ const AddCommand =  async () => {
   //     )
   //   } else {}
   // }
-
+  const [hover, setHover] = useState({sub: false, can:false})
+  function hoverFunc(i){
+    const newHover = { ...hover, [i]: true}
+    setHover(newHover)
+  }
+  function resetHover(){
+    setHover({sub: false, can: false})
+  }
   return (
-    <CommandStyledDiv className="flex flex-row justify-center items-center">
-      <Title title="Add Command..." />
-        <div className="flex flex-row">
-          <C path={path} setPath={addToPath} pathID={path.commands.length} stroke={stroke} fill={fill} control={control} end={end} />
-          {/* <Q path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} firstCtrl={firstCtrl} setFirstCtrl={setFirstCtrl} control={control} end={end} />
-          <H path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} />
-          <L path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} />
-          <V path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} /> */}
-        </div>
-        {/* <div className="flex flex-row">
-          {displayExtras()}
-          <Z path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} fullCommand={fullCommand}/>
-        </div>  
-        */}
-      </CommandStyledDiv>
+    <View style={styles.container}>
+      <View style={styles.title}>
+        <Title title="Add" />
+        {
+        newSnap.type!=null&&<Heading heading={`New '${newSnap.type.toUpperCase()}' Command`} color="rgba()"/>
+        }
+      </View>
+      <View style={styles.row}>
+        <CPresets />
+        <NewGridWithDrag size="350" resetHover={resetHover} hoverFunc={hoverFunc}/>
+        {newSnap.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}, {title: 'd2', points: {x: newSnap.secondControl.x, y: newSnap.secondControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
+        {newSnap.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
+        {newSnap.type==='s' && <Table label="Control Points" array={[{title: 'd2', points: {x: newSnap.secondControl.x, y: newSnap.secondControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
+        {newSnap.type!=null&&
+        <Table label="End Point" array={[{title: null, points: {x: newSnap.endPoint.x, y: newSnap.endPoint.y}}]} colour={endSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
+      </View>
+
+      <View style={styles.buttons}>
+      {/* <p onClick={setCCommand} className="font-sans text-rose-500 bg-zinc-300 w-12 h-12 flex items-center justify-center hover:text-rose-400 text-[28px] hover:bg-zinc-600 hover:font-semibold cursor-pointer border-2 border-zinc-600 hover:border-zinc-300 rounded-xl" style={styles.button}>
+        C
+      </p> */}
+      <C />
+      </View>
+      <View style={styles.subCan}>
+        <Link href="/path/viewPath" onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Confirm</Link>
+        <Link href="/path/viewPath">
+          <p className="">
+            Cancel
+          </p>
+        </Link>
+      </View>
+    </View>
   )
 };
 
 export default AddCommand;
+
+const styles= StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  row: {
+    width: 'min-content',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttons: {
+    display: 'flex',
+    margin: 10
+  },
+  button: {
+    margin: 2,
+    textShadow: '-2px 1.5px 3.5px rgba(0, 0, 0, 0.75)'
+  },
+  subCan: {
+    display: 'flex',
+    flexDirection: 'row',
+  }
+})
