@@ -9,7 +9,11 @@ const GridWithDrag = (props) => {
     const [offsetY, setOffsetY] = useState();
     const [selectedElement, setSelectedElement] = useState(null);
     const viewbox = `0 0 ${props.size} ${props.size}`;
-    const selectedSnap = useSnapshot(selected)
+    const selectedSnap = useSnapshot(selected.command);
+    const endSnap = useSnapshot(end);
+    const controlSnap = useSnapshot(control);
+    const strokeSnap = useSnapshot(stroke);
+    const fillSnap = useSnapshot(fill);
 
     function getMousePosition(evt) {
       const svg = evt.target
@@ -20,7 +24,6 @@ const GridWithDrag = (props) => {
       };
     }
     async function drag(evt) {
-      console.log('inside drag function')
       if (selectedElement) {
         evt.preventDefault();
         let coord = getMousePosition(evt);
@@ -28,20 +31,20 @@ const GridWithDrag = (props) => {
         let yCoord = Math.round( ( coord.y - offsetY ));
         if(selectedSnap.type==='h'){
           selectedElement.setAttributeNS(null, "cx", xCoord);
-          selectedElement.setAttributeNS(null, 'r', end.size*1.5);
+          selectedElement.setAttributeNS(null, 'r', endSnap.size*1.5);
           selectedActions.setEndPoint(xCoord-50, 0);
           document.getElementById('createGrid').removeChild(document.getElementById('path'));
           drawPath();
         }else if (selectedSnap.type==="v"){
           selectedElement.setAttributeNS(null, "cy", yCoord);
-          selectedElement.setAttributeNS(null, 'r', end.size*1.5);
+          selectedElement.setAttributeNS(null, 'r', endSnap.size*1.5);
           selectedActions.setEndPoint(0, yCoord-100);
           document.getElementById('createGrid').removeChild(document.getElementById('path'));
           drawPath();
         }else if (selectedSnap.type==="t"){
           selectedElement.setAttributeNS(null, "cx", xCoord);
           selectedElement.setAttributeNS(null, "cy", yCoord);
-          selectedElement.setAttributeNS(null, 'r', end.size*1.5);
+          selectedElement.setAttributeNS(null, 'r', endSnap.size*1.5);
           selectedActions.setEndPoint(xCoord-50-path[selectedSnap.commandId-1].endPoint.x, yCoord-100-path[selectedSnap.commandId-1].endPoint.y);
           document.getElementById('createGrid').removeChild(document.getElementById('path'));
           drawPath();
@@ -49,18 +52,18 @@ const GridWithDrag = (props) => {
           selectedElement.setAttributeNS(null, "cx", xCoord);
           selectedElement.setAttributeNS(null, "cy", yCoord);  
           if(selectedElement.id==="firstControl") {
-            selectedElement.setAttributeNS(null, 'r', control.size*1.5);
+            selectedElement.setAttributeNS(null, 'r', controlSnap.size*1.5);
             selectedActions.setFirstControl(xCoord-50, yCoord-100);
             document.getElementById('createGrid').removeChild(document.getElementById('path'));
             drawPath();
           } else if(selectedElement.id==="secondControl") {
-            selectedElement.setAttributeNS(null, 'r', control.size*1.5);
+            selectedElement.setAttributeNS(null, 'r', controlSnap.size*1.5);
             selectedActions.setSecondControl(xCoord-50, yCoord-100);
             document.getElementById('createGrid').removeChild(document.getElementById('path'));
             drawPath();
           } else {
             selectedActions.setEndPoint(xCoord-50, yCoord-100);
-            selectedElement.setAttributeNS(null, 'r', end.size*1.5);
+            selectedElement.setAttributeNS(null, 'r', endSnap.size*1.5);
             document.getElementById('createGrid').removeChild(document.getElementById('path'));
             drawPath();
           }
@@ -68,23 +71,21 @@ const GridWithDrag = (props) => {
       }
     }
     function endDrag() {
-      console.log('inside endDrag function')
       if(!selectedElement===null){
-        document.getElementById('endPoint').setAttributeNS(null, 'r', end.size);
-        document.getElementById('firstControl').setAttributeNS(null, 'r', control.size);
-        document.getElementById('secondControl').setAttributeNS(null, 'r', control.size);
+        document.getElementById('endPoint').setAttributeNS(null, 'r', endSnap.size);
+        document.getElementById('firstControl').setAttributeNS(null, 'r', controlSnap.size);
+        document.getElementById('secondControl').setAttributeNS(null, 'r', controlSnap.size);
         setSelectedElement(null);
       }else{
         setSelectedElement(null);
       }
     }
     function letGo(){
-      document.getElementById('endPoint').setAttributeNS(null, 'r', end.size);
-      document.getElementById('firstControl')?document.getElementById('firstControl').setAttributeNS(null, 'r', control.size):null;
-      document.getElementById('secondControl')?document.getElementById('secondControl').setAttributeNS(null, 'r', control.size):null
+      document.getElementById('endPoint').setAttributeNS(null, 'r', endSnap.size);
+      document.getElementById('firstControl')?document.getElementById('firstControl').setAttributeNS(null, 'r', controlSnap.size):null;
+      document.getElementById('secondControl')?document.getElementById('secondControl').setAttributeNS(null, 'r', controlSnap.size):null
     }
     function startDrag(evt) {
-      console.log('inside startDrag function')
       evt.preventDefault()
       if (evt.target.classList.contains('draggable')) {
         setSelectedElement(evt.target);
@@ -100,11 +101,11 @@ const GridWithDrag = (props) => {
       const grid = document.getElementById('createGrid');
       const currentPath = document.createElementNS(svgns, 'path');
         currentPath.setAttributeNS(null, "id", 'path');
-        currentPath.setAttributeNS(null, 'stroke', stroke.color);
-        currentPath.setAttributeNS(null, 'stroke-width', stroke.width);
-        currentPath.setAttributeNS(null, 'stroke-opacity', stroke.opacity);
-        currentPath.setAttributeNS(null, 'fill', fill.color);
-        currentPath.setAttributeNS(null, 'fill-opacity', fill.opacity);
+        currentPath.setAttributeNS(null, 'stroke', strokeSnap.color);
+        currentPath.setAttributeNS(null, 'stroke-width', strokeSnap.width);
+        currentPath.setAttributeNS(null, 'stroke-opacity', strokeSnap.opacity);
+        currentPath.setAttributeNS(null, 'fill', fillSnap.color);
+        currentPath.setAttributeNS(null, 'fill-opacity', fillSnap.opacity);
         if(selectedSnap.type==='q'){
           currentPath.setAttributeNS(null, 'd', `M50,100q${selectedSnap.firstControl.x},${selectedSnap.firstControl.y} ${selectedSnap.endPoint.x},${selectedSnap.endPoint.y}`)
         }else if(selectedSnap.type==='c'){
@@ -134,12 +135,12 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="firstControl" cx={selectedSnap.firstControl.x+50} cy={selectedSnap.firstControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.drag} r={control.size}  fill={control.color} fillOpacity={control.opacity}>
+            <circle className="draggable" id="firstControl" cx={selectedSnap.firstControl.x+50} cy={selectedSnap.firstControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.drag} r={controlSnap.size}  fill={controlSnap.color} fillOpacity={controlSnap.opacity}>
               <title>
                 {title1}
               </title>
             </circle>
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title2}
               </title>
@@ -152,7 +153,7 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50+path[selectedSnap.commandId-1].endPoint.x} cy={selectedSnap.endPoint.y+100+path[selectedSnap.commandId-1].endPoint.y} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50+path[selectedSnap.commandId-1].endPoint.x} cy={selectedSnap.endPoint.y+100+path[selectedSnap.commandId-1].endPoint.y} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title}
               </title>
@@ -165,7 +166,7 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title}
               </title>
@@ -178,7 +179,7 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="endPoint" cx="50" cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx="50" cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title}
               </title>
@@ -192,7 +193,7 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy="100" onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy="100" onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title}
               </title>
@@ -208,17 +209,17 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="firstControl" cx={selectedSnap.firstControl.x+50} cy={selectedSnap.firstControl.y+100} r={control.size} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.drag} fill={control.color} fillOpacity={control.opacity}>
+            <circle className="draggable" id="firstControl" cx={selectedSnap.firstControl.x+50} cy={selectedSnap.firstControl.y+100} r={controlSnap.size} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.drag} fill={controlSnap.color} fillOpacity={controlSnap.opacity}>
               <title>
                 {title1}
               </title>
             </circle>
-            <circle className="draggable" id="secondControl" cx={selectedSnap.secondControl.x+50} cy={selectedSnap.secondControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.drag} fill={control.color} fillOpacity={control.opacity} r={control.size} >
+            <circle className="draggable" id="secondControl" cx={selectedSnap.secondControl.x+50} cy={selectedSnap.secondControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.drag} fill={controlSnap.color} fillOpacity={controlSnap.opacity} r={controlSnap.size} >
               <title>
                 {title2}
               </title>
             </circle>
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title3}
               </title>
@@ -233,12 +234,12 @@ const GridWithDrag = (props) => {
       return(
         <View style={styles.container}>
           <Grid id='createGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag} >
-            <circle className="draggable" id="secondControl" cx={selectedSnap.secondControl.x+50} cy={selectedSnap.secondControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.drag} fill={control.color} fillOpacity={control.opacity} r={control.size} >
+            <circle className="draggable" id="secondControl" cx={selectedSnap.secondControl.x+50} cy={selectedSnap.secondControl.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()}   style={styles.drag} fill={controlSnap.color} fillOpacity={controlSnap.opacity} r={controlSnap.size} >
               <title>
                 {title2}
               </title>
             </circle>
-            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={end.color} fillOpacity={end.opacity} r={end.size} >
+            <circle className="draggable" id="endPoint" cx={selectedSnap.endPoint.x+50} cy={selectedSnap.endPoint.y+100} onMouseDown={(evt) => startDrag(evt)}  onMouseUp={endDrag} onMouseLeave={() => letGo()} style={styles.end} fill={endSnap.color} fillOpacity={endSnap.opacity} r={endSnap.size} >
               <title>
                 {title3}
               </title>

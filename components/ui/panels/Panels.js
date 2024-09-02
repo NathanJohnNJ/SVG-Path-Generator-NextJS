@@ -9,16 +9,26 @@ import Title from '@/components/layouts/title';
   to { --bg-angle: 360deg; }
 `
 
-const StyledDiv = styled.div`
-@property --bg-angle {
-  inherits: false;
-  initial-value: 0deg;
-  syntax: "<angle>";
-}
-  border-radius: 18px;
-  animation: ${borderAnimation} 40s infinite linear running;
-  background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #fdb, grey, dimgrey, #cfc4ba, grey, lightgrey, white);
+export const StyledDiv = styled.div`
+  width: fit-content;
+  min-width: 25vw;
+  height: auto;
+  @property --bg-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+    border-radius: 18px;
+    animation: ${borderAnimation} 30s infinite linear running;
+    background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, rgba(139, 90, 99, 0.39), grey, dimgrey, rgba(158, 97, 118, 0.54), grey, lightgrey, white);
 `
+export const PresetsHeading = ({children}) => {
+  return(
+  <Heading className="font-sans" style={{color: 'rgba(160, 0, 192, 0.54)', fontSize: '25px'}}>
+    {children}
+  </Heading>
+  )
+}
 
 export const Article = styled.div`
   color: #0010a0;
@@ -31,6 +41,17 @@ export const Article = styled.div`
   background-color: #eee;
   border-radius: 18px;
 `
+
+export const PresetsPanel = ({children}) => {
+  <StyledDiv style={styles.presetOuterDiv}>
+    <Article style={styles.presetArticle}>
+      <PresetsHeading>Preset</PresetsHeading>
+      <div style={styles.presetDiv}>
+      {children}
+      </div>
+    </Article>
+  </StyledDiv>
+}
 
 export const Heading = styled.h2`
 font-size: 35px;
@@ -130,7 +151,7 @@ export const ConfigHeading = ({children}) => {
 }
 
 export const ConfigStyledDiv = styled.div`
-width: 30vw;
+/* width: 30vw; */
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -159,7 +180,7 @@ const HorizontalArticle = styled.div`
   border-radius: 18px;
   padding: 10px;
   height: 100%;
-  width: 90vw
+  width: 90vw;
 `
 
 export const HorizontalPanel = ({children}, props) => {
@@ -167,7 +188,7 @@ export const HorizontalPanel = ({children}, props) => {
     <HorizontalStyledDiv style={styles(props).horizontalPanel}>
       <HorizontalArticle className={poppins.className}>
       <Title title="Path" />
-        <div className="flex flex-row w-full">
+        <div className="flex flex-col md:flex-row w-full">
         {children}
         </div>
       </HorizontalArticle>
@@ -205,6 +226,7 @@ const styles = (props) => StyleSheet.create({
     margin: 5,
     height: props.height,
     width: props.width,
+    minWidth: '280px'
   },
   horizontalPanel:{
     padding: 4,
@@ -216,5 +238,6 @@ const styles = (props) => StyleSheet.create({
   gridPanel: {
     padding: 4,
     width: 'fit-content'
-  }
+  },
+  
 });

@@ -1,10 +1,16 @@
-import { fullPath } from "@/lib/utils";
+'use client'
 import MainPanel from "@/components/ui/panels/MainPanel";
-import { path } from "@/lib/store";
+import { useSearchParams } from "next/navigation";
 
 const ViewPath = () => {
+  function SearchBar() {
+    const searchParams = useSearchParams()
+    const search = searchParams.get('search')
+    return <>Search: {search}</>
+  }
   return (     
-      <MainPanel path={path.commands} fullPath={fullPath}>
+      <MainPanel>
+        <SearchBar />
       </MainPanel>
   );
 };

@@ -141,7 +141,7 @@ const ConfigPanel = (props) => {
     }
   return(
     <>
-    <ConfigStyledDiv id="configPanel" style={styles.panel} colour={props.colour}>
+    <ConfigStyledDiv id="configPanel" style={styles.panel} colour={props.colour} className="flex flex-row w-full" >
       <Article className={poppins.className}>
       <ConfigHeading color="red">{props.heading}</ConfigHeading>
 

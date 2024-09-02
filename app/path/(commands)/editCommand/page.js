@@ -1,11 +1,12 @@
 'use client';
 import { selected, control, end, editCommand } from '@/lib/store';
 import { useSnapshot } from 'valtio';
-import GridWithDrag from '@/components/ui/gridWithDrag';
+import EditGridWithDrag from '@/components/ui/editGridWithDrag';
 import Table from '@/components/ui/Tables';
 import { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native-web';
 import Title from '@/components/layouts/title';
+import Heading from '@/components/layouts/heading';
 import Link from 'next/link';
 
 export default function EditCommand() {
@@ -25,115 +26,115 @@ export default function EditCommand() {
 
   function addToPath(){
     let newCommand;
-    if(snap.type==='c'){
+    if(snap.command.type==='c'){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
         startPoint: {
-          x: snap.startPoint.x, 
-          y: snap.startPoint.y
+          x: snap.command.startPoint.x, 
+          y: snap.command.startPoint.y
         },
         controlPoints: [
           {
             d1: { 
-              x: snap.firstControl.x,
-              y: snap.firstControl.y
+              x: snap.command.firstControl.x,
+              y: snap.command.firstControl.y
             }
           },
           {
             d2: { 
-              x: snap.secondControl.x,
-              y: snap.secondControl.y
+              x: snap.command.secondControl.x,
+              y: snap.command.secondControl.y
             }
           }
         ],
         endPoint: {
-          x: snap.endPoint.x,
-          y: snap.endPoint.y
+          x: snap.command.endPoint.x,
+          y: snap.command.endPoint.y
         },
       };
-    } else if(snap.type === 'q'){
+    } else if(snap.command.type === 'q'){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
         startPoint: {
-          x: snap.startPoint.x, 
-          y: snap.startPoint.y
+          x: snap.command.startPoint.x, 
+          y: snap.command.startPoint.y
         },
         controlPoints: [{
           d1: { 
-            x: snap.firstControl.x,
-            y: snap.firstControl.y
+            x: snap.command.firstControl.x,
+            y: snap.command.firstControl.y
           }
         }],
         endPoint: {
-          x: snap.endPoint.x, 
-          y: snap.endPoint.y
+          x: snap.command.endPoint.x, 
+          y: snap.command.endPoint.y
         },
       };
-    } else if(snap.type === 's'){
+    } else if(snap.command.type === 's'){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId,
+        type: snap.command.type,
+        commandId: snap.command.commandId,
         startPoint: {
-          x: snap.startPoint.x, 
-          y: snap.startPoint.y
+          x: snap.command.startPoint.x, 
+          y: snap.command.startPoint.y
         },
         controlPoints: [{
           d2: { 
-            x: snap.secondControl.x,
-            y: snap.secondControl.y
+            x: snap.command.secondControl.x,
+            y: snap.command.secondControl.y
           }
         }],
         endPoint: {
-          x: snap.endPoint.x, 
-          y: snap.endPoint.y
+          x: snap.command.endPoint.x, 
+          y: snap.command.endPoint.y
         }
       };
-    } else if(snap.type === 't'){
+    } else if(snap.command.type === 't'){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
-        startPoint: {x: snap.startPoint.x, y: snap.startPoint.y},
-        endPoint: {x: snap.endPoint.x, y: snap.endPoint.y},
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
+        startPoint: {x: snap.command.startPoint.x, y: snap.command.startPoint.y},
+        endPoint: {x: snap.command.endPoint.x, y: snap.command.endPoint.y},
       };
-    } else if(snap.type==="l"){
+    } else if(snap.command.type==="l"){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
-        startPoint: {x: snap.startPoint.x, y: snap.startPoint.y},
-        endPoint: {x: snap.endPoint.x, y: snap.endPoint.y},
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
+        startPoint: {x: snap.command.startPoint.x, y: snap.command.startPoint.y},
+        endPoint: {x: snap.command.endPoint.x, y: snap.command.endPoint.y},
       };
-    } else if(snap.type === "h"){
+    } else if(snap.command.type === "h"){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
-        startPoint: {x: snap.startPoint.x, y: snap.startPoint.y},
-        endPoint: {x: snap.endPoint.x, y: 0},
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
+        startPoint: {x: snap.command.startPoint.x, y: snap.command.startPoint.y},
+        endPoint: {x: snap.command.endPoint.x, y: 0},
       };
-    } else if(snap.type === "v"){
+    } else if(snap.command.type === "v"){
       newCommand = {
-        type: snap.type,
-        commandId: snap.commandId ,
-        startPoint: {x: snap.startPoint.x, y: snap.startPoint.y},
-        endPoint: {x: 0, y: snap.endPoint.y},
+        type: snap.command.type,
+        commandId: snap.command.commandId ,
+        startPoint: {x: snap.command.startPoint.x, y: snap.command.startPoint.y},
+        endPoint: {x: 0, y: snap.command.endPoint.y},
       };
     }
-    editCommand(snap.commandId, newCommand);
+    editCommand(snap.command.commandId, newCommand);
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.title}>
         <Title title="Edit" />
-        <Title title={`Command: ${snap.type}`} />
+        <Heading heading={`Command: ${snap.command.type}`} color="rgba()" />
       </View>
       <View style={styles.row}>
-        <GridWithDrag size="350" resetHover={resetHover} hoverFunc={hoverFunc}/>
-        {snap.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: snap.firstControl.x, y: snap.firstControl.y}}, {title: 'd2', points: {x: snap.secondControl.x, y: snap.secondControl.y}}]} colour={controlSnap.color} startX={snap.startPoint.x} startY={snap.startPoint.y} />}
-        {snap.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: snap.firstControl.x, y: snap.firstControl.y}}]} colour={controlSnap.color} startX={snap.startPoint.x} startY={snap.startPoint.y} />}
-        {snap.type==='s' && <Table label="Control Points" array={[{title: 'd2', points: {x: snap.secondControl.x, y: snap.secondControl.y}}]} colour={controlSnap.color} startX={snap.startPoint.x} startY={snap.startPoint.y} />}
-        <Table label="End Point" array={[{title: null, points: {x: snap.endPoint.x, y: snap.endPoint.y}}]} colour={endSnap.color} startX={snap.startPoint.x} startY={snap.startPoint.y} />
+        <EditGridWithDrag size="350" type="edit" resetHover={resetHover} hoverFunc={hoverFunc}/>
+        {snap.command.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: snap.command.firstControl.x, y: snap.command.firstControl.y}}, {title: 'd2', points: {x: snap.command.secondControl.x, y: snap.command.secondControl.y}}]} colour={controlSnap.color} startX={snap.command.startPoint.x} startY={snap.command.startPoint.y} />}
+        {snap.command.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: snap.command.firstControl.x, y: snap.command.firstControl.y}}]} colour={controlSnap.color} startX={snap.command.startPoint.x} startY={snap.command.startPoint.y} />}
+        {snap.command.type==='s' && <Table label="Control Points" array={[{title: 'd2', points: {x: snap.command.secondControl.x, y: snap.command.secondControl.y}}]} colour={controlSnap.color} startX={snap.command.startPoint.x} startY={snap.command.startPoint.y} />}
+        <Table label="End Point" array={[{title: null, points: {x: snap.command.endPoint.x, y: snap.command.endPoint.y}}]} colour={endSnap.color} startX={snap.command.startPoint.x} startY={snap.command.startPoint.y} />
       </View>
       <View style={styles.subCan}>
         <Link href="/path/viewPath" onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Confirm Changes!</Link>
