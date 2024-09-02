@@ -5,6 +5,8 @@ import SideBar from '@/components/layouts/Sidenav';
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import StyledComponentsRegistry from "@/lib/registry";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // export const metadata = Metadata(
 //   title: "SVG Path Generator",
@@ -44,6 +46,8 @@ export default function RootLayout({ children }) {
         <div className="pl-2">
           <StyledComponentsRegistry>
             {children}
+            <Analytics />
+            <SpeedInsights />
           </StyledComponentsRegistry>
         </div>
         <div className="relative bottom-0">

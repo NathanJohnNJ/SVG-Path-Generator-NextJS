@@ -38,18 +38,18 @@ const NewGridWithDrag = (props) => {
         let yCoord = Math.round( ( coord.y - offsetY ));
         if(newSnap.type==='h'){
           selectedElement.setAttributeNS(null, "cx", xCoord);
-          newActions.setEndPoint(xCoord-50, 0);
+          newActions.setEndPoint(xCoord-newSnap.startPoint.x, 0);
           document.getElementById('newGrid').removeChild(document.getElementById('path'));
           drawPath();
         }else if (newSnap.type==="v"){
           selectedElement.setAttributeNS(null, "cy", yCoord);
-          newActions.setEndPoint(0, yCoord-100);
+          newActions.setEndPoint(0, yCoord-newSnap.startPoint.y);
           document.getElementById('newGrid').removeChild(document.getElementById('path'));
           drawPath();
         }else if (newSnap.type==="t"){
           selectedElement.setAttributeNS(null, "cx", xCoord);
           selectedElement.setAttributeNS(null, "cy", yCoord);
-          newActions.setEndPoint(xCoord-50-path[newSnap.commandId-1].endPoint.x, yCoord-100-path[newSnap.commandId-1].endPoint.y);
+          newActions.setEndPoint(xCoord-newSnap.startPoint.x-path[newSnap.commandId-1].endPoint.x, yCoord-newSnap.startPoint.y-path[newSnap.commandId-1].endPoint.y);
           document.getElementById('newGrid').removeChild(document.getElementById('path'));
           drawPath();
         }else{
@@ -57,15 +57,15 @@ const NewGridWithDrag = (props) => {
           selectedElement.setAttributeNS(null, "cy", yCoord);  
           if(selectedElement.id==="firstControl") {
             selectedElement.setAttributeNS(null, 'r', controlSnap.size*1.5);
-            newActions.setFirstControl(xCoord-50, yCoord-100);
+            newActions.setFirstControl(xCoord-newSnap.startPoint.x, yCoord-newSnap.startPoint.y);
             document.getElementById('newGrid').removeChild(document.getElementById('path'));
             drawPath();
           } else if(selectedElement.id==="secondControl") {
-            newActions.setSecondControl(xCoord-50, yCoord-100);
+            newActions.setSecondControl(xCoord-newSnap.startPoint.x, yCoord-newSnap.startPoint.y);
             document.getElementById('newGrid').removeChild(document.getElementById('path'));
             drawPath();
           } else {
-            newActions.setEndPoint(xCoord-50, yCoord-100);
+            newActions.setEndPoint(xCoord-newSnap.startPoint.x, yCoord-newSnap.startPoint.y);
             document.getElementById('newGrid').removeChild(document.getElementById('path'));
             drawPath();
           }
@@ -102,19 +102,19 @@ const NewGridWithDrag = (props) => {
         currentPath.setAttributeNS(null, 'fill', fillSnap.color);
         currentPath.setAttributeNS(null, 'fill-opacity', fillSnap.opacity);
         if(newSnap.type==='q'){
-          currentPath.setAttributeNS(null, 'd', `M50,100q${newSnap.firstControl.x},${newSnap.firstControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}q${newSnap.firstControl.x},${newSnap.firstControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
         }else if(newSnap.type==='c'){
-          currentPath.setAttributeNS(null, 'd', `M50,100c${newSnap.firstControl.x},${newSnap.firstControl.y} ${newSnap.secondControl.x},${newSnap.secondControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}c${newSnap.firstControl.x},${newSnap.firstControl.y} ${newSnap.secondControl.x},${newSnap.secondControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
         }else if(newSnap.type==='s'){
-          currentPath.setAttributeNS(null, 'd', `M50,100s${newSnap.secondControl.x},${newSnap.secondControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}s${newSnap.secondControl.x},${newSnap.secondControl.y} ${newSnap.endPoint.x},${newSnap.endPoint.y}`)
         }else if(newSnap.type==='l'){
-          currentPath.setAttributeNS(null, 'd', `M50,100l${newSnap.endPoint.x},${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}l${newSnap.endPoint.x},${newSnap.endPoint.y}`)
         }else if(newSnap.type==='v'){
-          currentPath.setAttributeNS(null, 'd', `M50,100v${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}v${newSnap.endPoint.y}`)
         }else if(newSnap.type==='h'){
-          currentPath.setAttributeNS(null, 'd', `M50,100h${newSnap.endPoint.x}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}h${newSnap.endPoint.x}`)
         }else if(newSnap.type==='t'){
-          currentPath.setAttributeNS(null, 'd', `M50,100q${path[newSnap.commandId-1].controlPoints[0].value},${path[newSnap.commandId-1].controlPoints[1].value} ${path[newSnap.commandId-1].endPoint.x},${path[newSnap.commandId-1].endPoint.y}t${newSnap.endPoint.x},${newSnap.endPoint.y}`)
+          currentPath.setAttributeNS(null, 'd', `M${newSnap.startPoint.x},${newSnap.startPoint.y}q${path[newSnap.commandId-1].controlPoints[0].value},${path[newSnap.commandId-1].controlPoints[1].value} ${path[newSnap.commandId-1].endPoint.x},${path[newSnap.commandId-1].endPoint.y}t${newSnap.endPoint.x},${newSnap.endPoint.y}`)
         }
         
       grid.appendChild(currentPath)
@@ -294,7 +294,7 @@ const NewGridWithDrag = (props) => {
     return (
       <View style={styles.container}>
         <Grid size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} onMouseMove={(evt) => drag(evt)} onMouseLeave={endDrag}>
-          <G id='newGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox} ></G>
+          <G id='newGrid' width={props.size} height={props.size} viewBox={viewbox} ></G>
         </Grid>
       </View>
     )

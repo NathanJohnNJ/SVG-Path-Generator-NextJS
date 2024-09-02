@@ -1,22 +1,14 @@
 'use client';
-import { View, StyleSheet, Text, Pressable } from "react-native-web";
+import { View, StyleSheet, Pressable } from "react-native-web";
 import { Path } from "react-native-svg-web";
 import Grid from "../Grid";
-import { PresetsPanel } from "../panels/Panels";
+import { StyledDiv, PresetsHeading, Article } from "../panels/Panels";
+import { stroke, fill, newActions } from "@/lib/store";
+import { useSnapshot } from "valtio";
 
-export const CPresets = (props) => {
-    function hoverFunc(id){
-        const grid = document.getElementById(id)
-        grid.style.backgroundColor = "#acd";
-        grid.style.borderColor = "#e9b";
-        grid.style.boxShadow = "-1px 1px 10px #000";
-    }
-    function resetHover(id){
-        const grid = document.getElementById(id)
-        grid.style.backgroundColor = "#c2c2c2";
-        grid.style.borderColor = "#ccf";
-        grid.style.boxShadow = "-2px 2px 8px #9c9c9c";
-    }
+const CPresets = (props) => {
+    const strokeSnap = useSnapshot(stroke);
+    const fillSnap = useSnapshot(fill);
 
     const first = {
         type:'c',
@@ -45,7 +37,7 @@ export const CPresets = (props) => {
     const fourth = {
         type:'c',
         commandId: 0,
-        startPoint: {x: 50, y: 50},
+        startPoint: {x: 200, y: 50},
         firstControl: {x:25, y:50}, 
         secondControl:{x: -25, y:100},
         endPoint: {x: -50, y: 75},
@@ -54,44 +46,48 @@ export const CPresets = (props) => {
     function select(command){
       const grid = document.getElementById('newGrid');
       const path = document.getElementById('path');
+      newActions.setStartPoint(command.startPoint.x, command.startPoint.y)
       newActions.setFirstControl(command.firstControl.x, command.firstControl.y);
       newActions.setSecondControl(command.secondControl.x, command.secondControl.y);
       newActions.setEndPoint(command.endPoint.x, command.endPoint.y);
       const svgns = "http://www.w3.org/2000/svg";
       const currentPath = document.createElementNS(svgns, 'path');
       currentPath.setAttributeNS(null, "id", 'path');
-      currentPath.setAttributeNS(null, 'stroke', props.stroke);
-      currentPath.setAttributeNS(null, 'stroke-width', props.strokeWidth);
-      currentPath.setAttributeNS(null, 'stroke-opacity', props.strokeOpacity);
-      currentPath.setAttributeNS(null, 'fill', props.fill);
-      currentPath.setAttributeNS(null, 'fill-opacity', props.fillOpacity);
-      currentPath.setAttributeNS(null, 'd', `M50,100c${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`);
+      currentPath.setAttributeNS(null, 'stroke', strokeSnap.color);
+      currentPath.setAttributeNS(null, 'stroke-width', strokeSnap.width);
+      currentPath.setAttributeNS(null, 'stroke-opacity', strokeSnap.opacity);
+      currentPath.setAttributeNS(null, 'fill', fillSnap.color);
+      currentPath.setAttributeNS(null, 'fill-opacity', fillSnap.opacity);
+      currentPath.setAttributeNS(null, 'd', `M${command.startPoint.x},${command.startPoint.y}c${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`);
       grid.replaceChild(currentPath, path);   
     }
   return(
-    <PresetsPanel>
+    <StyledDiv style={styles.presetOuterDiv}>
+      <Article style={styles.article}>
+        <PresetsHeading>
+          Preset Commands
+        </PresetsHeading>
+      <View id="presetsViewBeforeMap">
       {
         presetArray.map((command, i) => {
           return(
-            <Pressable id={i} style={styles.pressable} key={i+20} onPress={()=>select(command)} onHoverIn={()=>hoverFunc(command.hoverRef)} onHoverOut={()=>resetHover(command.hoverRef)}>
+            <Pressable id={i} style={styles.pressable} key={i+20} onPress={()=>select(command)} >
               <Grid size="150" mainWidth="180" id="miniGrid" key={i}>
-                <Path d={command.fullAbsCommand} fill={props.fill} key={i+10} fillOpacity={props.fillOpacity} stroke={props.stroke} strokeWidth={props.strokeWidth} strokeOpacity={props.strokeOpacity} />
+                <Path d={command.fullAbsCommand} fill={fillSnap.color} key={i+10} fillOpacity={fillSnap.opacity} stroke={strokeSnap.color} strokeWidth={strokeSnap.width} strokeOpacity={strokeSnap.opacity} />
               </Grid>
             </Pressable>
           )
         })
       }
-    </PresetsPanel>
+      </View>
+      </Article>
+    </StyledDiv>
   )
 };
 
+export default CPresets;
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        textShadow: '-1px 1px 2px gray, 1px 1px 1px gray',
-        marginTop: -20
-    },
     mainContainer:{
         display: 'flex',
         flexDirection: 'column',
@@ -114,9 +110,23 @@ const styles = StyleSheet.create({
       },
     pressable:{
         scale: 0.5,
-        margin: -50,
+        margin: -35,
         borderRadius: 18,
         borderColor: "#ccf",
         boxShadow: "-2px 2px 8px #9c9c9c",
+      },
+      article: {
+        padding: 4,
+        width: 'fit-content',
+        borderRadius: 18,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      presetOuterDiv:{
+        boxShadow: '-2px 2px 8px #9c9c9c',
+        height: 'min-content',
+        width:'min-content'
       },
   });

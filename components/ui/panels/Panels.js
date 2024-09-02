@@ -9,8 +9,9 @@ import Title from '@/components/layouts/title';
   to { --bg-angle: 360deg; }
 `
 
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
   width: fit-content;
+  min-width: 25vw;
   height: auto;
   @property --bg-angle {
     inherits: false;
@@ -21,7 +22,7 @@ const StyledDiv = styled.div`
     animation: ${borderAnimation} 30s infinite linear running;
     background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, rgba(139, 90, 99, 0.39), grey, dimgrey, rgba(158, 97, 118, 0.54), grey, lightgrey, white);
 `
-const PresetsHeading = ({children}) => {
+export const PresetsHeading = ({children}) => {
   return(
   <Heading className="font-sans" style={{color: 'rgba(160, 0, 192, 0.54)', fontSize: '25px'}}>
     {children}
@@ -42,10 +43,12 @@ export const Article = styled.div`
 `
 
 export const PresetsPanel = ({children}) => {
-  <StyledDiv>
-    <Article>
+  <StyledDiv style={styles.presetOuterDiv}>
+    <Article style={styles.presetArticle}>
       <PresetsHeading>Preset</PresetsHeading>
+      <div style={styles.presetDiv}>
       {children}
+      </div>
     </Article>
   </StyledDiv>
 }
@@ -177,7 +180,7 @@ const HorizontalArticle = styled.div`
   border-radius: 18px;
   padding: 10px;
   height: 100%;
-  width: 90vw
+  width: 90vw;
 `
 
 export const HorizontalPanel = ({children}, props) => {
@@ -235,5 +238,6 @@ const styles = (props) => StyleSheet.create({
   gridPanel: {
     padding: 4,
     width: 'fit-content'
-  }
+  },
+  
 });

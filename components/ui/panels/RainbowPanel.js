@@ -41,12 +41,36 @@ const RainbowArticle = styled.div`
   padding-bottom: 10px;
 `
 
-export const RainbowPanel = ({children}) => {
+
+const PresetsArticle = styled.div`
+  color: #0010a0;
+  font-size: 12;
+  font-weight: 575;
+  text-align:left;
+  padding-left: 18px;
+  padding-right: 5px;
+  border-radius: 18px;
+  padding-top: 5px;
+  background-color: #898989;
+  padding-bottom: 10px;
+`
+
+export const RainbowPanel = ({children}, props) => {
   return(
-    <Rainbow>
-      <RainbowArticle>
+    <Rainbow style={props.outerStyle}>
+      <RainbowArticle style={props.style}>
           {children}
       </RainbowArticle>
+    </Rainbow>
+  )
+};
+
+export const PresetsRainbowPanel = ({children}, props) => {
+  return(
+    <Rainbow style={props.style}>
+      <PresetsArticle style={props.style}>
+          {children}
+      </PresetsArticle>
     </Rainbow>
   )
 };
