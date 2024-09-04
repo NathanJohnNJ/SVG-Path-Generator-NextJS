@@ -135,7 +135,7 @@ const lines = [hPath, lPath, vPath];
             } else if(command.type==="q"){
               d = `M${startX},${startY}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`;
             }   else {
-              d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
+              d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`; 
             }
             return(
               <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />

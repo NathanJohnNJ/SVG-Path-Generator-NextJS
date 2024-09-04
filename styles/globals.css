@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   @font-face {
@@ -23,7 +23,6 @@
   }
 }
 
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -37,11 +36,41 @@
 	animation: stroke 15s 1 linear;
 }
 
+.buttonFly{
+  animation: spinning 0.5s 6 linear, flyLeft 3s ease-in 1;
+  -webkit-animation: spinning 0.5s 6 linear, flyLeft 3s ease-in 1;
+  -moz-animation: spinning 0.5s 6 linear, flyLeft 3s ease-in 1
+}
+.buttonFlyOpposite{
+  animation: spinning 0.5s 6 linear, flyRight 3s ease-in 1;
+  -webkit-animation: spinning 0.5s 6 linear, flyRight 3s ease-in 1;
+  -moz-animation: spinning 0.5s 6 linear, flyRight 3s ease-in 1
+}
+.spin {
+  animation-play-state: running;
+}
+
 @keyframes stroke {
 	0% {stroke-dashoffset: 50%; stroke-dasharray: 0 50%; stroke-width: 1; fill-opacity:0}
 	25% {stroke-dashoffset: 12.5%; stroke-dasharray: 25% 25%; stroke-width: 1;}
 	50% {stroke-dashoffset: 0%; stroke-dasharray: 50% 0; stroke-width: 3;fill-opacity:0}
 	100% {stroke-width: 2; fill-opacity: 1; }
+}
+
+@keyframes spinning {
+  0% {transform:rotate(0deg)}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes flyLeft {
+  /* 0% {scale: 1; opacity: 1; transform: translateX(0px) translateY(0px);}
+  100% {scale: 0; opacity: 0; transform: translateX(200px) translateY(-50px);} */
+  from {top: 0px;}
+  to {top: 200px;}
+}
+@keyframes flyRight {
+  0% {scale: 1; opacity: 1; transform: translate(0px, 0px)  rotateZ(0.001deg);}
+  100% {scale: 0; opacity: 0; transform: translate(-200px, 50px)  rotateZ(0.001deg);}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,6 +80,8 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+
 
 @media screen and (max-width: 480px){
   #gridView, #configPanel, #commandPanel{
@@ -66,16 +97,12 @@
   #gridView, #configPanel, #commandPanel{
     scale: 0.8
   }
-  #gridView {
-    margin-left: -100px
-  }
 }
 @media screen and (min-width: 1200px)  {
   #gridView, #configPanel, #commandPanel{
     scale: 1
   }
 }
-
 
 body {
   color: rgb(var(--foreground-rgb));

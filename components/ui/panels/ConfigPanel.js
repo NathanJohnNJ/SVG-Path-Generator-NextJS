@@ -6,7 +6,7 @@ import Image from 'next/image';
 import FieldSet from '../Fieldset';
 import ColorPicker from '../colorPicker/colorPicker';
 import Title from '../../layouts/title';
-import { Article, ConfigHeading, ConfigStyledDiv } from './Panels';
+import { ConfigArticle, ConfigHeading, ConfigStyledDiv } from './Panels';
 import {  stroke, strokeActions, fill, fillActions, control, controlActions, end, endActions, resetConfig } from '@/lib/store';
 import { useSnapshot } from 'valtio';
 
@@ -140,11 +140,11 @@ const ConfigPanel = (props) => {
       }
     }
   return(
-    <>
-    <ConfigStyledDiv id="configPanel" style={styles.panel} colour={props.colour} className="flex flex-row w-full" >
-      <Article className={poppins.className}>
-      <ConfigHeading color="red">{props.heading}</ConfigHeading>
+    <ConfigStyledDiv id="configPanel" style={styles.panel} className="w-max" >
+      <ConfigArticle className="flex flex-row w-full md:flex-col">
+      <ConfigHeading>{props.heading}</ConfigHeading>
 
+      <View>
         {/****** STROKE SECTION ******/}
         <View style={styles.strokeSection}>
           <FieldSet width={160} label="Stroke" fontSize={15} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
@@ -326,8 +326,8 @@ const ConfigPanel = (props) => {
       </FieldSet>
     </View>
     {/****** END OF FILL SECTION ******/}
-    
-    
+    </View>
+    <View>
     {/****** CONTROL SECTION ******/}
     <View style={styles.strokeSection}>
       <FieldSet width={160} fontSize={15} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
@@ -524,14 +524,15 @@ const ConfigPanel = (props) => {
     </FieldSet>
   </View>
   {/****** END OF END POINT SECTION ******/}
+  </View>
         <Pressable style={hover.can?styles.cancelHover:styles.cancel} onPress={resetConfig} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
           <h2 className="font-sans" style={hover.can?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
             RESET ALL
           </h2>
         </Pressable>
         
-      </Article>
-    </ConfigStyledDiv>
+      </ConfigArticle>
+    
     <Modal
     animationType="slide"
     transparent={false}
@@ -545,7 +546,8 @@ const ConfigPanel = (props) => {
         </View>
       </View>
     </Modal>
-    </>
+    </ConfigStyledDiv>
+    
   )
 };
 
@@ -555,13 +557,11 @@ const styles = StyleSheet.create({
   panel:{
     padding: 4,
     borderRadius: 18,
+    maxWidth: '650px',
     boxShadow: '-2px 2px 8px #9c9c9c',
     margin: 10,
     marginRight: 35,
     height: 'fit-content',
-    maxWidth: '250px',
-    width: 'max-content',
-    display: 'flex'
   },
   strokeSection:{
     display: 'flex',

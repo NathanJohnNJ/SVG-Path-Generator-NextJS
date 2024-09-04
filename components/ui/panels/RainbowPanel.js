@@ -114,13 +114,41 @@ const Button = styled.button`
     box-shadow: none;
   };
 `
+function hoverHandle(){
+  const layer1 = document.getElementById("layer1");
+  const layer2 = document.getElementById("layer2");
+  layer1.classList.add("spin");
+  layer2.classList.add("spin");
+}
+function hoverReset(){
+  const layer1 = document.getElementById("layer1");
+  const layer2 = document.getElementById("layer2");
+  layer1.classList.remove("spin");
+  layer2.classList.remove("spin");
+}
 
 export const RainbowButton = ({children}) => {
   return(
-    <ButtonRainbow>
-      <Button className="font-serif tracking-widest uppercase text-center ">                    
-        {children}
-      </Button>
-    </ButtonRainbow>
+    <div className="group relative p-3 m-2 w-full" onMouseOver={hoverHandle} onMouseLeave={hoverReset} >
+      <ButtonRainbow className="group absolute top-[5px] left-[30%] z-10">
+        <Button className="font-serif tracking-widest uppercase text-center whitespace-nowrap">                    
+          {children}
+        </Button>
+      </ButtonRainbow>
+      <ButtonRainbow className="absolute animate-none top-[5px] left-[30%] group-hover:scale-105 group-hover:animate-wiggler group-hover:transition-scale-150 duration-300" id="layer1">
+        <Button className="font-serif tracking-widest uppercase text-center whitespace-nowrap">                    
+        <div className="invisible">          
+          {children}
+          </div> 
+        </Button>
+      </ButtonRainbow>
+      <ButtonRainbow className="absolute animate-none top-[5px] left-[30%] group-hover:scale-105 group-hover:animate-antiWiggler" id="layer2">
+        <Button className="font-serif tracking-widest uppercase text-center whitespace-nowrap">
+          <div className="invisible">          
+          {children}
+          </div>
+        </Button>
+      </ButtonRainbow>
+    </div>
   )
 }

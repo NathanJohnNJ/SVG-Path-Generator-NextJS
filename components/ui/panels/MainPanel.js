@@ -16,15 +16,19 @@ const MainPanel = (props) => {
   return(
     <View style={styles.main}>
       <HorizontalPanel heading="Path">
-        <ConfigPanel heading="Config" className="flex flex-row" />
-        <View style={styles.gridView}>
+        <div className="w-full md:w-min">
+          <ConfigPanel heading="Config" className="flex flex-row w-full" />
+        </div>
+        <View id="gridView" style={styles.gridView} className="bg-black w-screen">
           <Grid id="mainGrid" size={400} mainWidth={450}>
             <PathFromArray path={path} setSelected={setSelected} size={400} />
           </Grid>
           <PathText />
         </View>
         <View style={styles.column}>
+          <View id="commandPanel">
           <CommandPanel heading="Commands" selected={selected} />
+          </View>
           <InfoPanel selected={selected} />
         </View>
       </HorizontalPanel>
@@ -39,7 +43,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   gridView:{
-    flex:1,
+    // flex:1,
+    marginLeft: 50,
     display: 'flex',
     flexDirection: 'column'
   },
