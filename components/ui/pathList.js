@@ -1,11 +1,13 @@
-import { getPath } from "@/lib/mongodb/path/mongodb";
+import { path } from "@/lib/store";
+import { useSnapshot, subscribe } from "valtio";
 
 const PathList = async () => {
-  const path = await getPath();
+  const snap = useSnapshot(path.commands);
+
   return (
     <div className="flex flex-col justify-center items-center">
       <ul>
-        {path.map((command) => (
+        {snap.map((command) => (
           <li key={command._id} class="p-5">
             <div className="flex justify-between">
               <h2>

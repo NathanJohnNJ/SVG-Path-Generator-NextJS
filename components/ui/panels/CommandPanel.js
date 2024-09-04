@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const CommandPanel = (props) => {
   return (
+    <div className="-mt-12">
     <CommandStyledPanel>
       <RainbowButton>
         <Link
@@ -35,17 +36,8 @@ const CommandPanel = (props) => {
         </RainbowButton>
       </>}
     </CommandStyledPanel>
+    </div>
   )
 };
 
 export default CommandPanel;
-
-const styles = StyleSheet.create({
-  panel:{
-    padding: 4,
-    borderRadius: 18,
-    boxShadow: '-2px 2px 8px #9c9c9c',
-    margin: 10
-  },
-
-})

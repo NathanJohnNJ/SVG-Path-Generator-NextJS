@@ -82,7 +82,6 @@ export const CommandHeading = ({children}) => {
 
 export const CommandStyledDiv = styled.div`
 width: min-content;
-/* max-width: vw; */
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -145,14 +144,13 @@ export const InfoStyledPanel = ({children}, props) => {
 
 export const ConfigHeading = ({children}) => {
   return(
-  <Heading className="font-sans" style={{color: 'rgb(75, 245, 175)'}}>
+  <Heading className="font-sans" style={{color: 'rgb(75, 245, 175)', marginTop: '-100px', marginLeft:'10px', fontSize: '28px'}}>
     {children}
   </Heading>
   )
 }
 export const ConfigArticle = styled.div`
   color: #0010a0;
-  font-size: 3vw;
   font-weight: 575;
   display: flex;
   width: max-content;
@@ -197,9 +195,9 @@ const HorizontalArticle = styled.div`
 export const HorizontalPanel = ({children}, props) => {
   return(
     <HorizontalStyledDiv style={styles(props).horizontalPanel}>
-      <HorizontalArticle className={poppins.className}>
+      <HorizontalArticle >
       <Title title="Path" />
-        <div className="flex flex-col md:flex-row w-full">
+        <div className="flex flex-col md:flex-row w-full" >
         {children}
         </div>
       </HorizontalArticle>
@@ -237,6 +235,10 @@ const styles = (props) => StyleSheet.create({
     margin: 5,
     height: props.height,
     width: props.width,
+  },
+  horizontal: {
+    display: 'flex',
+    flexDirection: 'row'
   },
   horizontalPanel:{
     padding: 4,
