@@ -81,7 +81,8 @@ export const CommandHeading = ({children}) => {
 }
 
 export const CommandStyledDiv = styled.div`
-width: 25vw;
+width: min-content;
+/* max-width: vw; */
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -149,9 +150,20 @@ export const ConfigHeading = ({children}) => {
   </Heading>
   )
 }
+export const ConfigArticle = styled.div`
+  color: #0010a0;
+  font-size: 3vw;
+  font-weight: 575;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eee;
+  border-radius: 18px;
+`
 
 export const ConfigStyledDiv = styled.div`
-/* width: 30vw; */
+width: max-content;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -173,7 +185,6 @@ const HorizontalStyledDiv = styled.div`
 `
 
 const HorizontalArticle = styled.div`
-  /* font-weight: 575; */
   display: flex;
   flex-direction: column;
   background-color: #ddd;
@@ -226,7 +237,6 @@ const styles = (props) => StyleSheet.create({
     margin: 5,
     height: props.height,
     width: props.width,
-    minWidth: '280px'
   },
   horizontalPanel:{
     padding: 4,
