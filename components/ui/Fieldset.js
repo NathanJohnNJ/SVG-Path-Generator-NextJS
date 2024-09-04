@@ -50,7 +50,6 @@ const styles = (props) => StyleSheet.create({
     color: props.labelColor,
     fontSize: props.fontSize,
     padding: 5,
-    fontWeight: 'bold'
   },
   mainTextView: {
     zIndex: 1,

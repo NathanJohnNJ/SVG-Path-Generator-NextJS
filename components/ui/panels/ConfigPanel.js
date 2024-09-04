@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { poppins } from '@/styles/fonts';
 import { View, Text, Pressable, TextInput, Modal, StyleSheet } from 'react-native-web';
 import Image from 'next/image';
 import FieldSet from '../Fieldset';
@@ -143,11 +142,11 @@ const ConfigPanel = (props) => {
     <ConfigStyledDiv id="configPanel" style={styles.panel} className="w-max" >
       <ConfigArticle className="flex flex-row w-full md:flex-col">
       <ConfigHeading>{props.heading}</ConfigHeading>
-
       <View>
+      <div className="flex flex-row md:flex-col">
         {/****** STROKE SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet width={160} label="Stroke" fontSize={15} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
+          <FieldSet width={160} label="Stroke" fontSize={12} labelColor={strokeSnap.color} labelBgColor={strokeSnap.highlight} borderColor={strokeSnap.highlight}>
           {
           openSection === 'stroke'
 
@@ -248,7 +247,7 @@ const ConfigPanel = (props) => {
         
         {/****** FILL SECTION ******/}
         <View style={styles.strokeSection}>
-          <FieldSet width={160} fontSize={15} label="Fill" labelColor={fillSnap.color} labelBgColor={fillSnap.highlight} borderColor={fillSnap.highlight} >
+          <FieldSet width={160} fontSize={12} label="Fill" labelColor={fillSnap.color} labelBgColor={fillSnap.highlight} borderColor={fillSnap.highlight} >
           {
             openSection === 'fill'
             ?
@@ -326,11 +325,12 @@ const ConfigPanel = (props) => {
       </FieldSet>
     </View>
     {/****** END OF FILL SECTION ******/}
-    </View>
-    <View>
+    </div>
+
+    <div class="flex flex-row md:flex-col">
     {/****** CONTROL SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet width={160} fontSize={15} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
+      <FieldSet width={160} fontSize={12} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
       {
       openSection === 'control'
       ?
@@ -430,7 +430,7 @@ const ConfigPanel = (props) => {
     
     {/****** END POINT SECTION ******/}
     <View style={styles.strokeSection}>
-      <FieldSet width={160} fontSize={15} label="End Points" labelColor="white" labelBgColor={endSnap.color} borderColor={endSnap.color}>
+      <FieldSet width={160} fontSize={12} label="End Points" labelColor="white" labelBgColor={endSnap.color} borderColor={endSnap.color}>
       {
       openSection === 'end'
       ?
@@ -524,14 +524,14 @@ const ConfigPanel = (props) => {
     </FieldSet>
   </View>
   {/****** END OF END POINT SECTION ******/}
-  </View>
+  </div>
         <Pressable style={hover.can?styles.cancelHover:styles.cancel} onPress={resetConfig} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
           <h2 className="font-sans" style={hover.can?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
             RESET ALL
           </h2>
         </Pressable>
-        
-      </ConfigArticle>
+        </View>
+      </ConfigArticle> 
     
     <Modal
     animationType="slide"
@@ -559,9 +559,12 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     maxWidth: '650px',
     boxShadow: '-2px 2px 8px #9c9c9c',
-    margin: 10,
-    marginRight: 35,
+    margin: 15,
     height: 'fit-content',
+  },
+  cont: {
+    display: 'flex',
+    flexDirection: 'row'
   },
   strokeSection:{
     display: 'flex',
@@ -569,13 +572,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5
-  },
-  sectionTitle: {
-    fontSize: 15,
-    textAlign: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 6,
-    marginBottom: 10
   },
   attSection:{
     display: 'flex',

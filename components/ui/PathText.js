@@ -61,9 +61,9 @@ const PathText = () => {
   const absolutePath = `M${path.startPoint.x},${path.startPoint.y}${absolutePathFromMap}`
 
   return (
-    <div className="self-center p-2">
-      <h2 id="topText" className="group font-semibold flex text-[9.5px] py-1.5 px-1 hover:text-sm text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Relative Path: </span>{fullPath}</span></h2>
-      <h2 id="bottomText" className="group font-semibold flex text-[9.5px] py-1.5 px-1 hover:text-sm  text-blue-600 bg-neutral-50 rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 bg-slate-600/15 rounded-md w-max"><span className="group-hover:hidden">Full Absolute Path: </span>{absolutePath}</span></h2>
+    <div className="flex flex-col justify-center self-center p-2  items-center w-full">
+      <h2 id="topText" className="group w-full font-semibold flex text-[9.75px] py-1 px-3 hover:text-sm text-blue-600 bg-[#ebebeb] rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 px-2 bg-slate-600/15 rounded-md w-full"><span className="group-hover:hidden">Full Relative Path: </span>{fullPath}</span></h2>
+      <h2 id="bottomText" className="group w-full font-semibold flex text-[9.75px] py-1 px-3 hover:text-sm text-blue-600 bg-[#ebebeb] rounded-2xl p-1 border-slate-600 border-2 m-1"><span className="group p-1 px-2 bg-slate-600/15 rounded-md w-full"><span className="group-hover:hidden">Full Absolute Path: </span>{absolutePath}</span></h2>
     </div>
   )
 }

@@ -84,7 +84,7 @@
 
 
 @media screen and (max-width: 480px){
-  #gridView, #configPanel, #commandPanel{
+  #gridView, #configPanel, #commandPanel #config{
     scale: 0.4
   }
 }

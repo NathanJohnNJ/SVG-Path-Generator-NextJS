@@ -20,8 +20,9 @@ const Grid = (props) => {
           width="10"
           height="10"
           viewBox="0 0 10 10">
-            <Line x1="0" y1="0" x2="0" y2={props.size} stroke='#bbb'  />
-            <Line x1="0" y1="0" x2={props.size} y2="0" stroke='#bbb'  />
+            <Line x1="0" y1="0" x2="0" y2={props.size} stroke='#bbb' />
+            <Line x1="0" y1="0" x2={props.size} y2="0" stroke='#bbb' />
+         
           </Pattern>
           <Pattern
           id="ThickLinePattern"
@@ -33,6 +34,8 @@ const Grid = (props) => {
           viewBox="0 0 50 50">
             <Line x1="0" y1="0" x2="0" y2={props.size} stroke='#bbb' strokeWidth="5" />
             <Line x1="0" y1="0" x2={props.size} y2="0" stroke='#bbb' strokeWidth="5" />
+            <Rect fill="#777" fillOpacity="0.1" x="0" y="0" width={props.size} height={props.size} >
+            </Rect>
           </Pattern>
         </Defs>
         <G>
@@ -50,7 +53,7 @@ export default Grid;
 
 const styles = StyleSheet.create({
     grid:{
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#ebebeb',
         borderRadius: 18,
         display: 'flex',
         alignItems: 'center',

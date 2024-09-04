@@ -29,7 +29,7 @@ export default function NavLinks(props) {
       rel="noopener noreferrer"
       onClick={props.close}
       className={clsx(
-        'flex h-min grow items-center justify-center gap-2 rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+        'flex h-min grow items-center justify-center gap-2 rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
           'bg-sky-100 text-blue-600': pathname === '/',
         },
@@ -45,7 +45,7 @@ export default function NavLinks(props) {
       rel="noopener noreferrer"
       onClick={props.close}
       className={clsx(
-        'flex h-min items-center justify-center rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+        'flex h-min items-center justify-center rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
           'bg-sky-100 text-blue-600': pathname === '/viewPath',
         },
@@ -67,7 +67,7 @@ export default function NavLinks(props) {
             rel="noopener noreferrer"
             onClick={props.close}
             className={clsx(
-              'flex h-min grow items-center justify-center rounded-md bg-gray-400 p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none h-min grow items-center justify-center rounded-md  p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
               },

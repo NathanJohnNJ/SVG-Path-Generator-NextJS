@@ -25,7 +25,7 @@ export default function Sidebar() {
   return (
     <div className=" flex flex-col px-3 py-1 mt-20 md:px-2">
       {pathname==="/path/viewPath"?
-        <button type="button" onClick={()=>setIsOpen(!isOpen)} className="group mb-2 flex h-fit items-center justify-center rounded-md bg-gray-400 p-4 hover:bg-gray-300 w-1/2 self-center md:w-full lg:w-1/4 lg:self-start">
+        <button type="button" onClick={()=>setIsOpen(!isOpen)} className="group mb-2 flex h-fit items-center justify-center rounded-md bg-gray-400 p-4 hover:bg-gray-300 w-1/2 self-center md:w-1/4 md:sticky md:self-start  lg:w-1/4 lg:self-start">
           <Bars3Icon className="group w-6 text-slate-700 hover:text-slate-300 hover:rotate-90" />
         </button>:
         <>
