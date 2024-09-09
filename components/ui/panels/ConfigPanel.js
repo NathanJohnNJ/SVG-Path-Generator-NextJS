@@ -37,7 +37,6 @@ const ConfigPanel = (props) => {
 
     function closeModal(){
         setModalIsOpen(false);
-        setUpdateFunc(null);
         setCurrentColor();
         setModalTitle('');
     }

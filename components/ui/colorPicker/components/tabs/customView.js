@@ -8,7 +8,9 @@ const CustomView = (props) => {
   const { setModalIsOpen, selectedColor, setSelectedColor, colors, element, currentColor } = props;
   const [fullHex, setFullHex] = useState('#');
   const [showColor, setShowColor] = useState(false);
-
+  function saveColour(col){
+    console.log(col)
+  }
   function hexHandler(){
     const hexInput = document.getElementById('hexInput');
     if (hexInput.value.length>6){
