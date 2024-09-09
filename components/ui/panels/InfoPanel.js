@@ -24,7 +24,7 @@ const InfoPanel = () => {
   return (
     <>
       {selectedSnap.command.type != null &&
-        <InfoStyledPanel>
+        <InfoStyledPanel id="infoPanel">
           <View style={styles.tables}>
           {selectedSnap.command.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: selectedSnap.command.firstControl.x, y: selectedSnap.command.firstControl.y}}, {title: 'd2', points: {x: selectedSnap.command.secondControl.x, y: selectedSnap.command.secondControl.y}}]} colour={controlSnap.color} startX={selectedSnap.command.startPoint.x} startY={selectedSnap.command.startPoint.y} hoverFunc={hoverFunc} resetHover={resetHover} hover={hover}/>}
           {selectedSnap.command.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: selectedSnap.command.firstControl.x, y: selectedSnap.command.firstControl.y}}]} colour={controlSnap.color} startX={selectedSnap.command.startPoint.x} startY={selectedSnap.command.startPoint.y} hoverFunc={hoverFunc} resetHover={resetHover} hover={hover}/>}

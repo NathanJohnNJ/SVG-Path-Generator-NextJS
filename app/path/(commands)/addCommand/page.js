@@ -8,24 +8,26 @@ import Link from "next/link";
 import { C } from '@/components/commands/curves';
 import CPresets from '@/components/ui/presetPaths/c';
 // import { L, V, H } from '@/components/commands/lines';
-import { path, addToPath, fill, stroke, control, end, newCommand, newActions } from '@/lib/store';
-import { useSnapshot, subscribe, snapshot } from 'valtio';
+import { addToPath, stroke, newCommand, newActions, control, end } from '@/lib/store';
+import { useSnapshot, subscribe } from 'valtio';
 import Heading from "@/components/layouts/heading";
 import { useState } from "react";
-import localforage from "localforage";
 import { PresetsRainbowPanel } from "@/components/ui/panels/RainbowPanel";
+import { addToPathDB } from "@/lib/mongodb/path/mongodb";
+import DraggablePoint from "@/components/ui/DraggablePoint";
 
 const AddCommand = () => {
   const [newType, setNewType] = useState('');
-
   const newSnap = useSnapshot(newCommand);
+  const controlSnap = useSnapshot(control);
+  const endSnap = useSnapshot(end);
   subscribe(newCommand, () => {
-    localforage.setItem("newCommand", snapshot(newCommand));
+    // addToPathDB(newCommand.command)
     setNewType(newCommand.command.type);
   })
   const [showPresets, setShowPresets] = useState({c:false, l:false, q:false})
   // function displayExtras(){
-  //   if ( path[path.length-1].type==="q" || path[path.length-1].type==="t"){
+  //   if ( pathSnap.commands[pathSnap.commands.length-1].type==="q" || pathSnap.commands[pathSnap.commands.length-1].type==="t"){
   //     return(
         // <T path={path} setPath={addToPath} pathID={path.length} stroke={stroke} fill={fill} info={info} setInfo={setInfo} endPoint={endPoint} setEndPoint={setEndPoint} end={end} />
   //     )
@@ -57,7 +59,9 @@ const AddCommand = () => {
           showPresets.c?<CPresets />:<></>
         }
         </View>
-        <NewGridWithDrag size="350" resetHover={resetHover} hoverFunc={hoverFunc}/>
+        <NewGridWithDrag size="350" resetHover={resetHover} hoverFunc={hoverFunc}>
+          {newSnap.type==='c' && <DraggablePoint type="firstControl" cx={newSnap.firstControl.x+50} cy={newSnap.firstControl.y+100}  />}
+        </NewGridWithDrag>
         {newSnap.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}, {title: 'd2', points: {x: newSnap.secondControl.x, y: newSnap.secondControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
         {newSnap.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
         {newSnap.type==='s' && <Table label="Control Points" array={[{title: 'd2', points: {x: newSnap.secondControl.x, y: newSnap.secondControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
@@ -66,15 +70,12 @@ const AddCommand = () => {
       </View>
       <PresetsRainbowPanel style={styles.rainbow}>
         <View style={styles.buttons}>
-                          <C showPresets={showPresets} setShowPresets={setShowPresets}/>
+          <C showPresets={showPresets} setShowPresets={setShowPresets}/>
         </View>
       </PresetsRainbowPanel>
       <View style={styles.subCan}>
         <Link href="/path/viewPath" onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Confirm</Link>
-        <Link href="/path/viewPath">
-          <p className="">
-            Cancel
-          </p>
+        <Link href="/path/viewPath">Cancel
         </Link>
       </View>
       

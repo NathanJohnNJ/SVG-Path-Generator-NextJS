@@ -3,10 +3,15 @@ import {Text, View, StyleSheet, TextInput } from 'react-native-web';
 import GridButton from './GridButton';
 import { path, setStartX, setStartY } from "@/lib/store";
 import { useSnapshot } from 'valtio';
+import { stroke, fill, control, end } from '@/lib/store';
 
-export default function ChoosePath(props) {
+export default function ChoosePath() {
   const startX = useSnapshot(path).startPoint.x;
   const startY = useSnapshot(path).startPoint.y;
+  const strokeSnap = useSnapshot(stroke);
+  const fillSnap = useSnapshot(fill);
+  const controlSnap = useSnapshot(control);
+  const endSnap = useSnapshot(end);
 
   const cPath = {
     type:'c',
@@ -114,7 +119,7 @@ const lines = [hPath, lPath, vPath];
       </Text>
       <View style={styles.row} >
         <Text style={{marginRight: '5px', color: 'grey'}}>x:</Text>
-        <TextInput onChangeText={(e)=>setStartX(e)} value={path.startPoint.x} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'#000', marginRight: '5px', color: 'grey'}} className="text-grey"/>
+        <TextInput onChangeText={(e)=>setStartX(e)} value={path.startPoint.x} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', marginRight: '5px', color: 'grey'}} className="text-grey"/>
         <Text style={{marginRight: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'grey'}}>y:</Text>
         <TextInput onChangeText={setStartY} value={path.startPoint.y} style={{width: '35px', borderColor:'#d1d1d1', borderStyle: 'solid', borderWidth: '2px', color:'grey'}}  />
       </View>
@@ -128,7 +133,6 @@ const lines = [hPath, lPath, vPath];
         {
           curves.map((command, i) => {
             const gridID = `grid${command.type}`;
-            const key = `choose${i}`
             let d;
             if(command.type==="c"){
               d = `M${startX},${startY}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`;
@@ -138,7 +142,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`; 
             }
             return(
-              <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end} />
+              <GridButton command={command} id={gridID} d={d} key={i} stroke={strokeSnap} fill={fillSnap} control={controlSnap} end={endSnap} />
             )
           })}
           </View>
@@ -154,7 +158,7 @@ const lines = [hPath, lPath, vPath];
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`;
             }
             return(
-              <GridButton command={command} id={gridID} d={d} key={i} stroke={props.stroke} fill={props.fill} control={props.control} end={props.end}/>
+              <GridButton command={command} id={gridID} d={d} key={i} stroke={strokeSnap} fill={fillSnap} control={controlSnap} end={endSnap}/>
             )
           })
         }

@@ -29,9 +29,9 @@ export default function NavLinks(props) {
       rel="noopener noreferrer"
       onClick={props.close}
       className={clsx(
-        'flex h-min grow items-center justify-center gap-2 rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+        'flex h-min items-center justify-center rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:to-85% hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
-          'bg-sky-100 text-blue-600': pathname === '/',
+          'bg-gradient-to-r from-gray-500 to-75% to-bg-none text-blue-800': pathname === '/',
         },
       )}
     >
@@ -45,9 +45,9 @@ export default function NavLinks(props) {
       rel="noopener noreferrer"
       onClick={props.close}
       className={clsx(
-        'flex h-min items-center justify-center rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+        'flex h-min items-center justify-center rounded-md opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none p-1 text-sm font-medium hover:to-85% hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
         {
-          'bg-sky-100 text-blue-600': pathname === '/viewPath',
+          'bg-gradient-to-r from-gray-500 to-75% to-bg-none text-blue-800': pathname === '/viewPath',
         },
       )}
       style={{minWidth: '130px'}}
@@ -67,9 +67,9 @@ export default function NavLinks(props) {
             rel="noopener noreferrer"
             onClick={props.close}
             className={clsx(
-              'flex opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none h-min grow items-center justify-center rounded-md  p-1 text-sm font-medium hover:bg-gray-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex opacity-95 bg-gradient-to-r from-gray-400 to-50% to-bg-none h-min grow items-center justify-center rounded-md  p-1 text-sm font-medium hover:to-85% hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-gradient-to-r from-gray-500 to-75% to-bg-none text-blue-800': pathname === link.href,
               },
             )}
           >
