@@ -204,9 +204,9 @@ const NewGridWithDrag = (props, {children}) => {
     }
 
     useEffect(() => {
-      newSnap.type!=null?
+      newCommand.command.type!=null?
       drawPath():<></>
-    }, [newSnap])
+    }, [newCommand])
 
     
     // else if(newSnap.type==='s'){

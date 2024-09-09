@@ -30,7 +30,9 @@ const InputPath = () => {
         setStartY(Number(splitCommand[1]));
       }else if(i===1){
         const splitCommand = command.split(/\D/).filter(Boolean);
-        const start = newPath[i-1].split(/(\d*\,\d*)/).filter(Boolean);
+        // const start = newPath[i-1].split(/(\d*\,\d*)/).filter(Boolean);
+        const start = newPath[i-1].split(/(\d*,\d*)/).filter(Boolean);
+        console.log(start);
         const startPoint = start[start.length-1];
         const startX = startPoint.split(",")[0];
         const startY = startPoint.split(",")[1];

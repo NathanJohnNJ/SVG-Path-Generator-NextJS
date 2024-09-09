@@ -31,7 +31,12 @@ useEffect(()=>{
     console.log("onDrag");
     console.log("position.x", position.x + data.deltaX);
     console.log("position.y", position.y + data.deltaY);
-    props.type==='firstControl'?newActions.setFirstControl(position.x + data.deltaX, position.y + data.deltaY):props.type==='secondControl'?newActions.setSecondControl(position.x + data.deltaX, position.y + data.deltaY):newActions.setEndPoint(position.x + data.deltaX, position.y + data.deltaY)
+    if(event.target.id==='firstControl'){newActions.setFirstControl(position.x + data.deltaX, position.y + data.deltaY)
+    } else if(props.type==='secondControl'){
+    newActions.setSecondControl(position.x + data.deltaX, position.y + data.deltaY)
+    } else {
+    newActions.setEndPoint(position.x + data.deltaX, position.y + data.deltaY)
+    }
     setPosition({
       x: position.x + data.deltaX,
       y: position.y + data.deltaY
