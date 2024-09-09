@@ -28,58 +28,6 @@ export const C = (props) => {
       </p>
   )
 }
-//   function addCommandToPath(){
-//     const cCommand = {
-//       type: 'c',
-//       id: pathSnap.commands.length,
-//       startPoint: {x: startX, y: startY},
-//       firstControl: {x: newSnap.firstControl.x, y: newSnap.firstControl.y},
-//       secondControl: {x: newSnap.secondControl.x, y: newSnap.secondControl.y},
-//       endPoint: {x: newSnap.endPoint.x, y: newSnap.endPoint.y}
-//       };
-//     addToPath(cCommand)
-//     setModalIsOpen(false);
-//   }
-  
-//   return (
-//     <View style={styles.outerContainer}>
-//       <Text onClick={openModal} onMouseOver={() => hoverFunc('c')} onMouseLeave={resetHover} style={hover.c?styles.hover:styles.button} className="font-sans">
-//         C
-//       </Text>
-//       <Modal
-//       animationType="slide"
-//       transparent={false}
-//       visible={modalIsOpen}
-//       onRequestClose={closeModal}
-//       >
-//         <View style={styles.column}>
-//           <View style={styles.row}>
-//             {/* <Presets /> */}
-//             <View style={styles.middleSection}>
-//               <View style={styles.titleContainer}>
-//                 <Heading heading="
-//                   New C Command" style={styles.title} color="rgba(200 146 160 0.6)"/>
-//               </View>
-//               <View style={styles.container}>
-//                 <NewGridWithDrag size="250" resetHover={resetHover} hoverFunc={hoverFunc} />
-//               </View>
-//             </View>
-//             <View style={styles.container}>
-//               <Link href="https://svgwg.org/svg2-draft/paths.html#PathDataCubicBezierCommands" target="_blank" rel="noopener noreferrer">Help</Link>
-//               <InfoPanel selected={newSnap} control={control} end={end} />
-//             </View>
-//           </View>
-//           <View style={styles.subCan}>
-//             <Text onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Add to path!</Text>
-//             <Text onClick={closeModal} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover} style={hover.can?styles.cancelHover:styles.cancelButton}>Cancel</Text>
-//           </View>
-//         </View>
-//       </Modal>
-//     </View>
-//   )
-// };
-
-// export default C;
 // // export const S = (props) => {
 // //   const [modalIsOpen, setModalIsOpen] = useState(false);
  

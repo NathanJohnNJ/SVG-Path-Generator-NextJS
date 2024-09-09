@@ -10,8 +10,7 @@ import Title from '@/components/layouts/title';
 `
 
 export const StyledDiv = styled.div`
-  width: fit-content;
-  min-width: 25vw;
+  width: 65vw;
   height: auto;
   @property --bg-angle {
     inherits: false;
@@ -40,7 +39,7 @@ export const Article = styled.div`
   justify-content: space-between;
   background-color: #eee;
   border-radius: 18px;
-`
+`;
 
 export const PresetsPanel = ({children}) => {
   <StyledDiv style={styles.presetOuterDiv}>
@@ -51,13 +50,13 @@ export const PresetsPanel = ({children}) => {
       </div>
     </Article>
   </StyledDiv>
-}
+};
 
 export const Heading = styled.h2`
 font-size: 35px;
   font-weight: 550;
   text-align: center;
-`
+`;
 
 // export const Panel = ({children}, props) => {
 //   return(
@@ -81,7 +80,7 @@ export const CommandHeading = ({children}) => {
 }
 
 export const CommandStyledDiv = styled.div`
-width: min-content;
+width: 100%;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -144,7 +143,7 @@ export const InfoStyledPanel = ({children}, props) => {
 
 export const ConfigHeading = ({children}) => {
   return(
-  <Heading className="font-sans" style={{color: 'rgb(75, 245, 175)', marginTop: '-100px', marginLeft:'10px', fontSize: '28px'}}>
+  <Heading className="font-sans" style={{color: 'rgb(75, 245, 175)', marginLeft:'10px', fontSize: '28px'}}>
     {children}
   </Heading>
   )
@@ -153,15 +152,18 @@ export const ConfigArticle = styled.div`
   color: #0010a0;
   font-weight: 575;
   display: flex;
+  height: 100%;
   width: max-content;
   align-items: center;
   justify-content: space-between;
   background-color: #eee;
   border-radius: 18px;
+  padding-bottom: 5px;
 `
 
 export const ConfigStyledDiv = styled.div`
 width: max-content;
+height: 100%;
 @property --bg-angle {
 inherits: false;
 initial-value: 0deg;
@@ -173,6 +175,8 @@ background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgr
 
 const HorizontalStyledDiv = styled.div`
 @property --bg-angle {
+  height: 90vh;
+  width: 90vw;
   inherits: false;
   initial-value: 0deg;
   syntax: "<angle>";
@@ -189,15 +193,15 @@ const HorizontalArticle = styled.div`
   border-radius: 18px;
   padding: 10px;
   height: 100%;
-  width: 90vw;
-`
+  width: 100%;
+`;
 
 export const HorizontalPanel = ({children}, props) => {
   return(
     <HorizontalStyledDiv style={styles(props).horizontalPanel}>
       <HorizontalArticle >
       <Title title="Path" />
-        <div className="flex flex-col md:flex-row w-full" >
+        <div className="flex flex-col md:flex-row" >
         {children}
         </div>
       </HorizontalArticle>
@@ -233,8 +237,8 @@ const styles = (props) => StyleSheet.create({
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
     margin: 5,
-    height: props.height,
-    width: props.width,
+    height: 'max-content',
+    width: 'fit-content',
   },
   horizontal: {
     display: 'flex',
@@ -244,8 +248,8 @@ const styles = (props) => StyleSheet.create({
     padding: 4,
     borderRadius: 18,
     boxShadow: '-2px 2px 8px #9c9c9c',
-    height: 'min-content',
-    width:'min-content'
+    height: '90vh',
+    width:'90vw'
   },
   gridPanel: {
     padding: 4,

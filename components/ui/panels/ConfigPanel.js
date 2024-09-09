@@ -140,7 +140,7 @@ const ConfigPanel = (props) => {
     }
   return(
     <ConfigStyledDiv id="configPanel" style={styles.panel} className="w-max" >
-      <ConfigArticle className="flex flex-row w-full md:flex-col">
+      <ConfigArticle className="flex flex-row w-full md:flex-col lg:h-max">
       <ConfigHeading>{props.heading}</ConfigHeading>
       <View>
       <div className="flex flex-row md:flex-col">
@@ -560,7 +560,6 @@ const styles = StyleSheet.create({
     maxWidth: '650px',
     boxShadow: '-2px 2px 8px #9c9c9c',
     margin: 15,
-    height: 'fit-content',
   },
   cont: {
     display: 'flex',
@@ -628,7 +627,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#d4d4d4',
     boxShadow: '-1px 1px 1px #333',
     borderRadius: 6,
-    margin:5,
+    margin:15,
   },
   cancelText: {
     color:'#cc1402',
@@ -648,7 +647,7 @@ const styles = StyleSheet.create({
     boxShadow: '-1px 1px 1px #777',
     backgroundColor: '#d4d4d4',
     cursor: 'pointer',
-    margin:5,
+    margin:15,
   },
   cancelHoverText:{
     color:'#aa1402',

@@ -182,11 +182,12 @@ const InputPath = () => {
     setPath(pathArray)
   }
   return(
-    <StyledDiv className="flex flex-col items-center justify-center bg-sky-400 w-fit p-2 rounded-[1.4pc]">
+    <StyledDiv className="flex flex-col items-center justify-center bg-sky-400 p-2 rounded-[1.4pc]">
       <form className="flex flex-col items-center w-full justify-center bg-zinc-100 p-4 rounded-[1pc]" onSubmit={(e) => { 
         e.preventDefault();
         clickHandle()
       }}>
+        <p className="text-zinc-800 text-sm w-[90%] text-center">Enter the 'd' attribute from an existing SVG Path then hit the 'Sumit Path' button to see the path on a grid where you will be able to edit the individual commands in the path to get the perfect shape. You'll also be able to customise the style of the path including 'stroke' and 'fill' attributes, with more options coming soon . . .</p>
         <input value={input} onChange={(e) => setInput(e.target.value)} className="text-black m-4 bg-zinc-200 rounded-md"/>
         <RainbowButton onClick={clickHandle}>
           <Link href="/path/viewPath">

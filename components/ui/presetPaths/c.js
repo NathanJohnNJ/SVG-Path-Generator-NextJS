@@ -6,7 +6,7 @@ import { StyledDiv, PresetsHeading, Article } from "../panels/Panels";
 import { stroke, fill, newActions } from "@/lib/store";
 import { useSnapshot } from "valtio";
 
-const CPresets = (props) => {
+const CPresets = () => {
     const strokeSnap = useSnapshot(stroke);
     const fillSnap = useSnapshot(fill);
 
@@ -60,7 +60,7 @@ const CPresets = (props) => {
     currentPath.setAttributeNS(null, 'fill-opacity', fillSnap.opacity);
     currentPath.setAttributeNS(null, 'd', `M${command.startPoint.x},${command.startPoint.y}c${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`);
     grid.replaceChild(currentPath, path);   
-  };
+  }
   return(
     <StyledDiv style={styles.presetOuterDiv}>
       <Article style={styles.article}>
