@@ -1,10 +1,10 @@
 'use client';
 import { Path, G, Defs, ClipPath, Rect, Svg } from "react-native-svg-web";
-import { path } from "@/lib/store";
-import { stroke, fill, selectedActions } from '@/lib/store'
+import { path, stroke, fill, selectedActions } from '@/lib/store'
 import { useSnapshot } from "valtio";
 
 const PathFromArray = (props) => {
+  const pathSnap = useSnapshot(path);
   const strokeSnap = useSnapshot(stroke);
   const fillSnap = useSnapshot(fill); 
   const hoverWidth = strokeSnap.width*2;
@@ -30,27 +30,27 @@ const PathFromArray = (props) => {
     selectedActions.setStartPoint(command.startPoint.x, command.startPoint.y);
     selectedActions.setEndPoint(command.endPoint.x, command.endPoint.y);
     if(command.type==='c'){
-      selectedActions.setFirstControl(command.controlPoints[0].d1.x, command.controlPoints[0].d1.y);
-      selectedActions.setSecondControl(command.controlPoints[1].d2.x, command.controlPoints[1].d2.y);
+      selectedActions.setFirstControl(command.firstControl.x, command.firstControl.y);
+      selectedActions.setSecondControl(command.secondControl.x, command.secondControl.y);
     } else if(command.type==='q'){
-      selectedActions.setFirstControl(command.controlPoints[0].d1.x, command.controlPoints[0].d1.y);
+      selectedActions.setFirstControl(command.firstControl.x, command.firstControl.y);
     } else if(command.type==='s'){
-      selectedActions.setFirstControl(command.controlPoints[0].d2.x, command.controlPoints[0].d2.y);
+      selectedActions.setFirstControl(command.secondControl.x, command.secondControl.y);
     }
   }
   const viewBox = `0 0 ${props.size} ${props.size}`
   return(
     <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} >
       {
-        path.commands.map((command, i) => {
+        pathSnap.commands.map((command, i) => {
           let d;
           if(command.type==="c"){
-              d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`;
+              d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`;
               return(
                 <Path d={d} id={command.commandId} key={i} fill={fillSnap.color} fillOpacity={fillSnap.opacity} stroke={strokeSnap.color} strokeWidth={strokeSnap.width} strokeOpacity={strokeSnap.opacity} onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
               )
             } else if(command.type==="q" || command.type==="s"){
-              d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`;
+              d = `M${command.startPoint.x},${command.startPoint.y}${command.type}${command.firstControl.x},${command.firstControl.y} ${command.endPoint.x},${command.endPoint.y}`;
               return(
                 <Path d={d} id={command.commandId} key={i} fill={fillSnap.color} fillOpacity={fillSnap.opacity} stroke={strokeSnap.color} strokeWidth={strokeSnap.width} strokeOpacity={strokeSnap.opacity}  onClick={()=>pressFunc(command)} onMouseOver={() => hoverFunc(command.commandId)} onMouseLeave={() => resetHover(command.commandId)} />
               )
@@ -71,13 +71,13 @@ const PathFromArray = (props) => {
               )
             } 
             else if(command.type==="t"){
-              d = `M${props.path[command.commandId-1].startPoint.x},${props.path[command.commandId-1].startPoint.y}q${props.path[command.commandId-1].controlPoints[0].value},${props.path[command.commandId-1].controlPoints[1].value} ${props.path[command.commandId-1].endPoint.x},${props.path[command.commandId-1].endPoint.y}t${command.endPoint.x},${command.endPoint.y}`
-              const width = props.size-props.path[command.commandId-1].startPoint.x
+              d = `M${pathSnap[command.commandId-1].startPoint.x},${pathSnap[command.commandId-1].startPoint.y}q${pathSnap[command.commandId-1].controlPoints[0].value},${pathSnap[command.commandId-1].controlPoints[1].value} ${pathSnap[command.commandId-1].endPoint.x},${pathSnap[command.commandId-1].endPoint.y}t${command.endPoint.x},${command.endPoint.y}`
+              const width = props.size-pathSnap[command.commandId-1].startPoint.x
               return(
               <Svg key={i+200}  height={props.size} width={props.size} viewBox={viewBox} x="0" y="0">
                 <Defs>
                   <ClipPath id="clip">
-                    <Rect x={props.path[command.commandId-1].startPoint.x+props.path[command.commandId-1].endPoint.x} y="0" width={width} height={props.size} />
+                    <Rect x={pathSnap[command.commandId-1].startPoint.x+pathSnap[command.commandId-1].endPoint.x} y="0" width={width} height={props.size} />
                   </ClipPath>
                 </Defs>
                 <G id="pathGroup" height={props.size} width={props.size} viewBox={viewBox} key={i+300} >

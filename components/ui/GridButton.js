@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native-web";
 import Link from "next/link";
 import Grid from "./Grid";
 import { Path } from 'react-native-svg-web';
-import { addToPath, resetPath, stroke } from "@/lib/store";
+import { addToPath, resetPath, stroke, setStartX, setStartY } from "@/lib/store";
 
 const GridButton = (props) => {
   function hoverFunc(id){
@@ -18,6 +18,17 @@ const GridButton = (props) => {
   }
   function add(command){
     resetPath();
+    setStartX(command.startPoint.x);
+    setStartY(command.startPoint.y);
+    addToPath({ 
+      commandId: 0,
+      type: 'm',
+      startPoint: command.startPoint,
+      endPoint: {
+        x: 0,
+        y: 0
+      }
+    })
     addToPath(command);
   }
 

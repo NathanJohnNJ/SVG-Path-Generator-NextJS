@@ -26,11 +26,11 @@
     "expo": "^51.0.32",
     "framer-motion": "^11.5.4",
     "localforage": "^1.10.0",
-    "lucide-react": "^0.439.0",
-    "mongodb": "^6.8.1",
-    "mongoose": "^8.6.1",
+    "lucide-react": "^0.441.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.2",
     "nativewind": "^2.0.11",
-    "next": "^14.2.8",
+    "next": "^14.2.11",
     "next-fonts": "^1.5.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -38,20 +38,17 @@
     "react-native-svg-web": "^1.0.9",
     "react-native-web": "^0.19.12",
     "styled-components": "^6.1.13",
-    "tailwindcss": "^3.4.4",
-    "valtio": "^2.0.0"
+    "valtio": "^2.0.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.5",
     "autoprefixer": "^10.4.19",
-    "babel-plugin-styled-components": "^2.1.4",
     "cssnano": "^7.0.6",
-    "eslint-config-next": "^14.2.8",
-    "eslint-plugin-valtio": "^0.6.4",
     "postcss": "^8.4.45",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.1.0",
-    "tailwindcss": "^3.4.4"
+    "tailwindcss": "^3.4.11"
   },
   "browserslist": [
     "defaults and fully supports es6-module",

@@ -2,8 +2,6 @@ import Link from "next/link";
 import { RainbowPanel } from '@/components/ui/panels/RainbowPanel';
 import '@/styles/globals.css';
 
-
-
 export default async function Home() {
   return (
     <main className="flex w-full flex-col items-center justify-start h-screen">
@@ -13,10 +11,7 @@ export default async function Home() {
         <div className="sm:flex sm:flex-row">
           <div className="flex mr-4 ml-4 w-fit h-fit min-w-40">
             <RainbowPanel>
-              <Link
-                href='/path/newPath'
-                className="group rounded-lg transition-colors text-left"
-              >
+              <Link href='/path/newPath' className="group rounded-lg transition-colors text-left">
                 <h2 className="pt-2 mb-3 text-xl font-bold font-sans translate-y-2">
                   Create{" "}
                   <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
@@ -31,11 +26,8 @@ export default async function Home() {
           </div>
           <div className="flex mr-4 ml-4 w-fit h-fit min-w-40">
             <RainbowPanel>
-              <Link
-                href="/path/editPath"
-                className="group rounded-lg transition-colors text-left"
-              >
-                <h2 className="mb-3 text-xl font-bold font-sans pt-2 translate-y-4">
+              <Link href="/path/editPath" className="group rounded-lg transition-colors text-left">
+                <h2 className="mb-3 text-xl font-bold font-sans pt-2 translate-y-4" >
                   Edit{" "}
                   <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                     -&gt;
@@ -52,12 +44,7 @@ export default async function Home() {
         <div className="flex flex-col sm:flex-row sm:flex sm:mt-4">
           <div className="flex mr-4 ml-4 w-fit h-fit min-w-40">
             <RainbowPanel>
-              <Link
-                href='https://developer.mozilla.org/en-US/docs/Web/SVG'
-                className="group rounded-lg transition-colors text-left"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link href='https://developer.mozilla.org/en-US/docs/Web/SVG' className="group rounded-lg transition-colors text-left" target="_blank" rel="noopener noreferrer">
                 <h2 className="mb-3 text-xl font-bold font-sans pt-2 translate-y-2">
                   Help{" "}
                   <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
@@ -72,12 +59,7 @@ export default async function Home() {
           </div>
           <div className="flex ml-4 mr-4 w-fit h-fit min-w-40 min-h-48">
             <RainbowPanel>
-              <Link
-                href="https://www.njtd.xyz"
-                className="group rounded-lg transition-colors text-left"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link href="https://www.njtd.xyz" className="group rounded-lg transition-colors text-left" target="_blank" rel="noopener noreferrer">
                 <h2 className="mb-3 text-xl font-bold font-sans pt-2 translate-y-3">
                   NJTD{" "}
                   <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

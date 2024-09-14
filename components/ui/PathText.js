@@ -4,15 +4,15 @@ const PathText = () => {
   const pathFromMap = path.commands.map((command) => {
     if (command.type==='c'){
       return(
-        `${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`
+        `${command.type}${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`
       )
     } else if (command.type==='q'){
       return(
-        `${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`
+        `${command.type}${command.firstControl.x},${command.firstControl.y} ${command.endPoint.x},${command.endPoint.y}`
       )
     } else if (command.type==='s'){
       return(
-        `${command.type}${command.controlPoints[0].d2.x},${command.controlPoints[0].d2.y} ${command.endPoint.x},${command.endPoint.y}`
+        `${command.type}${command.secondControl.x},${command.controlPoints[0].d2.y} ${command.endPoint.x},${command.endPoint.y}`
       )
     } else if (command.type==='h'){
       return(
@@ -21,6 +21,10 @@ const PathText = () => {
     } else if (command.type==='v'){
       return(
         `${command.type}${command.endPoint.y}`
+      )
+    } else if (command.type==='m' || command.type==='M'){
+      return(
+        ''
       )
     }else{
       return(
@@ -32,11 +36,11 @@ const PathText = () => {
   const absolutePathFromMap = path.commands.map((command) => {
     if (command.type==='c'){
       return(
-        `${command.type.toUpperCase()}${Number(command.controlPoints[0].d1.x)+Number(command.startPoint.x)},${Number(command.controlPoints[0].d1.y)+Number(command.startPoint.y)} ${Number(command.controlPoints[1].d2.x)+Number(command.startPoint.x)},${Number(command.controlPoints[1].d2.y)+Number(command.startPoint.y)} ${Number(command.endPoint.x)+Number(command.startPoint.x)},${Number(command.endPoint.y)+Number(command.startPoint.y)}`
+        `${command.type.toUpperCase()}${Number(command.firstControl.x)+Number(command.startPoint.x)},${Number(command.firstControl.y)+Number(command.startPoint.y)} ${Number(command.secondControl.x)+Number(command.startPoint.x)},${Number(command.secondControl.y)+Number(command.startPoint.y)} ${Number(command.endPoint.x)+Number(command.startPoint.x)},${Number(command.endPoint.y)+Number(command.startPoint.y)}`
       )
     } else if (command.type==='q'){
       return(
-        `${command.type.toUpperCase()}${Number(command.controlPoints[0].d1.x)+Number(command.startPoint.x)},${Number(command.controlPoints[0].d1.y)+Number(command.startPoint.y)} ${Number(command.endPoint.x)+Number(command.startPoint.x)},${Number(command.endPoint.y)+Number(command.startPoint.y)}`
+        `${command.type.toUpperCase()}${Number(command.firstControl.x)+Number(command.startPoint.x)},${Number(command.firstControl.y)+Number(command.startPoint.y)} ${Number(command.endPoint.x)+Number(command.startPoint.x)},${Number(command.endPoint.y)+Number(command.startPoint.y)}`
       )
     } else if (command.type==='s'){
       return(
@@ -49,6 +53,10 @@ const PathText = () => {
     } else if (command.type==='v'){
       return(
         `${command.type.toUpperCase()}${Number(command.endPoint.y)+Number(command.startPoint.y)}`
+      )
+    } else if (command.type==='m' || command.type==='M'){
+      return(
+        ''
       )
     }else{
       return(

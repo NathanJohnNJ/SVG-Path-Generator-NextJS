@@ -1,9 +1,8 @@
 'use client';
 import {Text, View, StyleSheet, TextInput } from 'react-native-web';
 import GridButton from './GridButton';
-import { path, setStartX, setStartY } from "@/lib/store";
+import { path, setStartX, setStartY, stroke, fill, control, end } from "@/lib/store";
 import { useSnapshot } from 'valtio';
-import { stroke, fill, control, end } from '@/lib/store';
 
 export default function ChoosePath() {
   const startX = useSnapshot(path).startPoint.x;
@@ -16,59 +15,49 @@ export default function ChoosePath() {
   const cPath = {
     type:'c',
     name: 'Curve',
-    commandId: 0,
+    commandId: 1,
     startPoint: { 
       x: startX,
       y: startY
     },
-    controlPoints: [
-      {
-        d1: { 
-          x: 25,
-          y: 50
-        }
-      },
-      {
-        d2: { 
-          x: 75,
-          y: -50
-        }
-      }
-    ],
+    firstControl: { 
+      x: 25,
+      y: 50
+    },
+    secondControl: { 
+      x: 75,
+      y: -50
+    },
      endPoint: { 
       x: 100,
       y: 0
     }
 }
 
-const qPath = {
+  const qPath = {
     type: 'q',
     name: 'Quadratic',
     name2: 'Bézier',
     name3: 'Curve',
-    commandId: 0,
+    commandId: 1,
     startPoint: { 
       x: startX,
       y: startY
     },
-    controlPoints: [
-      {
-        d1: { 
-          x: 25,
-          y: 50
-        }
-      }
-    ],
+    firstControl: { 
+      x: 25,
+      y: 50
+    },
     endPoint: { 
       x: 50,
       y: 0
     }
-}
+  }
 
-const lPath = {
+  const lPath = {
     type: 'l',
     name: 'Line',
-    commandId: 0,
+    commandId: 1,
     startPoint: { 
       x: startX,
       y: startY
@@ -77,13 +66,13 @@ const lPath = {
       x: 50,
       y: 50
     }
-}
+  }
 
-const hPath = {
+  const hPath = {
     type: 'h',
     name: 'Horizontal',
     name2: 'Line',
-    commandId: 0,
+    commandId: 1,
     startPoint: { 
       x: startX,
       y: startY
@@ -92,13 +81,13 @@ const hPath = {
       x: 50,
       y: 0
     }
-}
+  }
 
-const vPath = {
+  const vPath = {
     type: 'v',
     name: 'Vertical',
     name2: 'Line',
-    commandId: 0,
+    commandId: 1,
     startPoint: { 
       x: startX,
       y: startY
@@ -107,10 +96,10 @@ const vPath = {
       x: 0,
       y: 50
     }
-}
+  }
 
-const curves = [cPath, qPath];
-const lines = [hPath, lPath, vPath];
+  const curves = [cPath, qPath];
+  const lines = [hPath, lPath, vPath];
 
   return (
     <View style={styles.main}>
@@ -135,9 +124,9 @@ const lines = [hPath, lPath, vPath];
             const gridID = `grid${command.type}`;
             let d;
             if(command.type==="c"){
-              d = `M${startX},${startY}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.controlPoints[1].d2.x},${command.controlPoints[1].d2.y} ${command.endPoint.x},${command.endPoint.y}`;
+              d = `M${startX},${startY}${command.type}${command.firstControl.x},${command.firstControl.y} ${command.secondControl.x},${command.secondControl.y} ${command.endPoint.x},${command.endPoint.y}`;
             } else if(command.type==="q"){
-              d = `M${startX},${startY}${command.type}${command.controlPoints[0].d1.x},${command.controlPoints[0].d1.y} ${command.endPoint.x},${command.endPoint.y}`;
+              d = `M${startX},${startY}${command.type}${command.firstControl.x},${command.firstControl.y} ${command.endPoint.x},${command.endPoint.y}`;
             }   else {
               d = `M${startX},${startY}${command.type}${command.endPoint.x},${command.endPoint.y}`; 
             }

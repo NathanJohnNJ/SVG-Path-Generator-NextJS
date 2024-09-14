@@ -4,8 +4,7 @@ import Svg, { G, Rect, Defs, Pattern, Line } from "react-native-svg-web";
 import { GridBorder } from './panels/Panels';
 import { useLayoutEffect, useState } from 'react';
 
-const Grid = (props, {children}) => {
-
+const Grid = (props) => {
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
     useLayoutEffect(() => {
@@ -19,7 +18,8 @@ const Grid = (props, {children}) => {
     return size;
   }
   const [width, height] = useWindowSize();
-  const size = (width<height?width:height)>400?400:(width<height?width:height)
+  let firstSize = width<height?width/2:height/2;
+  const size = firstSize>400?400:firstSize;
 
   const viewBox = `0 0 ${size} ${size}`;
   
@@ -57,7 +57,7 @@ const Grid = (props, {children}) => {
           <Rect fill="url(#LinePattern)" stroke="#bbb" strokeWidth="2" x="0" y="0" width={size} height={size} />
           <Rect fill="url(#ThickLinePattern)" stroke="#bbb" strokeWidth="5" x="0" y="0" width={size} height={size} />
         </G>
-        {children}
+        {props.children}
       </Svg>
     </View>
     </GridBorder>
@@ -67,13 +67,13 @@ const Grid = (props, {children}) => {
 export default Grid;
 
 const styles = StyleSheet.create({
-    grid:{
-        backgroundColor: '#ebebeb',
-        borderRadius: 18,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 5,
-        padding: 5                               
-    }
+  grid:{
+    backgroundColor: '#ebebeb',
+    borderRadius: 18,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    padding: 5                               
+  }
 })

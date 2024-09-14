@@ -147,7 +147,7 @@ export const ConfigHeading = ({children}) => {
     {children}
   </Heading>
   )
-}
+};
 export const ConfigArticle = styled.div`
   color: #0010a0;
   font-weight: 575;
@@ -159,7 +159,7 @@ export const ConfigArticle = styled.div`
   background-color: #eee;
   border-radius: 18px;
   padding-bottom: 5px;
-`
+`;
 
 export const ConfigStyledDiv = styled.div`
 width: max-content;
@@ -171,20 +171,21 @@ syntax: "<angle>";
 }
 animation: ${borderAnimation} 40s infinite linear running;
 background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #bfd, darkgrey, #bacfc4, lightgrey, white);
-`
+`;
 
 const HorizontalStyledDiv = styled.div`
 @property --bg-angle {
-  height: 90vh;
-  width: 90vw;
   inherits: false;
   initial-value: 0deg;
   syntax: "<angle>";
 }
+  height: 90vh;
+  width: 90vw;
+  overflow: hidden
   border-radius: 2px;
   animation: ${borderAnimation} 40s infinite linear running;
   background:conic-gradient(from var(--bg-angle) in hsl longer hue, white, lightgrey, darkgrey, #fdb, grey, dimgrey, #cfc4ba, grey, lightgrey, white); 
-`
+`;
 
 const HorizontalArticle = styled.div`
   display: flex;
@@ -194,6 +195,18 @@ const HorizontalArticle = styled.div`
   padding: 10px;
   height: 100%;
   width: 100%;
+`;
+
+const SmallHorizontalArticle = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #ddd;
+  border-radius: 18px;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const HorizontalPanel = ({children}, props) => {
@@ -209,6 +222,18 @@ export const HorizontalPanel = ({children}, props) => {
   )
 };
 
+export const SmallHorizontalPanel = ({children}, props) => {
+  return(
+    <HorizontalStyledDiv style={styles(props).horizontalPanel}>
+      <SmallHorizontalArticle >
+      <Title title="Path" />
+        <div className="flex flex-col md:flex-row" >
+        {children}
+        </div>
+      </SmallHorizontalArticle>
+    </HorizontalStyledDiv>
+  )
+};
 
  const Border = styled.div`
   border-radius: 5%;

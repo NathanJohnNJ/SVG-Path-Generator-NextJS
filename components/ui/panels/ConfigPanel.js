@@ -139,7 +139,7 @@ const ConfigPanel = (props) => {
     }
   return(
     <ConfigStyledDiv id="configPanel" style={styles.panel} className="w-max" >
-      <ConfigArticle className="flex flex-row w-full md:flex-col lg:h-max">
+      <ConfigArticle className="flex flex-row w-full h-fit md:flex-col lg:h-max">
       <ConfigHeading>{props.heading}</ConfigHeading>
       <View>
       <div className="flex flex-row md:flex-col">
@@ -326,7 +326,7 @@ const ConfigPanel = (props) => {
     {/****** END OF FILL SECTION ******/}
     </div>
 
-    <div class="flex flex-row md:flex-col">
+    <div className="flex flex-row md:flex-col">
     {/****** CONTROL SECTION ******/}
     <View style={styles.strokeSection}>
       <FieldSet width={160} fontSize={12} label="Control Points" labelColor="white" labelBgColor={controlSnap.color} borderColor={controlSnap.color}>
@@ -525,7 +525,7 @@ const ConfigPanel = (props) => {
   {/****** END OF END POINT SECTION ******/}
   </div>
         <Pressable style={hover.can?styles.cancelHover:styles.cancel} onPress={resetConfig} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
-          <h2 className="font-sans" style={hover.can?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
+          <h2 className="font-sans " style={hover.can?styles.cancelHoverText:styles.cancelText} onMouseOver={() => hoverFunc('can')} onMouseLeave={resetHover}>
             RESET ALL
           </h2>
         </Pressable>
@@ -626,7 +626,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#d4d4d4',
     boxShadow: '-1px 1px 1px #333',
     borderRadius: 6,
-    margin:15,
+    marginLeft:15,
+    marginTop: 5,
+    marginBottom:15
   },
   cancelText: {
     color:'#cc1402',
@@ -647,6 +649,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#d4d4d4',
     cursor: 'pointer',
     margin:15,
+    marginBottom:5
   },
   cancelHoverText:{
     color:'#aa1402',
