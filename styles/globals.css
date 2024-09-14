@@ -51,10 +51,10 @@
 }
 
 @keyframes stroke {
-	0% {stroke-dashoffset: 50%; stroke-dasharray: 0 50%; stroke-width: 1; fill-opacity:0}
-	25% {stroke-dashoffset: 12.5%; stroke-dasharray: 25% 25%; stroke-width: 1;}
-	50% {stroke-dashoffset: 0%; stroke-dasharray: 50% 0; stroke-width: 3;fill-opacity:0}
-	100% {stroke-width: 2; fill-opacity: 1; }
+	0% {stroke-dashoffset: -5%; stroke-dasharray: 0 60% 0; stroke-width: 1}
+	25% {stroke-dashoffset: 25%; stroke-dasharray: 25% 50%;}
+	50% {stroke-dashoffset: 100%; stroke-dasharray: 75% 25%; stroke-width: 2}
+	100% {stroke-width: 2; }
 }
 
 @keyframes spinning {

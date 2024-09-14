@@ -1,19 +1,16 @@
 'use client';
 import { useState, useLayoutEffect } from 'react';
 import PathFromArray from "@/components/ui/pathFromArray";
-import Grid from '@/components/ui/Grid';
-import { HorizontalPanel } from './Panels';
+import Grid from '@/components/ui/mainGrid';
+import { HorizontalPanel, SmallHorizontalPanel } from './Panels';
 import ConfigPanel from './ConfigPanel';
 import CommandPanel from './CommandPanel';
 import { StyleSheet, View } from 'react-native-web';
 import InfoPanel from './InfoPanel';
 import PathText from '../PathText';
-import { path } from '@/lib/store';
-import { useSnapshot } from 'valtio';
 
 const MainPanel = (props) => {
   const [selected, setSelected] = useState(null);
-  const snap= useSnapshot(path);
   
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -28,33 +25,34 @@ const MainPanel = (props) => {
     return size;
   }
 
-//   const [width, height] = useWindowSize();
-// if(width<='770'){
-//   return(
-//     <View style={styles.main}>
-//       <HorizontalPanel heading="Path">
-//         <div id="cssGrid" className="grid grid-cols-5 grid-flow-rows gap-4">
-//           <div id="commandDiv" className="col-start-1 col-end-5 row-start-1 row-end-1">
-//         <View id="commandPanel" style={smallStyles.horizontalView} />
-//     </div>
-//         <div style={smallStyles.gridDiv}>
-//             <Grid id="mainGrid" size={400} mainWidth={450}>
-//               <PathFromArray path={path} setSelected={setSelected} size={400} />
-//             </Grid>
-            
-//             <PathText />
-//             </div>
-//             <View style={styles.column}>
-//               <CommandPanel heading="Commands" selected={selected} />
-//               <InfoPanel selected={selected} />
-//             </View>
-//         <div id="configDiv" className="-mt-32 -mb-8 -ml-[50px]">
-//           <ConfigPanel heading="Config" className="flex flex-row scale-75" />
-//         </div>
-//         </div>
-//       </HorizontalPanel>
-//     </View>
-//   )}else{
+  const [width, height] = useWindowSize();
+if(width<='770'){
+  return(
+    <View style={styles.main}>
+      <SmallHorizontalPanel heading="Path">
+        <div id="cssGrid" className="grid grid-cols-4 grid-flow-rows gap-4">
+          <div id="commandDiv" className="col-start-1 col-end-3 row-start-1 row-end-2 flex items-center justify-center mt-12">
+            <CommandPanel heading="Commands" selected={selected} />
+          </div>
+          <div id="infoDiv" className="col-start-3 col-end-5 row-start-1 row-end-3 flex items-center justify-center">
+            <InfoPanel selected={selected} />
+          </div>
+          <div id="gridDiv" style={smallStyles.gridDiv} className="col-start-1 col-end-5 row-start-3 row-end-5 flex items-center justify-center">
+            <Grid id="mainGrid">
+              <PathFromArray setSelected={setSelected} />
+            </Grid>
+          </div>
+          <div id="textDiv" style={smallStyles.gridDiv} className="col-start-1 col-end-5 row-start-5 row-end-6 flex items-center justify-center">
+            <PathText />
+          </div>
+          
+          <div id="configDiv" className="flex items-center justify-center col-start-1 col-end-5 row-start-6 row-end-6 -mt-8">
+            <ConfigPanel heading="Config" className="flex flex-row scale-75" />
+          </div>
+        </div>
+      </SmallHorizontalPanel>
+    </View>
+  )}else{
   return(
     <View style={styles.main}>
       <HorizontalPanel heading="Path">
@@ -67,7 +65,7 @@ const MainPanel = (props) => {
           <div id="gridDiv" className="col-start-2 col-end-5 row-start-1 row-end-auto">   
             <View id="gridView" style={styles.gridView} className="bg-black w-screen">
               <Grid id="mainGrid">
-                <PathFromArray path={path} setSelected={setSelected} />
+                <PathFromArray setSelected={setSelected} />
               </Grid>
               <PathText style={{width: '100%'}}/>
             </View>
@@ -88,6 +86,7 @@ const MainPanel = (props) => {
     </View>
   )
 }
+}
 export default MainPanel;
 
 const styles = StyleSheet.create({
@@ -102,7 +101,8 @@ const styles = StyleSheet.create({
   main: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   
 })
