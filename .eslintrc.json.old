@@ -1,0 +1,14 @@
+{
+  "extends": ["next/core-web-vitals","plugin:valtio/recommended","eslint:recommended","next"],
+  "rules": {
+    "no-undef": "error",
+    "no-unused-vars": "off",
+    "no-unused-expressions": "off",
+    "no-extra-semi": "off",
+    "react/no-unescaped-entities": "off"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}

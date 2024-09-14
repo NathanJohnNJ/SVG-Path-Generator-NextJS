@@ -26,7 +26,7 @@ export default function EditPath() {
           <form className="flex flex-col items-center w-full justify-center bg-zinc-100 p-4 rounded-[1pc]">
             <p className="text-zinc-800 text-sm w-[90%] text-center">Enter the 'd' attribute from an existing SVG Path then hit the 'Sumit Path' button to see the path on a grid where you will be able to edit the individual commands in the path to get the perfect shape. You'll also be able to customise the style of the path including 'stroke' and 'fill' attributes, with more options coming soon . . .</p>
             <input value={input} onChange={(e) => setInput(e.target.value)} className="text-black m-4 bg-zinc-200 rounded-md"/>
-            <RainbowButton onClick={clickHandle}>
+            <RainbowButton>
               <Link href="/path/viewPath" onClick={clickHandle}>
                 Submit Path!
               </Link>
