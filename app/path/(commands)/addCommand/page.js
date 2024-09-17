@@ -60,7 +60,9 @@ const AddCommand = () => {
         }
         </View>
         <NewGridWithDrag size="350" resetHover={resetHover} hoverFunc={hoverFunc}>
-          {newSnap.type==='c' && <DraggablePoint type="firstControl" cx={newSnap.firstControl.x+50} cy={newSnap.firstControl.y+100}  />}
+          {/* {newCommand.type==='c' && 
+          <> */}
+          {/* </>} */}
         </NewGridWithDrag>
         {newSnap.type==='c' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}, {title: 'd2', points: {x: newSnap.secondControl.x, y: newSnap.secondControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
         {newSnap.type==='q' && <Table label="Control Points" array={[{title: 'd1', points: {x: newSnap.firstControl.x, y: newSnap.firstControl.y}}]} colour={controlSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
@@ -68,11 +70,10 @@ const AddCommand = () => {
         {newSnap.type!=null&&
         <Table label="End Point" array={[{title: null, points: {x: newSnap.endPoint.x, y: newSnap.endPoint.y}}]} colour={endSnap.color} startX={newSnap.startPoint.x} startY={newSnap.startPoint.y} />}
       </View>
-      <PresetsRainbowPanel style={styles.rainbow}>
+      
         <View style={styles.buttons}>
           <C showPresets={showPresets} setShowPresets={setShowPresets}/>
         </View>
-      </PresetsRainbowPanel>
       <View style={styles.subCan}>
         <Link href="/path/viewPath" onClick={addToPath} onMouseOver={() => hoverFunc('sub')} onMouseLeave={resetHover} style={hover.sub?styles.submitHover:styles.submitButton}>Confirm</Link>
         <Link href="/path/viewPath">Cancel
@@ -101,11 +102,9 @@ const styles= StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   presets:{
-    // backgroundColor: 'green',
     width: 100,
     height: 500,
-    display: 'flex',
-    backgroundColor: 'red'
+    display: 'flex'
   },
   buttons: {
     display: 'flex',

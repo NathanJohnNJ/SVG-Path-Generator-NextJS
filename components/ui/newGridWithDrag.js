@@ -325,7 +325,10 @@ const NewGridWithDrag = (props, {children}) => {
     return (
       <View style={styles.container}>
         <Grid id='newGrid' size={props.size} mainWidth={Number(props.size)+20} viewBox={viewbox}>
-          <DraggablePoint type="firstControl"  />
+          <DraggablePoint type="firstControl" cx={newSnap.firstControl.x+newSnap.startPoint.x} cy={newSnap.firstControl.y+newSnap.startPoint.y}  />
+          <DraggablePoint type="secondControl" cx={newSnap.secondControl.x+newSnap.startPoint.x} cy={newSnap.secondControl.y+newSnap.startPoint.y}  />
+          <DraggablePoint type="endPoint" cx={newSnap.endPoint.x+newSnap.startPoint.x} cy={newSnap.endPoint.y+newSnap.startPoint.y}  />
+          {/* <DraggablePoint type="firstControl"  /> */}
         </Grid>
       </View>
     )

@@ -15,12 +15,12 @@ export const C = (props) => {
   function setCCommand(){
     const newShowPresets= { ...props.showPresets, ['c']: true }
     props.setShowPresets(newShowPresets)
-    newActions.setType('c');
-    newActions.setStartPoint(50, 50);
-    newActions.setFirstControl(25, 50);
-    newActions.setSecondControl(75, 50);
-    newActions.setEndPoint(100, 0);
-    console.log('showPresets is: ', props.showPresets)
+    // newActions.setType('c');
+    // newActions.setStartPoint(50, 50);
+    // newActions.setFirstControl(25, 50);
+    // newActions.setSecondControl(75, 50);
+    // newActions.setEndPoint(100, 0);
+    // console.log('showPresets is: ', props.showPresets)
   }
   return(
     <p onClick={setCCommand} className="font-sans text-rose-500 bg-zinc-300 w-12 h-12 flex items-center justify-center hover:text-rose-400 text-[28px] hover:bg-zinc-600 hover:font-semibold cursor-pointer border-2 border-zinc-600 hover:border-zinc-300 rounded-xl" style={styles.button}>
