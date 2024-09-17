@@ -149,7 +149,7 @@ export function convertToPathArray(input){
             },
             endPoint: {
               x: Number(splitCommand[2]),
-              y: Number(splitCommand[4])
+              y: Number(splitCommand[3])
             }
           }
           pathArray.push(pathSegment);
@@ -167,7 +167,7 @@ export function convertToPathArray(input){
             },
             endPoint: {
               x: Number(splitCommand[2]),
-              y: Number(splitCommand[4])
+              y: Number(splitCommand[3])
             }
           }
         pathArray.push(pathSegment);

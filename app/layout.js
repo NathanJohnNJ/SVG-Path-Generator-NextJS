@@ -7,6 +7,8 @@ import Footer from "@/components/layouts/Footer";
 import StyledComponentsRegistry from "@/lib/registry";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Loading from "./loading";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "SVG Path Generator",
@@ -45,7 +47,9 @@ export default function RootLayout({ children }) {
         </div>
         <div className="pl-2">
           <StyledComponentsRegistry>
-            {children}
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
             <Analytics />
             <SpeedInsights />
           </StyledComponentsRegistry>

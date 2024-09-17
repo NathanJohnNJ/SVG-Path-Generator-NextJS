@@ -30,8 +30,31 @@ const GridButton = (props) => {
       }
     })
     addToPath(command);
+    const pathArray = [
+      { 
+        commandId: 0,
+        type: 'm',
+        startPoint: command.startPoint,
+        endPoint: {
+          x: 0,
+          y: 0
+        }
+      },
+      command
+    ]
+    savePath(command.startPoint.x, command.startPoint.y, pathArray);
   }
 
+  const savePath = (startX, startY, pathArray) => {
+    const toSave = {
+      startPoint: {
+        x: startX,
+        y: startY
+      },
+      commands: pathArray
+    };
+    localStorage.setItem('path', JSON.stringify(toSave))
+  }
   return(
     <View style={styles.gridButton} className="group" onHoverIn={() => hoverFunc(props.id)} onHoverOut={() => resetHover(props.id)} onClick={()=>add(props.command)}>
       <View style={styles.titleSection}>

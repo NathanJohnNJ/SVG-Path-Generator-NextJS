@@ -1,8 +1,13 @@
+'use client';
 import Link from "next/link";
 import { RainbowPanel } from '@/components/ui/panels/RainbowPanel';
 import '@/styles/globals.css';
+import { useEffect } from "react";
 
 export default async function Home() {
+  useEffect(() => {
+    localStorage.removeItem("path")
+  }, [])
   return (
     <main className="flex w-full flex-col items-center justify-start h-screen">
       

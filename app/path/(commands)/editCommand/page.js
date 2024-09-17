@@ -34,20 +34,14 @@ export default function EditCommand() {
           x: snap.command.startPoint.x, 
           y: snap.command.startPoint.y
         },
-        controlPoints: [
-          {
-            d1: { 
-              x: snap.command.firstControl.x,
-              y: snap.command.firstControl.y
-            }
-          },
-          {
-            d2: { 
-              x: snap.command.secondControl.x,
-              y: snap.command.secondControl.y
-            }
-          }
-        ],
+        firstControl: { 
+          x: snap.command.firstControl.x,
+          y: snap.command.firstControl.y
+        },
+        secondControl: { 
+          x: snap.command.secondControl.x,
+          y: snap.command.secondControl.y
+        },
         endPoint: {
           x: snap.command.endPoint.x,
           y: snap.command.endPoint.y
@@ -61,12 +55,10 @@ export default function EditCommand() {
           x: snap.command.startPoint.x, 
           y: snap.command.startPoint.y
         },
-        controlPoints: [{
-          d1: { 
-            x: snap.command.firstControl.x,
-            y: snap.command.firstControl.y
-          }
-        }],
+        firstControl: { 
+          x: snap.command.firstControl.x,
+          y: snap.command.firstControl.y
+        },
         endPoint: {
           x: snap.command.endPoint.x, 
           y: snap.command.endPoint.y
@@ -80,25 +72,16 @@ export default function EditCommand() {
           x: snap.command.startPoint.x, 
           y: snap.command.startPoint.y
         },
-        controlPoints: [{
-          d2: { 
-            x: snap.command.secondControl.x,
-            y: snap.command.secondControl.y
-          }
-        }],
+        secondControl: { 
+          x: snap.command.secondControl.x,
+          y: snap.command.secondControl.y
+        },
         endPoint: {
           x: snap.command.endPoint.x, 
           y: snap.command.endPoint.y
         }
       };
-    } else if(snap.command.type === 't'){
-      newCommand = {
-        type: snap.command.type,
-        commandId: snap.command.commandId ,
-        startPoint: {x: snap.command.startPoint.x, y: snap.command.startPoint.y},
-        endPoint: {x: snap.command.endPoint.x, y: snap.command.endPoint.y},
-      };
-    } else if(snap.command.type==="l"){
+    } else if(snap.command.type === 't' || snap.command.type==="l"){
       newCommand = {
         type: snap.command.type,
         commandId: snap.command.commandId ,

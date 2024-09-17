@@ -7,13 +7,14 @@ import styled, { keyframes } from 'styled-components';
 `
 
 const Rainbow = styled.div`
+width: fit-content;
 @property --bg-angle {
   inherits: false;
   initial-value: 0deg;
   syntax: "<angle>";
 }
   border-radius: 18px;
-  animation: ${rainbowAnimation} 6s infinite linear running;
+  animation: ${rainbowAnimation} 12s infinite linear running;
   margin: 2px;
   background:
     padding-box,
@@ -27,6 +28,28 @@ const Rainbow = styled.div`
       animation-play-state: paused;
     }
 `
+const PresetsArticle = styled.div`
+  color: #0010a0;
+  font-size: 12;
+  font-weight: 575;
+  text-align:left;
+  padding-left: 18px;
+  padding-right: 5px;
+  border-radius: 18px;
+  padding-top: 5px;
+  background-color: #eee;
+  padding-bottom: 10px;
+  width: min-content;
+`
+export const PresetsRainbowPanel = ({children}, props) => {
+  return(
+    <Rainbow style={props.style}>
+      <PresetsArticle style={props.style}>
+        {children}
+      </PresetsArticle>
+    </Rainbow>
+  )
+};
 
 const RainbowArticle = styled.div`
   color: #0010a0;
@@ -42,18 +65,7 @@ const RainbowArticle = styled.div`
 `
 
 
-const PresetsArticle = styled.div`
-  color: #0010a0;
-  font-size: 12;
-  font-weight: 575;
-  text-align:left;
-  padding-left: 18px;
-  padding-right: 5px;
-  border-radius: 18px;
-  padding-top: 5px;
-  background-color: #898989;
-  padding-bottom: 10px;
-`
+
 
 export const RainbowPanel = ({children}, props) => {
   return(
@@ -65,15 +77,7 @@ export const RainbowPanel = ({children}, props) => {
   )
 };
 
-export const PresetsRainbowPanel = ({children}, props) => {
-  return(
-    <Rainbow style={props.style}>
-      <PresetsArticle style={props.style}>
-          {children}
-      </PresetsArticle>
-    </Rainbow>
-  )
-};
+
 
 const ButtonRainbow = styled.div`
 display: flex;
